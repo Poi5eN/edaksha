@@ -1,0 +1,42 @@
+#container {
+  height: 100vh;
+  /* set width based on sections */
+  width: 400%;
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.horizontal-section {
+  background-color: #1f2937;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  filter: hue-rotate(40deg);
+}
+
+.horizontal-section:nth-child(1) {
+  background-image: url("https://images.pexels.com/photos/2249527/pexels-photo-2249527.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+}
+.horizontal-section:nth-child(2) {
+  background-image: url("https://images.pexels.com/photos/1037995/pexels-photo-1037995.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+}
+.horizontal-section:nth-child(3) {
+  background-image: url("https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+}
+.horizontal-section:nth-child(4) {
+  background-image: url("https://images.pexels.com/photos/1037996/pexels-photo-1037996.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+}
+
+.heading {
+  font-family: "Oswald", sans-serif;
+  font-size: 8vw;
+  font-weight: 300;
+  color: white;
+  letter-spacing: 1vw;
+  text-transform: uppercase;
+}

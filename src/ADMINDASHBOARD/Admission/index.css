@@ -1,0 +1,16 @@
+.overlay {
+    background: rgba(0, 0, 0, 0.7);
+  }
+  
+  .MuiDataGrid-columnHeaders {
+
+    min-height: 30px ! important; /* Set minimum height */
+  }
+  
+  .MuiDataGrid-columnHeaderTitle {
+    font-size: 12px !important; /* Adjust header font size */
+    font-weight: bold !important;
+    /* color: white !important; */
+    /* height: 30px !important;  */
+    
+  }

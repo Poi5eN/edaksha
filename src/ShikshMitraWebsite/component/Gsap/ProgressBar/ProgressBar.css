@@ -1,0 +1,18 @@
+.wrap {
+  background-color: rgba(25, 24, 35, 0.15);
+  color: rgba(25, 24, 35, 0.15);
+  height: 10px;
+  overflow: hidden;
+  width: 500px;
+  margin: auto;
+  border-radius: 4px;
+}
+.barWrap {
+  display: flex;
+  justify-content: center;
+}
+.bar {
+  height: 30px;
+  border-radius: 4px;
+  background-color: #006ff9;
+}
