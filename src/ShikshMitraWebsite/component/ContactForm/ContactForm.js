@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 const authToken = Cookies.get("token");
 
-const API_BASE_URL = "https://eshikshaserver.onrender.com/api/v1/ContactUs";
+const API_BASE_URL = "https://eserver-i5sm.onrender.com/api/v1/ContactUs";
 const showErrorToast = (message) => {
   toast.error(message, {
     position: toast.POSITION.TOP_RIGHT,

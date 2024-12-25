@@ -18,7 +18,7 @@ const ParentExam= () => {
   useEffect(() => {
     axios
       .get(
-       ` https://eshikshaserver.onrender.com/api/v1/adminRoute/myKids`,
+       ` https://eserver-i5sm.onrender.com/api/v1/adminRoute/myKids`,
         {
           withCredentials: true,
           headers: {
@@ -48,7 +48,7 @@ const ParentExam= () => {
     if (studentData.class && studentData.section) {
       axios
         .get(
-         ` https://eshikshaserver.onrender.com/api/v1/exam/getAllExams?className=${studentData.class}&section=${studentData.section}`,
+         ` https://eserver-i5sm.onrender.com/api/v1/exam/getAllExams?className=${studentData.class}&section=${studentData.section}`,
           {
             withCredentials: true,
           headers: {

@@ -13,7 +13,7 @@ const StudentAssigments = () => {
     // GET Request to fetch existing notices
     axios
       .get(
-        `https://eshikshaserver.onrender.com/api/v1/adminRoute/getAllStudents?email=${email}`,
+        `https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAllStudents?email=${email}`,
         {
           withCredentials: true,
           headers: {
@@ -34,7 +34,7 @@ const StudentAssigments = () => {
     if (studentData.class) {
       axios
         .get(
-          `https://eshikshaserver.onrender.com/api/v1/adminRoute/getAllAssignment?className=${studentData.class}&section=${studentData.section}`,
+          `https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAllAssignment?className=${studentData.class}&section=${studentData.section}`,
           {
             withCredentials: true,
             headers: {

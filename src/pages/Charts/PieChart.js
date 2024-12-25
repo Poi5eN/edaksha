@@ -63,7 +63,7 @@ const PieChart = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('https://eshikshaserver.onrender.com/api/v1/adminRoute/getAllStudents', {
+        const response = await axios.get('https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAllStudents', {
           withCredentials: true,
       headers: {
         Authorization: `Bearer ${authToken}`,

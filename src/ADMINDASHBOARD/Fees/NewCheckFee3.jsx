@@ -68,7 +68,7 @@ const NewCheckFee3 = () => {
   useEffect(() => {
     axios
       .get(
-        "https://eshikshaserver.onrender.com/api/v1/adminRoute/getAdditionalFees",
+        "https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAdditionalFees",
         {
           withCredentials: true,
           headers: {
@@ -101,7 +101,7 @@ const NewCheckFee3 = () => {
 
   useEffect(() => {
     axios
-      .get("https://eshikshaserver.onrender.com/api/v1/adminRoute/getFees", {
+      .get("https://eserver-i5sm.onrender.com/api/v1/adminRoute/getFees", {
         withCredentials: true,
         headers: {
           Authorization: `Bearer ${authToken}`,
@@ -186,7 +186,7 @@ const NewCheckFee3 = () => {
   const handleStudentClick = (admissionNumber) => {
     axios
       .get(
-        `https://eshikshaserver.onrender.com/api/v1/adminRoute/getParentWithChildren/${admissionNumber}`,
+        `https://eserver-i5sm.onrender.com/api/v1/adminRoute/getParentWithChildren/${admissionNumber}`,
         {
           withCredentials: true,
           headers: {
@@ -217,7 +217,7 @@ const NewCheckFee3 = () => {
   useEffect(() => {
     axios
       .get(
-        "https://eshikshaserver.onrender.com/api/v1/adminRoute/getAllStudents",
+        "https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAllStudents",
         {
           withCredentials: true,
           headers: {
@@ -293,7 +293,7 @@ const NewCheckFee3 = () => {
     }
 
     const apiUrl =
-      "https://eshikshaserver.onrender.com/api/v1/fees/createFeeStatus";
+      "https://eserver-i5sm.onrender.com/api/v1/fees/createFeeStatus";
     axios
       .post(apiUrl, newExamData, {
         withCredentials: true,
@@ -867,7 +867,7 @@ export default NewCheckFee3;
 //   useEffect(() => {
 //     axios
 //       .get(
-//         "https://eshikshaserver.onrender.com/api/v1/adminRoute/getAdditionalFees",
+//         "https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAdditionalFees",
 //         {
 //           withCredentials: true,
 //           headers: {
@@ -900,7 +900,7 @@ export default NewCheckFee3;
 
 //   useEffect(() => {
 //     axios
-//       .get("https://eshikshaserver.onrender.com/api/v1/adminRoute/getFees", {
+//       .get("https://eserver-i5sm.onrender.com/api/v1/adminRoute/getFees", {
 //         withCredentials: true,
 //         headers: {
 //           Authorization: `Bearer ${authToken}`,
@@ -985,7 +985,7 @@ export default NewCheckFee3;
 //   const handleStudentClick = (admissionNumber) => {
 //     axios
 //       .get(
-//         `https://eshikshaserver.onrender.com/api/v1/adminRoute/getParentWithChildren/${admissionNumber}`,
+//         `https://eserver-i5sm.onrender.com/api/v1/adminRoute/getParentWithChildren/${admissionNumber}`,
 //         {
 //           withCredentials: true,
 //           headers: {
@@ -1016,7 +1016,7 @@ export default NewCheckFee3;
 //   useEffect(() => {
 //     axios
 //       .get(
-//         "https://eshikshaserver.onrender.com/api/v1/adminRoute/getAllStudents",
+//         "https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAllStudents",
 //         {
 //           withCredentials: true,
 //           headers: {
@@ -1092,7 +1092,7 @@ export default NewCheckFee3;
 //     }
 
 //     const apiUrl =
-//       "https://eshikshaserver.onrender.com/api/v1/fees/createFeeStatus";
+//       "https://eserver-i5sm.onrender.com/api/v1/fees/createFeeStatus";
 //     axios
 //       .post(apiUrl, newExamData, {
 //         withCredentials: true,

@@ -1,6 +1,9 @@
 import React, { Suspense, lazy } from "react";
 import { Route, Routes } from "react-router-dom";
 import Loading from "./Loading";
+import ReportCardGenerator from "./TEACHERDASHBOARD/ReportCard";
+import ExamList from "./TEACHERDASHBOARD/ExamList";
+import ExamResultsManager from "./TEACHERDASHBOARD/ExamResultsManager";
 const LandingPage = lazy(() => import("./ShikshMitraWebsite/LandingPage"));
 const AdminDashboard = lazy(() => import("./ADMINDASHBOARD/AdminDashboard"));
 const Login = lazy(() =>
@@ -385,6 +388,9 @@ function App() {
             <Route path="study" element={<Study />} />
             <Route path="results" element={<Results />} />
             <Route path="createExam" element={<CreateExams />} />
+            <Route path="ReportCardGenerator" element={<ReportCardGenerator />} />
+            <Route path="ExamList" element={<ExamList />} />
+            <Route path="ExamResultsManager" element={<ExamResultsManager />} />
             <Route path="aboutTeacher" element={<AboutTeacher />} />
             <Route path="studentReport" element={<StudentReport />} />
           </Route>

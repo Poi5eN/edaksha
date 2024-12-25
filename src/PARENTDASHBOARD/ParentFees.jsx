@@ -66,7 +66,7 @@ const ParentFees = () => {
   useEffect(() => {
     axios
       .get(
-        `https://eshikshaserver.onrender.com/api/v1/adminRoute/myKids`,
+        `https://eserver-i5sm.onrender.com/api/v1/adminRoute/myKids`,
         {
           withCredentials: true,
           headers: {
@@ -91,7 +91,7 @@ const ParentFees = () => {
   useEffect(() => {
     axios
       .get(
-        `https://eshikshaserver.onrender.com/api/v1/adminRoute/getAdminInfo`,
+        `https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAdminInfo`,
         {
           withCredentials: true,
           headers: {
@@ -116,7 +116,7 @@ const ParentFees = () => {
   useEffect(() => {
     axios
       .get(
-        `https://eshikshaserver.onrender.com/api/v1/fees/getFeeStatus?studentId=${studentData._id}`,
+        `https://eserver-i5sm.onrender.com/api/v1/fees/getFeeStatus?studentId=${studentData._id}`,
         {
           withCredentials: true,
           headers: {

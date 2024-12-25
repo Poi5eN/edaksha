@@ -25,7 +25,7 @@ function DuesTable() {
 
   useEffect(() => {
     axios
-      .get(`https://eshikshaserver.onrender.com/api/v1/fees/getAllStudentsFeeStatus`, {
+      .get(`https://eserver-i5sm.onrender.com/api/v1/fees/getAllStudentsFeeStatus`, {
         withCredentials: true,
         headers: {
           Authorization: `Bearer ${authToken}`,

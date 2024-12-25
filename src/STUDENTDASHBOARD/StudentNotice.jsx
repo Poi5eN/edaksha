@@ -5,7 +5,7 @@ import { GrFormView } from "react-icons/gr";
 
 import { useStateContext } from "../contexts/ContextProvider";
 const API_GET_DATA =
-  "https://eshikshaserver.onrender.com/api/v1/adminRoute/getAllNotice";
+  "https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAllNotice";
 
 const StudentNotice = () => {
   const authToken = Cookies.get("token");

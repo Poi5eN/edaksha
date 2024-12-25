@@ -44,7 +44,7 @@ const Attendance = () => {
     const fetchStudentData = async () => {
       try {
         const response = await axios.get(
-          "https://eshikshaserver.onrender.com/api/v1/adminRoute/getAllStudents",
+          "https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAllStudents",
           {
             withCredentials: true,
             headers: {
@@ -110,7 +110,7 @@ const Attendance = () => {
     const month = selectedDate.getMonth() + 1;
     try {
       const response = await axios.get(
-        "https://eshikshaserver.onrender.com/api/v1/teacher/getAttendance",
+        "https://eserver-i5sm.onrender.com/api/v1/teacher/getAttendance",
         {
           params: {
             year: year,
@@ -183,7 +183,7 @@ const Attendance = () => {
 
     try {
        await axios.post(
-        "https://eshikshaserver.onrender.com/api/v1/teacher/createAttendance",
+        "https://eserver-i5sm.onrender.com/api/v1/teacher/createAttendance",
         {
           attendanceRecords: studentInfo,
         },
@@ -563,7 +563,7 @@ export default Attendance;
 //     const fetchStudentData = async () => {
 //       try {
 //         const response = await axios.get(
-//           "https://eshikshaserver.onrender.com/api/v1/adminRoute/getAllStudents",
+//           "https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAllStudents",
 //           {
 //             withCredentials: true,
 //             headers: {
@@ -630,7 +630,7 @@ export default Attendance;
 
 //     try {
 //        await axios.post(
-//         "https://eshikshaserver.onrender.com/api/v1/teacher/createAttendance",
+//         "https://eserver-i5sm.onrender.com/api/v1/teacher/createAttendance",
 //         {
 //           attendanceRecords: studentInfo,
 //         },
@@ -677,7 +677,7 @@ export default Attendance;
 //     const month = selectedDate.getMonth() + 1;
 //     try {
 //       const response = await axios.get(
-//         "https://eshikshaserver.onrender.com/api/v1/teacher/getAttendance",
+//         "https://eserver-i5sm.onrender.com/api/v1/teacher/getAttendance",
 //         {
 //           params: {
 //             year: year,
@@ -1046,7 +1046,7 @@ export default Attendance;
 //     const fetchStudentData = async () => {
 //       try {
 //         const response = await axios.get(
-//           "https://eshikshaserver.onrender.com/api/v1/adminRoute/getAllStudents",
+//           "https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAllStudents",
 //           {
 //             withCredentials: true,
 //             headers: {
@@ -1109,7 +1109,7 @@ export default Attendance;
 
 //     try {
 //       const response = await axios.post(
-//         "https://eshikshaserver.onrender.com/api/v1/teacher/createAttendance",
+//         "https://eserver-i5sm.onrender.com/api/v1/teacher/createAttendance",
 //         {
 //           attendanceRecords: studentInfo,
 //         },
@@ -1149,7 +1149,7 @@ export default Attendance;
 //     const month = selectedDate.getMonth() + 1;
 //     try {
 //       const response = await axios.get(
-//         "https://eshikshaserver.onrender.com/api/v1/teacher/getAttendance",
+//         "https://eserver-i5sm.onrender.com/api/v1/teacher/getAttendance",
 //         {
 //           params: {
 //             year: year,

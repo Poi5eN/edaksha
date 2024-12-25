@@ -23,7 +23,7 @@ const Newegistrations = () => {
     loading: registrationLoading,
     refetch: refetchRegistrations,
   } = useCustomQuery(
-    "https://eshikshaserver.onrender.com/api/v1/adminRoute/getRegistrations"
+    "https://eserver-i5sm.onrender.com/api/v1/adminRoute/getRegistrations"
   );
   useEffect(() => {
     if (allRegistration) {
@@ -42,7 +42,7 @@ const Newegistrations = () => {
               console.log("click1");
               axios
                 .delete(
-                  `https://eshikshaserver.onrender.com/api/v1/adminRoute/deleteRegistration/${registrationNumber}`,
+                  `https://eserver-i5sm.onrender.com/api/v1/adminRoute/deleteRegistration/${registrationNumber}`,
                   {
                     withCredentials: true,
                     headers: {

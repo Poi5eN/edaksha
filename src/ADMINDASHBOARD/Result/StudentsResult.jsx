@@ -26,7 +26,7 @@ const StudentsResult = () => {
   const [submittedData, setSubmittedData] = useState([]);
 
   useEffect(() => {
-    axios.get("https://eshikshaserver.onrender.com/api/v1/adminRoute/getAllStudents", {
+    axios.get("https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAllStudents", {
 
       withCredentials: true,
       headers: {

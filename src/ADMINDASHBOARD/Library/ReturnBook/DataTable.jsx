@@ -11,7 +11,7 @@ function DynamicDataTable({ data, updateFetchData }) {
   const handleReturn = async (issueId) => {
     try {
       const response = await axios.put(
-        `https://eshikshaserver.onrender.com/api/v1/adminRoute/returnBook/${issueId}`,
+        `https://eserver-i5sm.onrender.com/api/v1/adminRoute/returnBook/${issueId}`,
         {},
         {
           withCredentials: true,

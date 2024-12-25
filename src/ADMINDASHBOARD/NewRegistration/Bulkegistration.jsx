@@ -35,7 +35,7 @@ const Bulkegistration = ({ refreshRegistrations }) => {
         try {
             setLoading(true);
           await axios.post(
-            "https://eshikshaserver.onrender.com/api/v1/adminRoute/createBulkRegistrations",
+            "https://eserver-i5sm.onrender.com/api/v1/adminRoute/createBulkRegistrations",
             { registrations: worksheet },
             {
               withCredentials: true,

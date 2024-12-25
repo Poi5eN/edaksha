@@ -27,7 +27,7 @@ const ViewReg = () => {
   useEffect(() => {
     axios
       .get(
-        `https://eshikshaserver.onrender.com/api/v1/adminRoute/getRegistration/${registrationNumber}`,
+        `https://eserver-i5sm.onrender.com/api/v1/adminRoute/getRegistration/${registrationNumber}`,
         {
           withCredentials: true,
           headers: {

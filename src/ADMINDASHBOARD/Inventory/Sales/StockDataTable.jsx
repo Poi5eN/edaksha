@@ -15,7 +15,7 @@
 //     // Fetch all items (fees) when the component mounts
 //     axios
 //       .get(
-//         "https://eshikshaserver.onrender.com/api/v1/adminRoute/getAllItems",
+//         "https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAllItems",
 //         {
 //           withCredentials: true,
 //           headers: {
@@ -42,7 +42,7 @@
 //   }, [authToken]);
 //   const fetchSalesRecords = () => {
 //     axios
-//       .get("https://eshikshaserver.onrender.com/api/v1/inventory/getSalesRecords", {
+//       .get("https://eserver-i5sm.onrender.com/api/v1/inventory/getSalesRecords", {
 //         withCredentials: true,
 //         headers: {
 //           Authorization: `Bearer ${authToken}`,
@@ -110,7 +110,7 @@
 
 //     // Send POST request
 //     axios
-//       .post("https://eshikshaserver.onrender.com/api/v1/inventory/multiItemSell", dataToPost, {
+//       .post("https://eserver-i5sm.onrender.com/api/v1/inventory/multiItemSell", dataToPost, {
 //         withCredentials: true,
 //         headers: {
 //           Authorization: `Bearer ${authToken}`,
@@ -271,7 +271,7 @@ const StockTable = () => {
   useEffect(() => {
     axios
       .get(
-        "https://eshikshaserver.onrender.com/api/v1/adminRoute/getAllItems",
+        "https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAllItems",
         {
           withCredentials: true,
           headers: {
@@ -298,7 +298,7 @@ const StockTable = () => {
   const fetchSalesRecords = () => {
     axios
       .get(
-        "https://eshikshaserver.onrender.com/api/v1/inventory/getSalesRecords",
+        "https://eserver-i5sm.onrender.com/api/v1/inventory/getSalesRecords",
         {
           withCredentials: true,
           headers: {
@@ -372,7 +372,7 @@ const StockTable = () => {
     // Send POST request
     axios
       .post(
-        "https://eshikshaserver.onrender.com/api/v1/inventory/multiItemSell",
+        "https://eserver-i5sm.onrender.com/api/v1/inventory/multiItemSell",
         dataToPost,
         {
           withCredentials: true,

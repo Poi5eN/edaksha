@@ -46,7 +46,7 @@ function Create_Staff() {
 
   useEffect(() => {
     // Fetch data from the server when the component mounts
-    axios.get('https://eshikshaserver.onrender.com/api/v1/adminRoute/getAllEmployees', {
+    axios.get('https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAllEmployees', {
       withCredentials: true,
       headers: {
         Authorization: `Bearer ${authToken}`,
@@ -96,7 +96,7 @@ function Create_Staff() {
     try {
       setLoading(true)
       const response = await axios.post(
-        "https://eshikshaserver.onrender.com/api/v1/adminRoute/createEmployee",
+        "https://eserver-i5sm.onrender.com/api/v1/adminRoute/createEmployee",
         formDataToSend,
         {
           withCredentials: true,
@@ -119,7 +119,7 @@ function Create_Staff() {
   };
 
   const handleDelete = (email) => {
-    axios.put(`https://eshikshaserver.onrender.com/api/v1/adminRoute/deactivateEmployee`, { email }, {
+    axios.put(`https://eserver-i5sm.onrender.com/api/v1/adminRoute/deactivateEmployee`, { email }, {
       withCredentials: true,
       headers: {
         Authorization: `Bearer ${authToken}`,

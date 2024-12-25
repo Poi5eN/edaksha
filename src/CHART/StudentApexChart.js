@@ -44,7 +44,7 @@ const StudentApexChart = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://eshikshaserver.onrender.com/api/v1/adminRoute/getAllStudents",
+          "https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAllStudents",
           {
             withCredentials: true,
             headers: {

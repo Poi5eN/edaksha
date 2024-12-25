@@ -27,7 +27,7 @@ const TeacherHome = () => {
   useEffect(() => {
     axios
       .get(
-        "https://eshikshaserver.onrender.com/api/v1/adminRoute/getTeachers",
+        "https://eserver-i5sm.onrender.com/api/v1/adminRoute/getTeachers",
         {
           withCredentials: true,
           headers: {
@@ -52,7 +52,7 @@ const TeacherHome = () => {
    
     axios
       .get(
-        "https://eshikshaserver.onrender.com/api/v1/adminRoute/getAllParents",
+        "https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAllParents",
         {
           withCredentials: true,
           headers: {

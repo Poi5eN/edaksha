@@ -25,7 +25,7 @@ const AllExams = () => {
   
 
     axios
-      .get(`https://eshikshaserver.onrender.com/api/v1/exam/getAllExams`, {
+      .get(`https://eserver-i5sm.onrender.com/api/v1/exam/getAllExams`, {
         withCredentials: true,
         headers: {
           Authorization: `Bearer ${authToken}`,
@@ -45,7 +45,7 @@ const AllExams = () => {
       const examId = examData[index]._id;
 
       const response = await axios.delete(
-        `https://eshikshaserver.onrender.com/api/v1/exam/deleteExam/${examId}`,
+        `https://eserver-i5sm.onrender.com/api/v1/exam/deleteExam/${examId}`,
         {
           withCredentials: true,
           headers: {

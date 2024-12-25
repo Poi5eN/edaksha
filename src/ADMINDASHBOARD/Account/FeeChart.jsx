@@ -17,7 +17,7 @@ const FeeChart = () => {
   useEffect(() => {
     axios
       .get(
-        `https://eshikshaserver.onrender.com/api/v1/fees/getFeeStatus`,
+        `https://eserver-i5sm.onrender.com/api/v1/fees/getFeeStatus`,
         {
           withCredentials: true,
           headers: {
@@ -151,7 +151,7 @@ export default FeeChart;
 //   useEffect(() => {
 //     axios
 //       .get(
-//         `https://eshikshaserver.onrender.com/api/v1/fees/getFeeStatus`,
+//         `https://eserver-i5sm.onrender.com/api/v1/fees/getFeeStatus`,
 //         {
 //           withCredentials: true,
 //       headers: {
@@ -265,7 +265,7 @@ export default FeeChart;
 //   useEffect(() => {
 //     axios
 //       .get(
-//         `https://eshikshaserver.onrender.com/api/v1/fees/getFeeStatus`,
+//         `https://eserver-i5sm.onrender.com/api/v1/fees/getFeeStatus`,
 //         {
 //           withCredentials: true,
 //       headers: {

@@ -3,7 +3,7 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 const authToken = Cookies.get('token');
 
-const API_GET_DATA = "https://eshikshaserver.onrender.com/api/v1/adminRoute/getAllNotice";
+const API_GET_DATA = "https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAllNotice";
 
 
 const ParentNotice = () => {

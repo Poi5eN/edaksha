@@ -13,7 +13,7 @@ import ParentNotice from "./ParentNotice";
 import Cookies from 'js-cookie';
 const authToken = Cookies.get('token');
 
-// const API_GET_DATA = "https://eshikshaserver.onrender.com/api/v1/adminRoute/getAllStudents"
+// const API_GET_DATA = "https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAllStudents"
 const ParentHome = () => {
   const [data, setData] = useState([]);
 
@@ -24,7 +24,7 @@ const ParentHome = () => {
 
   useEffect(() => {
     // GET Request to fetch existing notices
-    axios.get(`https://eshikshaserver.onrender.com/api/v1/adminRoute/getAllStudents?email=${email}`,
+    axios.get(`https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAllStudents?email=${email}`,
       {
         withCredentials: true,
       headers: {

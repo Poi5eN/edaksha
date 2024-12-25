@@ -30,7 +30,7 @@ function Primary() {
   useEffect(() => {
     axios
       .get(
-        `https://eshikshaserver.onrender.com/api/v1/adminRoute/getAllClasses`,
+        `https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAllClasses`,
         {
           withCredentials: true,
           headers: {
@@ -81,7 +81,7 @@ function Primary() {
 
       axios
         .post(
-          "https://eshikshaserver.onrender.com/api/v1/adminRoute/createClass",
+          "https://eserver-i5sm.onrender.com/api/v1/adminRoute/createClass",
           formattedFormData,
           {
             withCredentials: true,
@@ -115,7 +115,7 @@ function Primary() {
   const handleDelete = async (classId) => {
     try {
       await axios.delete(
-        `https://eshikshaserver.onrender.com/api/v1/adminRoute/deleteClass/${classId}`,
+        `https://eserver-i5sm.onrender.com/api/v1/adminRoute/deleteClass/${classId}`,
         {
           withCredentials: true,
           headers: {
@@ -346,7 +346,7 @@ export default Primary;
 //   useEffect(() => {
 //     axios
 //       .get(
-//         `https://eshikshaserver.onrender.com/api/v1/adminRoute/getAllClasses`,
+//         `https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAllClasses`,
 //         {
 //           withCredentials: true,
 //           headers: {
@@ -397,7 +397,7 @@ export default Primary;
 
 //       axios
 //         .post(
-//           "https://eshikshaserver.onrender.com/api/v1/adminRoute/createClass",
+//           "https://eserver-i5sm.onrender.com/api/v1/adminRoute/createClass",
 //           formattedFormData,
 //           {
 //             withCredentials: true,
@@ -432,7 +432,7 @@ export default Primary;
 //     try {
 
 //      await axios.delete(
-//         `https://eshikshaserver.onrender.com/api/v1/adminRoute/deleteClass/${classId}`,
+//         `https://eserver-i5sm.onrender.com/api/v1/adminRoute/deleteClass/${classId}`,
 //         {
 //           withCredentials: true,
 //           headers: {

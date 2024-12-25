@@ -20,7 +20,7 @@ function CreateAdditionalFee() {
     loading: additionalFeeLoading,
     error: additionalFeeError,
   } = useCustomQuery(
-    "https://eshikshaserver.onrender.com/api/v1/adminRoute/getAdditionalFees"
+    "https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAdditionalFees"
   );
 
   const toastifyTiming = {
@@ -49,7 +49,7 @@ function CreateAdditionalFee() {
   }, [additionalFee]);
   // useEffect(() => {
   //   axios
-  //     .get("https://eshikshaserver.onrender.com/api/v1/adminRoute/getAdditionalFees", {
+  //     .get("https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAdditionalFees", {
   //       withCredentials: true,
   //       headers: {
   //         Authorization: `Bearer ${authToken}`,
@@ -65,7 +65,7 @@ function CreateAdditionalFee() {
   useEffect(() => {
     axios
       .get(
-        `https://eshikshaserver.onrender.com/api/v1/adminRoute/getAllClasses`,
+        `https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAllClasses`,
         {
           withCredentials: true,
           headers: {
@@ -101,7 +101,7 @@ function CreateAdditionalFee() {
     try {
       setLoading(true);
       await axios.post(
-        "https://eshikshaserver.onrender.com/api/v1/adminRoute/createAdditionalFees",
+        "https://eserver-i5sm.onrender.com/api/v1/adminRoute/createAdditionalFees",
         formDataToSend,
         {
           withCredentials: true,
@@ -141,7 +141,7 @@ function CreateAdditionalFee() {
   const handleDelete = (itemId) => {
     axios
       .delete(
-        `https://eshikshaserver.onrender.com/api/v1/adminRoute/deleteFees/${itemId}`,
+        `https://eserver-i5sm.onrender.com/api/v1/adminRoute/deleteFees/${itemId}`,
         {
           withCredentials: true,
           headers: {

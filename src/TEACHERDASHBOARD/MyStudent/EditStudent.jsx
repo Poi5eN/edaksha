@@ -55,7 +55,7 @@ const EditStudentTeacher = () => {
   useEffect(() => {
     axios
       .get(
-        `https://eshikshaserver.onrender.com/api/v1/adminRoute/getAllStudents?email=${email}`,
+        `https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAllStudents?email=${email}`,
         {
           withCredentials: true,
           headers: {
@@ -99,7 +99,7 @@ const EditStudentTeacher = () => {
 
 
     axios
-      .put(`https://eshikshaserver.onrender.com/api/v1/adminRoute/updateStudent`, data, {
+      .put(`https://eserver-i5sm.onrender.com/api/v1/adminRoute/updateStudent`, data, {
         withCredentials: true,
         headers: {
           Authorization: `Bearer ${authToken}`,

@@ -50,7 +50,7 @@ function Create_Student() {
   useEffect(() => {
     axios
       .get(
-        "https://eshikshaserver.onrender.com/api/v1/adminRoute/getAllStudents",
+        "https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAllStudents",
         {
           withCredentials: true,
           headers: {
@@ -121,7 +121,7 @@ function Create_Student() {
     try {
       setLoading(true);
       const response = await axios.post(
-        "https://eshikshaserver.onrender.com/api/v1/adminRoute/createStudentParent",
+        "https://eserver-i5sm.onrender.com/api/v1/adminRoute/createStudentParent",
         formDataToSend,
         {
           withCredentials: true,
@@ -170,7 +170,7 @@ function Create_Student() {
   const handleDelete = (email) => {
     axios
       .put(
-        `https://eshikshaserver.onrender.com/api/v1/adminRoute/deactivateStudent`,
+        `https://eserver-i5sm.onrender.com/api/v1/adminRoute/deactivateStudent`,
         { email },
         {
           withCredentials: true,

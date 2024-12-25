@@ -10,7 +10,7 @@ const ExpensesChart = () => {
 
   useEffect(() => {
 
-    axios.get('https://eshikshaserver.onrender.com/api/v1/employee/salaryExpensesMonths', 
+    axios.get('https://eserver-i5sm.onrender.com/api/v1/employee/salaryExpensesMonths', 
     {
       withCredentials: true,
       headers: {

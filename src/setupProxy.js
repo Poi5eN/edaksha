@@ -4,8 +4,8 @@ module.exports = function(app) {
   app.use(
     '/api',
     createProxyMiddleware({
-      // target: 'https://eshikshaserver.onrender.com',
-      target: 'https://backendserver-vpse.onrender.com',
+      // target: 'https://eserver-i5sm.onrender.com',
+      target: 'https://eserver-i5sm.onrender.com',
       changeOrigin: true,
     })
   );

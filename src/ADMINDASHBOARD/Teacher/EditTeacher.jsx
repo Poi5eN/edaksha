@@ -38,7 +38,7 @@ const EditTeacher = () => {
   // Fetch all classes for the dropdown
   useEffect(() => {
     axios
-      .get(`https://eshikshaserver.onrender.com/api/v1/adminRoute/getAllClasses`, {
+      .get(`https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAllClasses`, {
         withCredentials: true,
         headers: {
           Authorization: `Bearer ${authToken}`,
@@ -88,7 +88,7 @@ const EditTeacher = () => {
   // Fetch teacher data by email for pre-filling the form
   useEffect(() => {
     axios
-      .get(`https://eshikshaserver.onrender.com/api/v1/adminRoute/getTeachers?email=${email}`, {
+      .get(`https://eserver-i5sm.onrender.com/api/v1/adminRoute/getTeachers?email=${email}`, {
         withCredentials: true,
         headers: {
           Authorization: `Bearer ${authToken}`,
@@ -129,7 +129,7 @@ const EditTeacher = () => {
     }
 
     axios
-      .put(`https://eshikshaserver.onrender.com/api/v1/adminRoute/updateTeacher`, data, {
+      .put(`https://eserver-i5sm.onrender.com/api/v1/adminRoute/updateTeacher`, data, {
         withCredentials: true,
         headers: {
           Authorization: `Bearer ${authToken}`,
@@ -385,7 +385,7 @@ export default EditTeacher;
 //   useEffect(() => {
 //     axios
 //       .get(
-//         `https://eshikshaserver.onrender.com/api/v1/adminRoute/getAllClasses`,
+//         `https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAllClasses`,
 //         {
 //           withCredentials: true,
 //           headers: {
@@ -432,7 +432,7 @@ export default EditTeacher;
 //   useEffect(() => {
 //     axios
 //       .get(
-//         `https://eshikshaserver.onrender.com/api/v1/adminRoute/getTeachers?email=${email}`,
+//         `https://eserver-i5sm.onrender.com/api/v1/adminRoute/getTeachers?email=${email}`,
 //         {
 //           withCredentials: true,
 //           headers: {
@@ -479,7 +479,7 @@ export default EditTeacher;
 
 //     axios
 //       .put(
-//         `https://eshikshaserver.onrender.com/api/v1/adminRoute/updateTeacher`,
+//         `https://eserver-i5sm.onrender.com/api/v1/adminRoute/updateTeacher`,
 //         data,
 //         {
 //           withCredentials: true,
@@ -715,7 +715,7 @@ export default EditTeacher;
 //   useEffect(() => {
 //     axios
 //       .get(
-//         `https://eshikshaserver.onrender.com/api/v1/adminRoute/getAllClasses`,
+//         `https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAllClasses`,
 //         {
 //           withCredentials: true,
 //           headers: {
@@ -759,7 +759,7 @@ export default EditTeacher;
 
 //   useEffect(() => {
 //     axios.get(
-//       `https://eshikshaserver.onrender.com/api/v1/adminRoute/getTeachers?email=${email}`,
+//       `https://eserver-i5sm.onrender.com/api/v1/adminRoute/getTeachers?email=${email}`,
 //       {
 //         withCredentials: true,
 //       headers: {
@@ -797,7 +797,7 @@ export default EditTeacher;
 //       }
 //     }
 
-//     axios.put(`https://eshikshaserver.onrender.com/api/v1/adminRoute/updateTeacher`, data, {
+//     axios.put(`https://eserver-i5sm.onrender.com/api/v1/adminRoute/updateTeacher`, data, {
 //       withCredentials: true,
 //       headers: {
 //         Authorization: `Bearer ${authToken}`,

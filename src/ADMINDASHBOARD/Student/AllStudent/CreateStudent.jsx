@@ -21,7 +21,7 @@ function CreateStudent() {
 
   const [submittedData, setSubmittedData] = useState([]);
 
-  const { queryData: studentData, error: studentError, loading: studentLoading } = useCustomQuery("https://eshikshaserver.onrender.com/api/v1/adminRoute/getAllStudents");
+  const { queryData: studentData, error: studentError, loading: studentLoading } = useCustomQuery("https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAllStudents");
   
 // console.log("firststudentData",studentData)
   useEffect(()=>{
@@ -73,7 +73,7 @@ function CreateStudent() {
   //   try {
   //     setLoading(true);
   //     const response = await axios.post(
-  //       "https://eshikshaserver.onrender.com/api/v1/adminRoute/createStudentParent",
+  //       "https://eserver-i5sm.onrender.com/api/v1/adminRoute/createStudentParent",
   //       formDataToSend,
   //       {
   //         withCredentials: true,
@@ -122,7 +122,7 @@ function CreateStudent() {
   const handleDelete = (email) => {
     axios
       .put(
-        `https://eshikshaserver.onrender.com/api/v1/adminRoute/deactivateStudent`,
+        `https://eserver-i5sm.onrender.com/api/v1/adminRoute/deactivateStudent`,
         { email },
         {
           withCredentials: true,

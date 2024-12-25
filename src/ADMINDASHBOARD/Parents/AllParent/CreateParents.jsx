@@ -31,8 +31,8 @@ function CreateParents() {
     },
   };
   const [submittedData, setSubmittedData] = useState([]);
-  const {queryData:allParent,loading:parentLoading,error:parentError} =useCustomQuery("https://eshikshaserver.onrender.com/api/v1/adminRoute/getAllParentsWithChildren")
-  // const {queryData:allParent,loading:parentLoading,error:parentError} =useCustomQuery("https://eshikshaserver.onrender.com/api/v1/adminRoute/getAllParents")
+  const {queryData:allParent,loading:parentLoading,error:parentError} =useCustomQuery("https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAllParentsWithChildren")
+  // const {queryData:allParent,loading:parentLoading,error:parentError} =useCustomQuery("https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAllParents")
 
   useEffect(()=>{
 if(allParent){
@@ -42,7 +42,7 @@ if(allParent){
   },[allParent])
   
   const handleDelete = (email) => {
-    axios.put(`https://eshikshaserver.onrender.com/api/v1/adminRoute/deactivateParent`, {email}, {
+    axios.put(`https://eserver-i5sm.onrender.com/api/v1/adminRoute/deactivateParent`, {email}, {
       withCredentials: true,
       headers: {
         Authorization: `Bearer ${authToken}`,
@@ -127,7 +127,7 @@ export default CreateParents;
 //     },
 //   };
 //   const [submittedData, setSubmittedData] = useState([]);
-//   const {queryData:allParent,loading:parentLoading,error:parentError} =useCustomQuery("https://eshikshaserver.onrender.com/api/v1/adminRoute/getAllParents")
+//   const {queryData:allParent,loading:parentLoading,error:parentError} =useCustomQuery("https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAllParents")
 
 //   useEffect(()=>{
 // if(allParent){
@@ -136,7 +136,7 @@ export default CreateParents;
 //   },[allParent])
   
 //   const handleDelete = (email) => {
-//     axios.put(`https://eshikshaserver.onrender.com/api/v1/adminRoute/deactivateParent`, {email}, {
+//     axios.put(`https://eserver-i5sm.onrender.com/api/v1/adminRoute/deactivateParent`, {email}, {
 //       withCredentials: true,
 //       headers: {
 //         Authorization: `Bearer ${authToken}`,

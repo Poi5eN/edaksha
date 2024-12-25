@@ -12,13 +12,13 @@ import Marquee from "../Marque/Marquee";
 Modal.setAppElement("#root");
 
 const API_BASE_URL =
-  "https://eshikshaserver.onrender.com/api/v1/adminRoute/createNotice";
+  "https://eserver-i5sm.onrender.com/api/v1/adminRoute/createNotice";
 const API_EDIT =
-  "https://eshikshaserver.onrender.com/api/v1/adminRoute/updateNotice/";
+  "https://eserver-i5sm.onrender.com/api/v1/adminRoute/updateNotice/";
 const API_DELETE =
-  "https://eshikshaserver.onrender.com/api/v1/adminRoute/deleteNotice/";
+  "https://eserver-i5sm.onrender.com/api/v1/adminRoute/deleteNotice/";
 const API_GET_DATA =
-  "https://eshikshaserver.onrender.com/api/v1/adminRoute/getAllNotice";
+  "https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAllNotice";
 
 const TeacherNotice = () => {
   const authToken = Cookies.get("token");

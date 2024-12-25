@@ -37,7 +37,7 @@ const BulkAdmission = ({ refreshRegistrations }) => {
         try {
           setLoading(true);
           await axios.post(
-            "https://eshikshaserver.onrender.com/api/v1/adminRoute/createBulkStudentParent",
+            "https://eserver-i5sm.onrender.com/api/v1/adminRoute/createBulkStudentParent",
             { students: worksheet },
             // { registrations: worksheet },
             {
@@ -223,7 +223,7 @@ export default BulkAdmission;
 //       try {
 //         setLoading(true);
 //         await axios.post(
-//           "https://eshikshaserver.onrender.com/api/v1/adminRoute/createBulkStudentParent",
+//           "https://eserver-i5sm.onrender.com/api/v1/adminRoute/createBulkStudentParent",
 //           formData, // Sending the FormData containing the file
 //           {
 //             withCredentials: true,

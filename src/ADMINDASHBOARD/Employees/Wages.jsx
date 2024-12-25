@@ -21,7 +21,7 @@ function DynamicDataTable({ data, handleDelete }) {
   useEffect(() => {
     axios
       .get(
-        `https://eshikshaserver.onrender.com/api/v1/adminRoute/getAllEmployees`,
+        `https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAllEmployees`,
         {
           withCredentials: true,
           headers: {

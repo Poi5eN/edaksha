@@ -9,8 +9,8 @@ import Cookies from 'js-cookie';
 import { Button } from '@mui/material';
 const authToken = Cookies.get('token');
 
-const Api_GetAll = "https://eshikshaserver.onrender.com/api/v1/adminRoute/getAllCurriculum";
-const Delete_API ="https://eshikshaserver.onrender.com/api/v1/adminRoute/deleteCurriculum";
+const Api_GetAll = "https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAllCurriculum";
+const Delete_API ="https://eserver-i5sm.onrender.com/api/v1/adminRoute/deleteCurriculum";
 
 const Curriculum = () => {
   const [loading, setLoading] = useState(false);
@@ -63,7 +63,7 @@ const Curriculum = () => {
     formDataToSend.append("image", formData.image);
 
     axios
-      .post("https://eshikshaserver.onrender.com/api/v1/adminRoute/createCurriculum", formDataToSend, {
+      .post("https://eserver-i5sm.onrender.com/api/v1/adminRoute/createCurriculum", formDataToSend, {
         withCredentials: true,
       headers: {
         Authorization: `Bearer ${authToken}`,
@@ -88,7 +88,7 @@ const Curriculum = () => {
   };
  
   useEffect(() => {
-    axios.get("https://eshikshaserver.onrender.com/api/v1/adminRoute/getAllCurriculum", {
+    axios.get("https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAllCurriculum", {
       withCredentials: true,
       headers: {
         Authorization: `Bearer ${authToken}`,
@@ -108,7 +108,7 @@ const Curriculum = () => {
  
  
   // useEffect(() => {
-  //   axios.get("https://eshikshaserver.onrender.com/api/v1/adminRoute/getAllClass", {
+  //   axios.get("https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAllClass", {
   //     withCredentials: true,
   //     headers: {
   //       Authorization: `Bearer ${authToken}`,
@@ -127,7 +127,7 @@ const Curriculum = () => {
   const handleDeleteCurriculum = (index) => {
     const curriculumId = curriculumData[index]._id; 
     axios
-      .delete("https://eshikshaserver.onrender.com/api/v1/adminRoute/deleteCurriculum/" + curriculumId, {
+      .delete("https://eserver-i5sm.onrender.com/api/v1/adminRoute/deleteCurriculum/" + curriculumId, {
         withCredentials: true,
       headers: {
         Authorization: `Bearer ${authToken}`,

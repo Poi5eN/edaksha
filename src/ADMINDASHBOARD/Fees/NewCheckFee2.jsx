@@ -96,7 +96,7 @@ const NewCheckFee2 = () => {
   useEffect(() => {
     axios
       .get(
-        "https://eshikshaserver.onrender.com/api/v1/adminRoute/getAllStudents",
+        "https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAllStudents",
         {
           withCredentials: true,
           headers: {
@@ -141,7 +141,7 @@ const NewCheckFee2 = () => {
   const handleStudentClick = (admissionNumber) => {
     axios
       .get(
-        `https://eshikshaserver.onrender.com/api/v1/adminRoute/getParentWithChildren/${admissionNumber}`,
+        `https://eserver-i5sm.onrender.com/api/v1/adminRoute/getParentWithChildren/${admissionNumber}`,
         {
           withCredentials: true,
           headers: {
@@ -176,7 +176,7 @@ const NewCheckFee2 = () => {
 
     axios
       .get(
-        "https://eshikshaserver.onrender.com/api/v1/adminRoute/getAdditionalFees",
+        "https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAdditionalFees",
         {
           withCredentials: true,
           headers: {
@@ -201,7 +201,7 @@ const NewCheckFee2 = () => {
       });
 
     axios
-      .get(`https://eshikshaserver.onrender.com/api/v1/adminRoute/getFees`, {
+      .get(`https://eserver-i5sm.onrender.com/api/v1/adminRoute/getFees`, {
         withCredentials: true,
         headers: {
           Authorization: `Bearer ${authToken}`,
@@ -410,7 +410,7 @@ const NewCheckFee2 = () => {
 
         try {
           const response = await axios.post(
-            "https://eshikshaserver.onrender.com/api/v1/fees/createFeeStatus",
+            "https://eserver-i5sm.onrender.com/api/v1/fees/createFeeStatus",
             newFeeData,
             {
               withCredentials: true,

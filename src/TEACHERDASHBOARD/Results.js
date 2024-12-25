@@ -6,13 +6,13 @@ import { Button } from "@mui/material";
 const authToken = Cookies.get("token");
 
 export const GET_ALL_EXAMS_API =
-  "https://eshikshaserver.onrender.com/api/v1/exam/getAllExams";
+  "https://eserver-i5sm.onrender.com/api/v1/exam/getAllExams";
 export const GET_ALL_STUDENTS_API =
-  "https://eshikshaserver.onrender.com/api/v1/adminRoute/getAllStudents?studentclassName=11&studentSection=A";
+  "https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAllStudents?studentclassName=11&studentSection=A";
 export const CREATE_RESULTS_API =
-  "https://eshikshaserver.onrender.com/api/v1/results/createResults";
+  "https://eserver-i5sm.onrender.com/api/v1/results/createResults";
 export const GET_RESULTS_API =
-  "https://eshikshaserver.onrender.com/api/v1/results/getResults";
+  "https://eserver-i5sm.onrender.com/api/v1/results/getResults";
 
 const Results = () => {
 
@@ -160,7 +160,7 @@ const Results = () => {
 
       axios
         .get(
-          `https://eshikshaserver.onrender.com/api/v1/adminRoute/getAllStudents?studentclassName=${classTeacher}&studentSection=${section}`,
+          `https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAllStudents?studentclassName=${classTeacher}&studentSection=${section}`,
           {
             withCredentials: true,
             headers: {

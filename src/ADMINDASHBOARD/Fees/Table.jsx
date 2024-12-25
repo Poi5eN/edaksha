@@ -37,8 +37,8 @@ useEffect(()=>{
   const getFeeHistory = async () => {
   try {
     const response = await axios.get(
-      // "https://eshikshaserver.onrender.com/api/v1/fees/getFeeStatus",
-      "https://eshikshaserver.onrender.com/api/v1/fees/getFeeHistoryAndDues/RWN599",
+      // "https://eserver-i5sm.onrender.com/api/v1/fees/getFeeStatus",
+      "https://eserver-i5sm.onrender.com/api/v1/fees/getFeeHistoryAndDues/RWN599",
       {
         withCredentials: true,
         headers: {
@@ -61,7 +61,7 @@ useEffect(()=>{
   const getFeeHistory = async () => {
     try {
       const response = await axios.get(
-        "https://eshikshaserver.onrender.com/api/v1/fees/feeHistory",
+        "https://eserver-i5sm.onrender.com/api/v1/fees/feeHistory",
         {
           withCredentials: true,
           headers: {
@@ -500,7 +500,7 @@ export default Table;
 //   const getFeeHistory = async () => {
 //     try {
 //       const response = await axios.get(
-//         "https://eshikshaserver.onrender.com/api/v1/fees/feeHistory",
+//         "https://eserver-i5sm.onrender.com/api/v1/fees/feeHistory",
 //         {
 //           withCredentials: true,
 //           headers: {

@@ -46,7 +46,7 @@ function CreateExams() {
     // Fetch data from the server when the component mounts
     axios
       .get(
-        "https://eshikshaserver.onrender.com/api/v1/adminRoute/getAllEmployees",
+        "https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAllEmployees",
         {
           withCredentials: true,
           headers: {
@@ -100,7 +100,7 @@ function CreateExams() {
     try {
       setLoading(true);
       const response = await axios.post(
-        "https://eshikshaserver.onrender.com/api/v1/adminRoute/createEmployee",
+        "https://eserver-i5sm.onrender.com/api/v1/adminRoute/createEmployee",
         formDataToSend,
         {
           withCredentials: true,
@@ -126,7 +126,7 @@ function CreateExams() {
   const handleDelete = (email) => {
     axios
       .put(
-        `https://eshikshaserver.onrender.com/api/v1/adminRoute/deactivateEmployee`,
+        `https://eserver-i5sm.onrender.com/api/v1/adminRoute/deactivateEmployee`,
         { email },
         {
           withCredentials: true,

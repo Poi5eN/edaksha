@@ -55,7 +55,7 @@ const EditStudent = () => {
   useEffect(() => {
     axios
       .get(
-        `https://eshikshaserver.onrender.com/api/v1/adminRoute/getAllClasses`,
+        `https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAllClasses`,
         {
           withCredentials: true,
           headers: {
@@ -91,7 +91,7 @@ const EditStudent = () => {
     const fetchStudentAndParentData = async () => {
       try {
         const response = await axios.get(
-          `https://eshikshaserver.onrender.com/api/v1/adminRoute/getStudentAndParent/${email}`,
+          `https://eserver-i5sm.onrender.com/api/v1/adminRoute/getStudentAndParent/${email}`,
           {
             withCredentials: true,
             headers: {
@@ -220,7 +220,7 @@ const EditStudent = () => {
   
   //   try {
   //     const response = await axios.put(
-  //       `https://eshikshaserver.onrender.com/api/v1/adminRoute/editStudentParent/${email}`,
+  //       `https://eserver-i5sm.onrender.com/api/v1/adminRoute/editStudentParent/${email}`,
   //       data,
   //       {
   //         withCredentials: true,
@@ -292,7 +292,7 @@ const EditStudent = () => {
   
   //   try {
   //     const response = await axios.put(
-  //       `https://eshikshaserver.onrender.com/api/v1/adminRoute/editStudentParent/${email}`,
+  //       `https://eserver-i5sm.onrender.com/api/v1/adminRoute/editStudentParent/${email}`,
   //       data, // Sending FormData as payload
   //       {
   //         withCredentials: true,
@@ -347,7 +347,7 @@ const EditStudent = () => {
   
   //   try {
   //     const response = await axios.put(
-  //       `https://eshikshaserver.onrender.com/api/v1/adminRoute/editStudentParent/${email}`,
+  //       `https://eserver-i5sm.onrender.com/api/v1/adminRoute/editStudentParent/${email}`,
   //       data,
   //       {
   //         withCredentials: true,
@@ -419,7 +419,7 @@ const EditStudent = () => {
   
   //   try {
   //     const response = await axios.put(
-  //       `https://eshikshaserver.onrender.com/api/v1/adminRoute/editStudentParent/${email}`,
+  //       `https://eserver-i5sm.onrender.com/api/v1/adminRoute/editStudentParent/${email}`,
   //       data,
   //       {
   //         withCredentials: true,
@@ -497,7 +497,7 @@ const EditStudent = () => {
 
     try {
       const response = await axios.put(
-        `https://eshikshaserver.onrender.com/api/v1/adminRoute/editStudentParent/${email}`,
+        `https://eserver-i5sm.onrender.com/api/v1/adminRoute/editStudentParent/${email}`,
         data, // Sending FormData as payload
         {
           withCredentials: true,
@@ -935,7 +935,7 @@ export default EditStudent;
 //   useEffect(() => {
 //     axios
 //       .get(
-//         `https://eshikshaserver.onrender.com/api/v1/adminRoute/getAllClasses`,
+//         `https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAllClasses`,
 //         {
 //           withCredentials: true,
 //           headers: {
@@ -971,7 +971,7 @@ export default EditStudent;
 //     const fetchStudentAndParentData = async () => {
 //       try {
 //         const response = await axios.get(
-//           `https://eshikshaserver.onrender.com/api/v1/adminRoute/getStudentAndParent/${email}`,
+//           `https://eserver-i5sm.onrender.com/api/v1/adminRoute/getStudentAndParent/${email}`,
 //           {
 //             withCredentials: true,
 //             headers: {
@@ -1069,7 +1069,7 @@ export default EditStudent;
   
 //     try {
 //       const response = await axios.put(
-//         `https://eshikshaserver.onrender.com/api/v1/adminRoute/editStudentParent/${email}`,
+//         `https://eserver-i5sm.onrender.com/api/v1/adminRoute/editStudentParent/${email}`,
 //         data,
 //         {
 //           withCredentials: true,

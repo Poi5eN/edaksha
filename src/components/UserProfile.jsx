@@ -28,7 +28,7 @@ const UserProfile = () => {
 
   const handleLogout = () => {
     axios
-      .get("https://eshikshaserver.onrender.com/api/v1/logout")
+      .get("https://eserver-i5sm.onrender.com/api/v1/logout")
       .then((response) => {
         // sessionStorage.removeItem("fullName"); // Clear user data from sessionStorage
         // sessionStorage.removeItem("image");
@@ -48,7 +48,7 @@ const UserProfile = () => {
   // useEffect(() => {
   //   axios
   //     .get(
-  //       "https://eshikshaserver.onrender.com/api/v1/adminRoute/getAdminInfo",
+  //       "https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAdminInfo",
   //       {
   //         withCredentials: true,
   //         headers: {

@@ -52,7 +52,7 @@ const RegForm = ({ refreshRegistrations }) => {
       setLoading(true);
       await axios
         .post(
-          "https://eshikshaserver.onrender.com/api/v1/adminRoute/createRegistration",
+          "https://eserver-i5sm.onrender.com/api/v1/adminRoute/createRegistration",
           formData,
           {
             withCredentials: true,
@@ -80,7 +80,7 @@ const RegForm = ({ refreshRegistrations }) => {
   useEffect(() => {
     axios
       .get(
-        `https://eshikshaserver.onrender.com/api/v1/adminRoute/getAllClasses`,
+        `https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAllClasses`,
         {
           withCredentials: true,
           headers: {

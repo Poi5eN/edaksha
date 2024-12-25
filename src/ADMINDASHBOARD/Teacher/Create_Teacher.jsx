@@ -56,7 +56,7 @@ function CreateTeacher() {
     loading: teacherLoading,
     refetch: refetchRegistrations,
   } = useCustomQuery(
-    "https://eshikshaserver.onrender.com/api/v1/adminRoute/getTeachers"
+    "https://eserver-i5sm.onrender.com/api/v1/adminRoute/getTeachers"
   );
 
   useEffect(() => {
@@ -94,7 +94,7 @@ function CreateTeacher() {
     try {
       setLoading(true);
       const response = await axios.post(
-        "https://eshikshaserver.onrender.com/api/v1/adminRoute/createTeacher",
+        "https://eserver-i5sm.onrender.com/api/v1/adminRoute/createTeacher",
         formDataToSend,
         {
           withCredentials: true,
@@ -128,7 +128,7 @@ function CreateTeacher() {
   useEffect(() => {
     axios
       .get(
-        `https://eshikshaserver.onrender.com/api/v1/adminRoute/getAllClasses`,
+        `https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAllClasses`,
         {
           withCredentials: true,
           headers: {
@@ -150,7 +150,7 @@ function CreateTeacher() {
   const handleDelete = (email) => {
     axios
       .put(
-        `https://eshikshaserver.onrender.com/api/v1/adminRoute/deactivateTeacher`,
+        `https://eserver-i5sm.onrender.com/api/v1/adminRoute/deactivateTeacher`,
         { email },
         {
           withCredentials: true,

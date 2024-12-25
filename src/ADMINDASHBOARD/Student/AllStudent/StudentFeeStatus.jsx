@@ -21,7 +21,7 @@ const StudentFeeStatus = () => {
   useEffect(() => {
     axios
       .get(
-        `https://eshikshaserver.onrender.com/api/v1/adminRoute/getAllStudents?email=${email}`,
+        `https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAllStudents?email=${email}`,
         {
           withCredentials: true,
           headers: {
@@ -62,7 +62,7 @@ const StudentFeeStatus = () => {
 
   const handleModalOpen = () => {
     axios
-      .get(`https://eshikshaserver.onrender.com/api/v1/adminRoute/getFees`, {
+      .get(`https://eserver-i5sm.onrender.com/api/v1/adminRoute/getFees`, {
         withCredentials: true,
         headers: {
           Authorization: `Bearer ${authToken}`,
@@ -117,7 +117,7 @@ const StudentFeeStatus = () => {
     };
 
     const apiUrl =
-      "https://eshikshaserver.onrender.com/api/v1/fees/createFeeStatus";
+      "https://eserver-i5sm.onrender.com/api/v1/fees/createFeeStatus";
     axios
       .post(apiUrl, newExamData, {
         withCredentials: true,
@@ -128,7 +128,7 @@ const StudentFeeStatus = () => {
       .then((response) => {
         axios
           .get(
-            `https://eshikshaserver.onrender.com/api/v1/fees/getFeeStatus?studentId=${studentId}`,
+            `https://eserver-i5sm.onrender.com/api/v1/fees/getFeeStatus?studentId=${studentId}`,
             {
               withCredentials: true,
               headers: {
@@ -168,7 +168,7 @@ const StudentFeeStatus = () => {
     if (studentId && Object.keys(studentData).length > 0) {
       axios
         .get(
-          `https://eshikshaserver.onrender.com/api/v1/fees/getFeeStatus?studentId=${studentId}`,
+          `https://eserver-i5sm.onrender.com/api/v1/fees/getFeeStatus?studentId=${studentId}`,
           {
             withCredentials: true,
             headers: {
@@ -210,7 +210,7 @@ const StudentFeeStatus = () => {
   useEffect(() => {
     axios
       .get(
-        "https://eshikshaserver.onrender.com/api/v1/adminRoute/getAdditionalFees",
+        "https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAdditionalFees",
         {
           withCredentials: true,
           headers: {

@@ -38,7 +38,7 @@ const IdCard = () => {
     loading: idCardLoading,
     error: idCardError,
   } = useCustomQuery(
-    "https://eshikshaserver.onrender.com/api/v1/adminRoute/getAllStudents"
+    "https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAllStudents"
   );
 
   useEffect(() => {
@@ -274,7 +274,7 @@ export default IdCard;
 //     loading: idCardLoading,
 //     error: idCardError,
 //   } = useCustomQuery(
-//     "https://eshikshaserver.onrender.com/api/v1/adminRoute/getAllStudents"
+//     "https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAllStudents"
 //   );
 
 //   useEffect(() => {

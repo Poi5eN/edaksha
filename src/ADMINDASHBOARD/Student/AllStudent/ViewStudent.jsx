@@ -45,7 +45,7 @@ const ViewStudent = () => {
     // Fetch teacher data based on the email parameter
     axios
       .get(
-        `https://eshikshaserver.onrender.com/api/v1/adminRoute/getAllStudents?email=${email}`,
+        `https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAllStudents?email=${email}`,
         {
           withCredentials: true,
           headers: {

@@ -34,7 +34,7 @@ const StudentHome = () => {
     // GET Request to fetch existing notices
     axios
       .get(
-        `https://eshikshaserver.onrender.com/api/v1/adminRoute/getAllStudents?email=${email}`,
+        `https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAllStudents?email=${email}`,
         {
           withCredentials: true,
           headers: {
@@ -58,7 +58,7 @@ const StudentHome = () => {
   useEffect(() => {
     axios
       .get(
-        `https://eshikshaserver.onrender.com/api/v1/adminRoute/getAllIssuedBookStudent?bookId=${_id}`,
+        `https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAllIssuedBookStudent?bookId=${_id}`,
         {
           withCredentials: true,
           headers: {

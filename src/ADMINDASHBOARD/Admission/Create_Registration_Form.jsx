@@ -146,7 +146,7 @@ function Create_Registration_Form() {
     error: admissionError,
     refetch: refetchRegistrations,
   } = useCustomQuery(
-    "https://eshikshaserver.onrender.com/api/v1/adminRoute/getLastYearStudents"
+    "https://eserver-i5sm.onrender.com/api/v1/adminRoute/getLastYearStudents"
   );
 
   const handleSubmit = async (e) => {
@@ -263,7 +263,7 @@ function Create_Registration_Form() {
     try {
       setLoading(true);
       const response = await axios.post(
-        "https://eshikshaserver.onrender.com/api/v1/adminRoute/createStudentParent",
+        "https://eserver-i5sm.onrender.com/api/v1/adminRoute/createStudentParent",
         formDataToSend,
         {
           withCredentials: true,
@@ -302,7 +302,7 @@ function Create_Registration_Form() {
   useEffect(() => {
     axios
       .get(
-        `https://eshikshaserver.onrender.com/api/v1/adminRoute/getAllClasses`,
+        `https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAllClasses`,
         {
           withCredentials: true,
           headers: {
@@ -330,7 +330,7 @@ function Create_Registration_Form() {
           onClick={() => {
             axios
               .put(
-                `https://eshikshaserver.onrender.com/api/v1/adminRoute/deactivateStudent`,
+                `https://eserver-i5sm.onrender.com/api/v1/adminRoute/deactivateStudent`,
                 { email },
                 {
                   withCredentials: true,
@@ -1178,7 +1178,7 @@ export default Create_Registration_Form;
 //     error: admissionError,
 //     refetch: refetchRegistrations,
 //   } = useCustomQuery(
-//     "https://eshikshaserver.onrender.com/api/v1/adminRoute/getLastYearStudents"
+//     "https://eserver-i5sm.onrender.com/api/v1/adminRoute/getLastYearStudents"
 //   );
 
 //   const handleSubmit = async (e) => {
@@ -1189,7 +1189,7 @@ export default Create_Registration_Form;
 //     try {
 //       setLoading(true);
 //       const response = await axios.post(
-//         "https://eshikshaserver.onrender.com/api/v1/adminRoute/createStudentParent",
+//         "https://eserver-i5sm.onrender.com/api/v1/adminRoute/createStudentParent",
 //         formData,
 //         {
 //           withCredentials: true,
@@ -1227,7 +1227,7 @@ export default Create_Registration_Form;
 //   useEffect(() => {
 //     axios
 //       .get(
-//         `https://eshikshaserver.onrender.com/api/v1/adminRoute/getAllClasses`,
+//         `https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAllClasses`,
 //         {
 //           withCredentials: true,
 //           headers: {
@@ -1255,7 +1255,7 @@ export default Create_Registration_Form;
 //           onClick={() => {
 //             axios
 //               .put(
-//                 `https://eshikshaserver.onrender.com/api/v1/adminRoute/deactivateStudent`,
+//                 `https://eserver-i5sm.onrender.com/api/v1/adminRoute/deactivateStudent`,
 //                 { email },
 //                 {
 //                   withCredentials: true,

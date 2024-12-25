@@ -16,7 +16,7 @@ const Syllabus = () => {
     // GET Request to fetch existing notices
     axios
       .get(
-        `https://eshikshaserver.onrender.com/api/v1/adminRoute/getAllStudents?email=${email}`,
+        `https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAllStudents?email=${email}`,
         {
           withCredentials: true,
           headers: {
@@ -40,7 +40,7 @@ const Syllabus = () => {
     if (studentData.class) {
       axios
         .get(
-          `https://eshikshaserver.onrender.com/api/v1/adminRoute/getAllCurriculum?className=${studentData.class}`,
+          `https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAllCurriculum?className=${studentData.class}`,
           {
             withCredentials: true,
             headers: {

@@ -4,7 +4,7 @@ import Cookies from "js-cookie";
 const authToken = Cookies.get("token");
 
 const Api_GetAll =
-  "https://eshikshaserver.onrender.com/api/v1/adminRoute/getAllClass";
+  "https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAllClass";
 
 const CreateCurriculum = () => {
   const [selectedGrade, setSelectedGrade] = useState("Select Class");
@@ -24,7 +24,7 @@ const CreateCurriculum = () => {
   useEffect(() => {
     axios
       .get(
-        "https://eshikshaserver.onrender.com/api/v1/adminRoute/getAllClass",
+        "https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAllClass",
         {
           withCredentials: true,
           headers: {
@@ -47,7 +47,7 @@ const CreateCurriculum = () => {
         setLoading(true);
         try {
           const response = await axios.get(
-            "https://eshikshaserver.onrender.com/api/v1/adminRoute/getAllCurriculum",
+            "https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAllCurriculum",
             {
               withCredentials: true,
               headers: {

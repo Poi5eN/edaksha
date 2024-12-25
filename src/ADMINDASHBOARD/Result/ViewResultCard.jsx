@@ -24,7 +24,7 @@ const ViewResultCard = () => {
   useEffect(() => {
     axios
       .get(
-        `https://eshikshaserver.onrender.com/api/v1/adminRoute/getAllStudents?email=${email}`,
+        `https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAllStudents?email=${email}`,
         {
           withCredentials: true,
           headers: {
@@ -54,7 +54,7 @@ const ViewResultCard = () => {
   useEffect(() => {
     axios
       .get(
-        "https://eshikshaserver.onrender.com/api/v1/adminRoute/getAdminInfo",
+        "https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAdminInfo",
         {
           withCredentials: true,
           headers: {
@@ -75,7 +75,7 @@ const ViewResultCard = () => {
 
   useEffect(() => {
     axios
-      .get("https://eshikshaserver.onrender.com/api/v1/exam/getAllExams", {
+      .get("https://eserver-i5sm.onrender.com/api/v1/exam/getAllExams", {
         withCredentials: true,
         headers: {
           Authorization: `Bearer ${authToken}`,
@@ -118,7 +118,7 @@ const ViewResultCard = () => {
       }
       axios
         .get(
-          `https://eshikshaserver.onrender.com/api/v1/results/getResults?examName=${selectedExam}&studentId=${userId}`,
+          `https://eserver-i5sm.onrender.com/api/v1/results/getResults?examName=${selectedExam}&studentId=${userId}`,
           {
             withCredentials: true,
             headers: {
@@ -596,7 +596,7 @@ export default ViewResultCard;
 //   useEffect(() => {
 //     axios
 //       .get(
-//         `https://eshikshaserver.onrender.com/api/v1/adminRoute/getAllStudents?email=${email}`,
+//         `https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAllStudents?email=${email}`,
 //         {
 //           withCredentials: true,
 //           headers: {
@@ -626,7 +626,7 @@ export default ViewResultCard;
 //   useEffect(() => {
 //     axios
 //       .get(
-//         "https://eshikshaserver.onrender.com/api/v1/adminRoute/getAdminInfo",
+//         "https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAdminInfo",
 //         {
 //           withCredentials: true,
 //           headers: {
@@ -647,7 +647,7 @@ export default ViewResultCard;
 
 //   useEffect(() => {
 //     axios
-//       .get("https://eshikshaserver.onrender.com/api/v1/exam/getAllExams", {
+//       .get("https://eserver-i5sm.onrender.com/api/v1/exam/getAllExams", {
 //         withCredentials: true,
 //         headers: {
 //           Authorization: `Bearer ${authToken}`,
@@ -690,7 +690,7 @@ export default ViewResultCard;
 //       }
 //       axios
 //         .get(
-//           `https://eshikshaserver.onrender.com/api/v1/results/getResults?examName=${selectedExam}&studentId=${userId}`,
+//           `https://eserver-i5sm.onrender.com/api/v1/results/getResults?examName=${selectedExam}&studentId=${userId}`,
 //           {
 //             withCredentials: true,
 //             headers: {

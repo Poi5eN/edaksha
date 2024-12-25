@@ -9,7 +9,7 @@ const FeeStatus = ({ admissionNumber }) => {
     const fee = async () => {
       try {
         const response = await axios.get(
-          `https://eshikshaserver.onrender.com/api/v1/fees/getFeeHistoryAndDues/${admissionNumber}`,
+          `https://eserver-i5sm.onrender.com/api/v1/fees/getFeeHistoryAndDues/${admissionNumber}`,
 
           {
             withCredentials: true,

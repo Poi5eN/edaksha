@@ -39,7 +39,7 @@ const EditStaff = () => {
 
   useEffect(() => {
     axios.get(
-      `https://eshikshaserver.onrender.com/api/v1/adminRoute/getAllEmployees?email=${email}`,
+      `https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAllEmployees?email=${email}`,
       {
         withCredentials: true,
         headers: {
@@ -78,7 +78,7 @@ const EditStaff = () => {
       }
     }
 
-    axios.put(`https://eshikshaserver.onrender.com/api/v1/adminRoute/updateEmployee`, data, {
+    axios.put(`https://eserver-i5sm.onrender.com/api/v1/adminRoute/updateEmployee`, data, {
       withCredentials: true,
       headers: {
         Authorization: `Bearer ${authToken}`,

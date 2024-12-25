@@ -72,7 +72,7 @@ function Create_Subjects() {
 
     try {
       const response = await axios.post(
-        "https://eshikshaserver.onrender.com/api/v1/adminRoute/createTeacher",
+        "https://eserver-i5sm.onrender.com/api/v1/adminRoute/createTeacher",
         formDataToSend,
         {
           headers: {

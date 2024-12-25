@@ -11,7 +11,7 @@ const InventoryStock = () => {
 
   useEffect(() => {
     axios
-      .get("https://eshikshaserver.onrender.com/api/v1/adminRoute/getAllItems", {
+      .get("https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAllItems", {
         withCredentials: true,
       headers: {
         Authorization: `Bearer ${authToken}`,

@@ -9,7 +9,7 @@ const StudentFeeDetails = ({ modalData }) => {
   useEffect(() => {
     axios
       .get(
-        `https://eshikshaserver.onrender.com/api/v1/fees/getFeeHistoryAndDues/${modalData}`,
+        `https://eserver-i5sm.onrender.com/api/v1/fees/getFeeHistoryAndDues/${modalData}`,
         {
           withCredentials: true,
           headers: {

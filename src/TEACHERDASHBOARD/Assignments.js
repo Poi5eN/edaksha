@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 const authToken = Cookies.get("token");
 const Api_Create =
-  "https://eshikshaserver.onrender.com/api/v1/adminRoute/createAssignment";
+  "https://eserver-i5sm.onrender.com/api/v1/adminRoute/createAssignment";
 
 const Assignments = () => {
   const classdata = JSON.parse(sessionStorage.getItem("response"));
@@ -36,7 +36,7 @@ const Assignments = () => {
   useEffect(() => {
     axios
       .get(
-        "https://eshikshaserver.onrender.com/api/v1/adminRoute/getAllClasses",
+        "https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAllClasses",
         {
           withCredentials: true,
           headers: {
@@ -148,7 +148,7 @@ const Assignments = () => {
   // useEffect(() => {
   //   axios
   //     .get(
-  //       "https://eshikshaserver.onrender.com/api/v1/adminRoute/getAllClasses",
+  //       "https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAllClasses",
   //       {
   //         withCredentials: true,
   //         headers: {
@@ -169,7 +169,7 @@ const Assignments = () => {
   useEffect(() => {
     axios
       .get(
-        "https://eshikshaserver.onrender.com/api/v1/adminRoute/getAllAssignment",
+        "https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAllAssignment",
         {
           withCredentials: true,
           headers: {
@@ -192,7 +192,7 @@ const Assignments = () => {
     const assignmentId = assignmentData[index]._id;
     axios
       .delete(
-        "https://eshikshaserver.onrender.com/api/v1/adminRoute/deleteAssignment/" +
+        "https://eserver-i5sm.onrender.com/api/v1/adminRoute/deleteAssignment/" +
           assignmentId,
         {
           withCredentials: true,
@@ -481,16 +481,16 @@ export default Assignments;
 // const authToken = Cookies.get("token");
 
 // const Api_Create =
-//   "https://eshikshaserver.onrender.com/api/v1/adminRoute/createAssignment";
+//   "https://eserver-i5sm.onrender.com/api/v1/adminRoute/createAssignment";
 // const Api_Update =
-//   "https://eshikshaserver.onrender.com/api/v1/adminRoute/updateAssignment/";
+//   "https://eserver-i5sm.onrender.com/api/v1/adminRoute/updateAssignment/";
 // const Api_GetAssiignment =
-//   "https://eshikshaserver.onrender.com/api/v1/adminRoute/getAllAssignment";
+//   "https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAllAssignment";
 // const Api_GetAll =
-//   // "https://eshikshaserver.onrender.com/api/v1/adminRoute/getAllClass";
-//   "https://eshikshaserver.onrender.com/api/v1/adminRoute/getAllClasses";
+//   // "https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAllClass";
+//   "https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAllClasses";
 // const API_DELETE =
-//   "https://eshikshaserver.onrender.com/api/v1/adminRoute/deleteAssignment/6538e0fb0c6aa38bbddec27b";
+//   "https://eserver-i5sm.onrender.com/api/v1/adminRoute/deleteAssignment/6538e0fb0c6aa38bbddec27b";
 
 // const Assignments = () => {
 //   const { currentColor} = useStateContext();
@@ -580,8 +580,8 @@ export default Assignments;
 //   useEffect(() => {
 //     axios
 //       .get(
-//         "https://eshikshaserver.onrender.com/api/v1/adminRoute/getAllClasses",
-//         // "https://eshikshaserver.onrender.com/api/v1/adminRoute/getAllClass",
+//         "https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAllClasses",
+//         // "https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAllClass",
 //         {
 //           withCredentials: true,
 //           headers: {
@@ -602,7 +602,7 @@ export default Assignments;
 //   useEffect(() => {
 //     axios
 //       .get(
-//         "https://eshikshaserver.onrender.com/api/v1/adminRoute/getAllAssignment",
+//         "https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAllAssignment",
 //         {
 //           withCredentials: true,
 //           headers: {
@@ -625,7 +625,7 @@ export default Assignments;
 //     const assignmentId = assignmentData[index]._id;
 //     axios
 //       .delete(
-//         "https://eshikshaserver.onrender.com/api/v1/adminRoute/deleteAssignment/" +
+//         "https://eserver-i5sm.onrender.com/api/v1/adminRoute/deleteAssignment/" +
 //           assignmentId,
 //         {
 //           withCredentials: true,

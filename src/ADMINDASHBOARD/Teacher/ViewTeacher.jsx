@@ -22,7 +22,7 @@ const ViewTeacher = () => {
   useEffect(() => {
     axios
       .get(
-        `https://eshikshaserver.onrender.com/api/v1/adminRoute/getTeachers?email=${email}`,
+        `https://eserver-i5sm.onrender.com/api/v1/adminRoute/getTeachers?email=${email}`,
         {
           withCredentials: true,
           headers: {

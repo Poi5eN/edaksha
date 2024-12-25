@@ -38,7 +38,7 @@ function CreateClassWise() {
   const toggleModal = () => {
     setIsOpen(!isOpen);
   };
-  const {queryData:classData,loading:classLoading,error:classError}=useCustomQuery("https://eshikshaserver.onrender.com/api/v1/adminRoute/getFees")
+  const {queryData:classData,loading:classLoading,error:classError}=useCustomQuery("https://eserver-i5sm.onrender.com/api/v1/adminRoute/getFees")
 
   useEffect(()=>{
     if(classData){
@@ -56,7 +56,7 @@ function CreateClassWise() {
   useEffect(() => {
     axios
       .get(
-        `https://eshikshaserver.onrender.com/api/v1/adminRoute/getAllClasses`,
+        `https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAllClasses`,
         {
           withCredentials: true,
           headers: {
@@ -85,7 +85,7 @@ function CreateClassWise() {
     try {
       setLoading(true);
       const response = await axios.post(
-        "https://eshikshaserver.onrender.com/api/v1/adminRoute/createFees",
+        "https://eserver-i5sm.onrender.com/api/v1/adminRoute/createFees",
         formDataToSend,
         {
           withCredentials: true,
@@ -124,7 +124,7 @@ function CreateClassWise() {
   const handleDelete = (itemId) => {
     axios
       .delete(
-        `https://eshikshaserver.onrender.com/api/v1/adminRoute/deleteFees/${itemId}`,
+        `https://eserver-i5sm.onrender.com/api/v1/adminRoute/deleteFees/${itemId}`,
         {
           withCredentials: true,
           headers: {

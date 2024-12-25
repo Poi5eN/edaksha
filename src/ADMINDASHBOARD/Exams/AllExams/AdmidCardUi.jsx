@@ -89,7 +89,7 @@ const AdmitCardUi = () => {
     loading: admitCardLoading,
     error: admitCardError,
   } = useCustomQuery(
-    "https://eshikshaserver.onrender.com/api/v1/adminRoute/getAllStudents"
+    "https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAllStudents"
   );
 // console.log("firstadmitCard".admitCard)
   const {
@@ -97,7 +97,7 @@ const AdmitCardUi = () => {
     loading: allExamLoading,
     error: allExamError,
   } = useCustomQuery(
-    "https://eshikshaserver.onrender.com/api/v1/exam/getAllExams"
+    "https://eserver-i5sm.onrender.com/api/v1/exam/getAllExams"
   );
 
   useEffect(() => {

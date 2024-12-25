@@ -63,7 +63,7 @@
 //   useEffect(() => {
 //     axios
 //       .get(
-//         `https://eshikshaserver.onrender.com/api/v1/adminRoute/getDataByAdmissionNumber/${email}`,
+//         `https://eserver-i5sm.onrender.com/api/v1/adminRoute/getDataByAdmissionNumber/${email}`,
 //         {
 //           withCredentials: true,
 //           headers: {
@@ -109,7 +109,7 @@
 
 //     axios
 //       .put(
-//         `https://eshikshaserver.onrender.com/api/v1/adminRoute/updateStudent`,
+//         `https://eserver-i5sm.onrender.com/api/v1/adminRoute/updateStudent`,
 //         data,
 //         {
 //           withCredentials: true,
@@ -461,7 +461,7 @@ const EditAdmission = () => {
   useEffect(() => {
     axios
       .get(
-        `https://eshikshaserver.onrender.com/api/v1/adminRoute/getAllStudents?email=${email}`,
+        `https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAllStudents?email=${email}`,
         {
           withCredentials: true,
           headers: {
@@ -500,7 +500,7 @@ const EditAdmission = () => {
 
     axios
       .put(
-        `https://eshikshaserver.onrender.com/api/v1/adminRoute/updateStudent`,
+        `https://eserver-i5sm.onrender.com/api/v1/adminRoute/updateStudent`,
         data,
         {
           withCredentials: true,

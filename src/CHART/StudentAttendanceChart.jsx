@@ -42,7 +42,7 @@ const StudentAttendanceChart = () => {
         const currentMonth = currentDate.getMonth() + 1; // Months are 0-indexed, so add 1
 
         const response = await axios.get(
-          `https://eshikshaserver.onrender.com/api/v1/teacher/getAttendanceForStudent?year=${currentYear}&month=${currentMonth}`,
+          `https://eserver-i5sm.onrender.com/api/v1/teacher/getAttendanceForStudent?year=${currentYear}&month=${currentMonth}`,
           {
             withCredentials: true,
             headers: {

@@ -12,7 +12,7 @@ const Queries = () => {
   useEffect(() => {
     axios
       .get(
-        "https://eshikshaserver.onrender.com/api/v1/adminRoute/getAdminInfo",
+        "https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAdminInfo",
         {
           withCredentials: true,
           headers: {

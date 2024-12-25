@@ -4,7 +4,7 @@ const authToken = Cookies.get("token");
 
 export const teacherApi = async (email) => {
   const tachapi = await axios.get(
-    `https://eshikshaserver.onrender.com/api/v1/adminRoute/getTeachers?email=${email}`,
+    `https://eserver-i5sm.onrender.com/api/v1/adminRoute/getTeachers?email=${email}`,
     {
       withCredentials: true,
       headers: {
@@ -17,7 +17,7 @@ export const teacherApi = async (email) => {
 
 export const getAllStudent = () => {
   const numberOfStudent = axios.get(
-    "https://eshikshaserver.onrender.com/api/v1/adminRoute/getAllStudents",
+    "https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAllStudents",
     {
       withCredentials: true,
       headers: {

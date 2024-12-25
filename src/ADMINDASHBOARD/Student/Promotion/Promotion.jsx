@@ -33,7 +33,7 @@ const Promotion = () => {
 
   useEffect(() => {
     axios
-      .get("https://eshikshaserver.onrender.com/api/v1/adminRoute/getLastYearStudents", {
+      .get("https://eserver-i5sm.onrender.com/api/v1/adminRoute/getLastYearStudents", {
         withCredentials: true,
         headers: { Authorization: `Bearer ${authToken}` },
       })
@@ -49,7 +49,7 @@ const Promotion = () => {
   }, []);
   useEffect(() => {
     axios
-      .get("https://eshikshaserver.onrender.com/api/v1/adminRoute/getAllClasses", {
+      .get("https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAllClasses", {
         withCredentials: true,
         headers: { Authorization: `Bearer ${authToken}` },
       })
@@ -122,7 +122,7 @@ const Promotion = () => {
 
     try {
       await axios.put(
-        "https://eshikshaserver.onrender.com/api/v1/adminRoute/promotionOfStudent",
+        "https://eserver-i5sm.onrender.com/api/v1/adminRoute/promotionOfStudent",
         dataToUpdate,
         {
           withCredentials: true,
@@ -299,8 +299,8 @@ export default Promotion;
 //     // Fetch data from the server when the component mounts
 //     axios
 //       .get(
-//         "https://eshikshaserver.onrender.com/api/v1/adminRoute/getAllClasses",
-//         // "https://eshikshaserver.onrender.com/api/v1/adminRoute/getAllClass",
+//         "https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAllClasses",
+//         // "https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAllClass",
 //         {
 //           withCredentials: true,
 //           headers: {
@@ -452,7 +452,7 @@ export default Promotion;
 //     // Make the PUT request
 //     await axios
 //       .put(
-//         "https://eshikshaserver.onrender.com/api/v1/adminRoute/promotionOfStudent",
+//         "https://eserver-i5sm.onrender.com/api/v1/adminRoute/promotionOfStudent",
 //         dataToUpdate,
 //         {
 //           withCredentials: true,

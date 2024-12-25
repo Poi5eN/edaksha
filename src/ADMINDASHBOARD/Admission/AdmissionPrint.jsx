@@ -25,8 +25,8 @@ function AdmissionPrint() {
    
     axios
       .get(
-        `https://eshikshaserver.onrender.com/api/v1/adminRoute/getDataByAdmissionNumber/${email}`,
-        // `https://eshikshaserver.onrender.com/api/v1/adminRoute/getAllStudents?email=${email}`,
+        `https://eserver-i5sm.onrender.com/api/v1/adminRoute/getDataByAdmissionNumber/${email}`,
+        // `https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAllStudents?email=${email}`,
         {
           withCredentials: true,
           headers: { Authorization: `Bearer ${authToken}` },

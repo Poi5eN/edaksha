@@ -24,7 +24,7 @@ const EditPrimary = () => {
   useEffect(() => {
     axios
       .get(
-        `https://eshikshaserver.onrender.com/api/v1/adminRoute/getAllClasses?className=${className}`,
+        `https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAllClasses?className=${className}`,
         {
           withCredentials: true,
           headers: {
@@ -51,7 +51,7 @@ const EditPrimary = () => {
 
     axios
       .put(
-        `https://eshikshaserver.onrender.com/api/v1/adminRoute/updateClass`,
+        `https://eserver-i5sm.onrender.com/api/v1/adminRoute/updateClass`,
         formData,
         {
           withCredentials: true,

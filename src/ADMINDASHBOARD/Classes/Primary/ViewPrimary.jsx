@@ -13,7 +13,7 @@ const ViewPrimary = () => {
   const { currentColor } = useStateContext();
   const { _id } = useParams();
   const [classData, setClassData] = useState({});
-  const {queryData:viewClass,loading:viewClassLoading,error:viewClassError} =useCustomQuery( `https://eshikshaserver.onrender.com/api/v1/adminRoute/getClass/${_id}`)
+  const {queryData:viewClass,loading:viewClassLoading,error:viewClassError} =useCustomQuery( `https://eserver-i5sm.onrender.com/api/v1/adminRoute/getClass/${_id}`)
   
   useEffect(()=>{
     if(viewClass){
