@@ -16,8 +16,8 @@
     color: gray;
     padding: 0 0.3rem;
     margin: 0 0.5rem;
-    transition: .1s ease-out;
     transform-origin: left top;
+    transition: .1s ease-out;
     pointer-events: none;
   }
   .input_text {
