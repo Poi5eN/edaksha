@@ -40,21 +40,21 @@ const DashboardHome = () => {
     error: teacherError,
     loading: teacherLoading,
   } = useCustomQuery(
-    "https://eserver-i5sm.onrender.com/api/v1/adminRoute/getTeachers"
+    "https://eshikshaserver.onrender.com/api/v1/adminRoute/getTeachers"
   );
   const {
     queryData: studentData,
     error: studentError,
     loading: studentLoading,
   } = useCustomQuery(
-    "https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAllStudents"
+    "https://eshikshaserver.onrender.com/api/v1/adminRoute/getAllStudents"
   );
   const {
     queryData: admissionData,
     error: admissionError,
     loading: admissionLoading,
   } = useCustomQuery(
-    "https://eserver-i5sm.onrender.com/api/v1/adminRoute/getLastYearStudents"
+    "https://eshikshaserver.onrender.com/api/v1/adminRoute/getLastYearStudents"
   );
 
   const location = useLocation();
@@ -99,7 +99,7 @@ const DashboardHome = () => {
     const fetchItems = async () => {
       try {
         const response = await axios.get(
-          "https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAllItems",
+          "https://eshikshaserver.onrender.com/api/v1/adminRoute/getAllItems",
           {
             withCredentials: true,
             headers: {
@@ -147,7 +147,7 @@ const DashboardHome = () => {
     const fetchFeeStatus = async () => {
       try {
         const response = await axios.get(
-          "https://eserver-i5sm.onrender.com/api/v1/fees/getFeeStatus",
+          "https://eshikshaserver.onrender.com/api/v1/fees/getFeeStatus",
           {
             withCredentials: true,
             headers: {
@@ -437,21 +437,21 @@ export default DashboardHome;
 //     error: teacherError,
 //     loading: teacherLoading,
 //   } = useCustomQuery(
-//     "https://eserver-i5sm.onrender.com/api/v1/adminRoute/getTeachers"
+//     "https://eshikshaserver.onrender.com/api/v1/adminRoute/getTeachers"
 //   );
 //   const {
 //     queryData: studentData,
 //     error: studentError,
 //     loading: studentLoading,
 //   } = useCustomQuery(
-//     "https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAllStudents"
+//     "https://eshikshaserver.onrender.com/api/v1/adminRoute/getAllStudents"
 //   );
 //   const {
 //     queryData: admissionData,
 //     error: admissionError,
 //     loading: admissionLoading,
 //   } = useCustomQuery(
-//     "https://eserver-i5sm.onrender.com/api/v1/adminRoute/getLastYearStudents"
+//     "https://eshikshaserver.onrender.com/api/v1/adminRoute/getLastYearStudents"
 //   );
 
 //   const location = useLocation();
@@ -485,7 +485,7 @@ export default DashboardHome;
 //   useEffect(() => {
 //     axios
 //       .get(
-//         "https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAllItems",
+//         "https://eshikshaserver.onrender.com/api/v1/adminRoute/getAllItems",
 //         {
 //           withCredentials: true,
 //           headers: {
@@ -530,7 +530,7 @@ export default DashboardHome;
 
 //   useEffect(() => {
 //     axios
-//       .get(`https://eserver-i5sm.onrender.com/api/v1/fees/getFeeStatus`, {
+//       .get(`https://eshikshaserver.onrender.com/api/v1/fees/getFeeStatus`, {
 //         withCredentials: true,
 //         headers: {
 //           Authorization: `Bearer ${authToken}`,
