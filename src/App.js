@@ -4,6 +4,7 @@ import Loading from "./Loading";
 import ReportCardGenerator from "./TEACHERDASHBOARD/ReportCard";
 import ExamList from "./TEACHERDASHBOARD/ExamList";
 import ExamResultsManager from "./TEACHERDASHBOARD/ExamResultsManager";
+import ExamSystem from "./TEACHERDASHBOARD/ExamSystem";
 const LandingPage = lazy(() => import("./ShikshMitraWebsite/LandingPage"));
 const AdminDashboard = lazy(() => import("./ADMINDASHBOARD/AdminDashboard"));
 const Login = lazy(() =>
@@ -393,6 +394,7 @@ function App() {
             <Route path="ExamResultsManager" element={<ExamResultsManager />} />
             <Route path="aboutTeacher" element={<AboutTeacher />} />
             <Route path="studentReport" element={<StudentReport />} />
+            <Route path="examsystem" element={<ExamSystem />} />
           </Route>
           <Route path="/student" element={<StudentDashboard />}>
             <Route index element={<StudentHome />} />

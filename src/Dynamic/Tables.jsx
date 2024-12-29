@@ -1,4 +1,5 @@
 import React, { useRef, useState } from "react";
+import { useStateContext } from "../contexts/ContextProvider";
 
 function Tables({
   thead,
@@ -14,7 +15,7 @@ function Tables({
 }) {
   const isMobile = window.innerWidth <= 768;
   const activeRowRef = useRef(null);
-
+  const { currentColor } = useStateContext();
   // Function to handle row click
   const handleRowClick = (rowRef, ele, index) => {
     getRowClick && getRowClick(ele, index);
@@ -46,9 +47,13 @@ function Tables({
       >
         <div className="grid">
           <div className="col-span-full">
-            <table className="table-auto border-collapse w-full">
+            <table className="table-auto border-collapse w-full dark:text-white dark:bg-secondary-dark-bg">
               <thead>
-                <tr className="bg-gray-200">
+                <tr className="bg-gray-200 text-[10px] text-white" 
+                 style={{ backgroundColor: currentColor }}
+                // style={{background:currentColor}}
+                
+                >
                   {thead?.map((headData, index) => (
                     <th
                       key={index}
@@ -58,7 +63,7 @@ function Tables({
                           ? headData?.textAlign
                           : "",
                       }}
-                      className={`px-2 py-1 font-semibold text-left ${
+                      className={`px-2 py-1 font-semibold text-left  ${
                         headData?.className ? headData?.className : ""
                       }`}
                     >
@@ -67,7 +72,7 @@ function Tables({
                   ))}
                 </tr>
               </thead>
-              <tbody className="bg-white">
+              <tbody className="bg-white text-[10px] dark:bg-secondary-dark-bg">
                 {tbody?.map((ele, index) => {
                   const keys = Object.keys(ele).filter(
                     (key) => key !== "colorcode"
@@ -76,8 +81,8 @@ function Tables({
                   return (
                     <tr
                       key={index}
-                      className={`${getRowClass ? getRowClass(ele, index) : ""}`}
-                      style={{ backgroundColor: rowColor }}
+                      className={ ` border ${getRowClass ? getRowClass(ele, index) : ""}`}
+                      // style={{ backgroundColor: rowColor }}
                       onClick={(e) =>
                         handleRowClick(e.currentTarget, ele, index)
                       }

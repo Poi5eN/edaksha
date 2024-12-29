@@ -7,6 +7,9 @@ import { useStateContext } from "../../contexts/ContextProvider.js";
 import { Button } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import DownloadIcon from "@mui/icons-material/Download";
+
+import { MdFileDownload } from "react-icons/md";
+
 function AdmissionPrint() {
   const { currentColor } = useStateContext();
   const authToken = Cookies.get("token");
@@ -46,34 +49,18 @@ function AdmissionPrint() {
   });
   return (
     <>
-     <div className=" border border-gray-300 w-full flex justify-center items-center">
-        <div className="w-full mx-auto flex justify-start gap-2 text-[10px] px-5">
+    
+     <div className="bg-gray-200 border border-gray-300 w-full flex justify-center items-center px-5">
+        <div className="w-full mx-auto flex justify-start gap-2 text-[10px] ">
           <Link to="/admin">Dashboard » </Link>
           <Link to="/admin/admission">Students » </Link>
           <Link to="" className="text-gray-500">
             Students Details
           </Link>
         </div>
+        <span  onClick={generatePDF} style={{cursor:"pointer"}} className="whitespace-nowrap flex items-center"><MdFileDownload/> Download Pdf</span>
       </div>
-      <div className="flex justify-between md:w-[90%] mx-auto w-full z-[999999]">
-        <Link to="/admin/admission">
-          <Button
-            variant="contained"
-            startIcon={<ArrowBackIcon />}
-            style={{ backgroundColor: currentColor, color: "white" }}
-          >
-            Back
-          </Button>
-        </Link>
-        <Button
-          variant="contained"
-          onClick={generatePDF}
-          startIcon={<DownloadIcon />}
-          style={{ backgroundColor: currentColor, color: "white" }}
-        >
-          download
-        </Button>
-      </div>
+     
 
      <div className="w-full flex justify-center">
      <div className="a4 ">

@@ -501,19 +501,26 @@ export const Teacherslinks = [
         route: "teacher/CreateExam",
       },
       {
-        id: "8",
+        id: "9",
 
         name: "About",
         icon: <BiSolidStoreAlt />,
         route: "teacher/AboutTeacher",
       },
       {
-        id: "9",
+        id: "10",
 
         name: "Students Report",
         icon: <BiSolidStoreAlt />,
         route: "teacher/studentReport",
       },
+      {
+        id: "11",
+
+        name: "Exam System",
+        icon: <BiSolidStoreAlt />,
+        route: "teacher/examsystem",
+      },
     ],
   },
 ];
