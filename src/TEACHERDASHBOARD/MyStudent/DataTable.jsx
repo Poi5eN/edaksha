@@ -36,7 +36,15 @@ const filteredData = data.filter(
   (student) => student.class == classTeacherClass && student.section == classTeacherSection
 );
 
+// console.log("filteredData",filteredData)
+// localStorage.setItem('studentsData', JSON.stringify(filteredData));
 
+// const retrievedData = JSON.parse(localStorage.getItem('studentsData'));
+
+// // Use the retrieved data
+// console.log("retrievedData",retrievedData);
+
+// console.log("filteredData1",filteredData1)
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [deletingItemId, setDeletingItemId] = useState(null);
 

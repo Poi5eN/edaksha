@@ -4,42 +4,46 @@ import Tables from "../../Dynamic/Tables";
 import { Button } from "@mui/material";
 
 const AllotMarks = () => {
-  const { currentColor } = useStateContext();
-  const [submittedData, setSubmittedData] = useState([
-    { 
-      Student_ID: "S001", 
-      Student_Name: "John Doe", 
-      Math: "", 
-      Hindi: "", 
-      Eng: "", 
-      WorkEducation: "", 
-      ArtEducation: "", 
-      PhysicalEducation: "", 
-      selected: false 
-    },
-    { 
-      Student_ID: "S002", 
-      Student_Name: "Anand", 
-      Math: "", 
-      Hindi: "", 
-      Eng: "", 
-      WorkEducation: "", 
-      ArtEducation: "", 
-      PhysicalEducation: "", 
-      selected: false 
-    },
-    { 
-      Student_ID: "S003", 
-      Student_Name: "Vishal", 
-      Math: "", 
-      Hindi: "", 
-      Eng: "", 
-      WorkEducation: "", 
-      ArtEducation: "", 
-      PhysicalEducation: "", 
-      selected: false 
-    },
-  ]);
+  const allStudent = JSON.parse(localStorage.getItem('studentsData'));
+  console.log("allStudent",allStudent);
+  
+  const { currentColor,teacherRoleData} = useStateContext();
+  const [submittedData, setSubmittedData] = useState(allStudent);
+  // const [submittedData, setSubmittedData] = useState([
+  //   { 
+  //     Student_ID: "S001", 
+  //     Student_Name: "John Doe", 
+  //     Math: "", 
+  //     Hindi: "", 
+  //     Eng: "", 
+  //     WorkEducation: "", 
+  //     ArtEducation: "", 
+  //     PhysicalEducation: "", 
+  //     selected: false 
+  //   },
+  //   { 
+  //     Student_ID: "S002", 
+  //     Student_Name: "Anand", 
+  //     Math: "", 
+  //     Hindi: "", 
+  //     Eng: "", 
+  //     WorkEducation: "", 
+  //     ArtEducation: "", 
+  //     PhysicalEducation: "", 
+  //     selected: false 
+  //   },
+  //   { 
+  //     Student_ID: "S003", 
+  //     Student_Name: "Vishal", 
+  //     Math: "", 
+  //     Hindi: "", 
+  //     Eng: "", 
+  //     WorkEducation: "", 
+  //     ArtEducation: "", 
+  //     PhysicalEducation: "", 
+  //     selected: false 
+  //   },
+  // ]);
 
   const [selectAll, setSelectAll] = useState(false);
 
@@ -67,7 +71,17 @@ const AllotMarks = () => {
   };
 
   const handleSubmit = async () => {
-    const selectedData = submittedData.filter((data) => data.selected);
+    // const selectedData = submittedData.filter((data) => data.selected);
+    const selectedData = submittedData.filter((data) => data.selected).map((data) => ({
+      Student_Name: data.fullName,  // Student ka naam
+      admissionNumber: data.admissionNumber,  // Admission number
+      Math: data.Math,  // Math ka grade/marks
+      Hindi: data.Hindi,  // Hindi ka grade/marks
+      Eng: data.Eng,  // English ka grade/marks
+      WorkEducation: data.WorkEducation,  // Work Education ka grade
+      ArtEducation: data.ArtEducation,  // Art Education ka grade
+      PhysicalEducation: data.PhysicalEducation  // Physical Education ka grade
+    }));
     console.log("Selected Data to Post:", selectedData);
 
     try {
@@ -101,13 +115,15 @@ const AllotMarks = () => {
 
   return (
     <div>
-      <p
-        className="rounded-tl-lg border rounded-tr-lg text-white px-2 text-[12px] lg:text-lg"
-        // style={{ background: `linear-gradient(to bottom, ${currentColor}, ${"#8d8b8b"})` }}
-        
+       <div  className='rounded-tl-lg border rounded-tr-lg text-white  text-[12px] lg:text-lg'
+      style={{background:currentColor}}
       >
-        Allot Marks
-      </p>
+      <p 
+      className='px-5'
+      
+      > Allot Marks</p>
+      </div>
+   
       <div>
         <Tables
           thead={THEAD}
@@ -119,8 +135,8 @@ const AllotMarks = () => {
                 onChange={(e) => handleCheckboxChange(ind, e.target.checked)}
               />
             ),
-            "ID": val.Student_ID,
-            "Name": val.Student_Name,
+            "ID": val.admissionNumber,
+            "Name": val.fullName,
             "Math": (
               <input
                 type="number"

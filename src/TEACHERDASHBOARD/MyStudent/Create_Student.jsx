@@ -7,6 +7,9 @@ import { useStateContext } from "../../contexts/ContextProvider";
 import DynamicDataTable from "./DataTable";
 import Cookies from "js-cookie";
 import { Button } from "@mui/material";
+import Tables from "../../Dynamic/Tables";
+import { Link } from "react-router-dom";
+import { MdDelete, MdRemoveRedEye } from "react-icons/md";
 const authToken = Cookies.get("token");
 
 function Create_Student() {
@@ -43,6 +46,32 @@ function Create_Student() {
   });
 
   const [submittedData, setSubmittedData] = useState([]);
+
+
+
+  
+const student = JSON.parse(sessionStorage.response);
+const classTeacherClass = student.classTeacher;
+const classTeacherSection = student.section; // Assuming 'section' is also available in your student data
+// console.log("classTeacherClass",typeof classTeacherClass)
+// console.log("classTeacherSection",classTeacherSection)
+
+// console.log(typeof classTeacherClass, typeof student.class);
+
+const filteredData = submittedData.filter(
+  (student) => student.class == classTeacherClass && student.section == classTeacherSection
+);
+
+// console.log("filteredData",filteredData)
+localStorage.setItem('studentsData', JSON.stringify(filteredData));
+
+const retrievedData = JSON.parse(localStorage.getItem('studentsData'));
+
+// Use the retrieved data
+console.log("retrievedData",retrievedData);
+
+
+
   const [isOpen, setIsOpen] = useState(false);
   const toggleModal = () => {
     setIsOpen(!isOpen);
@@ -200,6 +229,22 @@ function Create_Student() {
   // const closeModal = () => {
   //   setIsModalOpen(false);
   // };
+  const THEAD = [
+   
+    "S.No.",
+    "Photo",
+    "adm No",
+    "Class",
+    "Name",
+    "Father",
+    "Gender",
+    "Email",
+    "Contact",
+    "Adm Date",
+    
+    "Actions",
+   
+  ];
 
   const formFields = [
     {
@@ -363,13 +408,22 @@ function Create_Student() {
 
   return (
     <div className=" mt-12 md:mt-1 p-3  ">
-      <h1
+       <div  className='rounded-tl-lg border rounded-tr-lg text-white  text-[12px] lg:text-lg'
+      //  style={{ background: `linear-gradient(to bottom, ${currentColor}, ${"#8d8b8b"})` }}
+      style={{background:currentColor}}
+      >
+      <p 
+      className='px-5'
+      
+      >New Student and Parent</p>
+      </div>
+      {/* <h1
         className="text-4xl font-bold mb-4 uppercase text-center  hover-text "
         style={{ color: currentColor }}
       >
         New Student and Parent
-      </h1>
-      <div className=" mb-4">
+      </h1> */}
+      {/* <div className=" mb-4"> */}
       {/* <Button
           variant="contained"
           style={{ backgroundColor: currentColor,marginRight:"20px" }}
@@ -377,7 +431,7 @@ function Create_Student() {
         >
           Create Admission
         </Button> */}
-        </div>
+        {/* </div> */}
        {isOpen && (
         <div
           id="default-modal"
@@ -479,7 +533,57 @@ function Create_Student() {
         </div>
       )}
 
-      <DynamicDataTable data={submittedData} handleDelete={handleDelete} />
+      {/* <DynamicDataTable data={submittedData} handleDelete={handleDelete} /> */}
+      <Tables  thead={THEAD} 
+       tbody={ filteredData?.map((val, ind) => ({
+        "S.No.":ind+1,
+        "Photo": (
+          val?.image && val?.image.url ? (
+            <img
+              src={val?.image?.url  }
+              alt="Student"
+              style={{
+                width: "25px",
+                height: "25px",
+                borderRadius: "50%",
+                objectFit: "cover",
+              }}
+            />
+          ) : (
+            <span><img className="h-[25px] w-[25px] rounded-full object-contain" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/300px-No_image_available.svg.png" alt="" /></span>
+          )
+        ),
+      
+      //   "Photo": <img
+      //   src={val?.image?.url  }
+      //   alt="Student"
+      //   style={{
+      //     width: "25px",
+      //     height: "25px",
+      //     borderRadius: "50%",
+      //     objectFit: "cover",
+      //   }}
+      // />,
+      
+        "adm No": val?. admissionNumber,
+        "Class":val?.class,
+        "Name":val?.fullName,
+        "Father":val?.fatherName,
+        "Gender":val?.gender,
+        "Email":val?.email,
+        "Contact":val?.contact,
+        "Adm Date":val?.joiningDate,
+       
+        "Delete":<div className=" w-full flex ">
+         <div className="text-[16px]">
+         <Link to={`/teacher/mystudents/view-profile/${val.email}`}><MdRemoveRedEye /></Link>
+         </div>
+          {/* <button onClick={()=>handleDelete(val.email)} className="text-[16px]"> <MdDelete /></button> */}
+          {/* <button onClick={()=>handleDelete(val.email)} className="text-[16px]"> <MdRemoveRedEye /></button> */}
+        </div>,
+       }))}
+      
+      />
     </div>
   );
 }

@@ -43,10 +43,10 @@ const ViewStudentTeacher = () => {
               </Link>
             </div>
             <div className=" flex justify-center mt-4">
-              {studentData.image && studentData.image.url ? (
+              {studentData?.image && studentData?.image?.url ? (
                 <img
                   className="w-[150px] h-[150px] rounded-full"
-                  src={studentData.image.url}
+                  src={studentData?.image?.url}
                   alt="Image"
                 />
               ) : (
@@ -56,16 +56,16 @@ const ViewStudentTeacher = () => {
             <div className="p-8">
               <h2 className="text-center text-lg text-white font-bold  ">
                 {" "}
-                {studentData.fullName}
+                {studentData?.fullName}
               </h2>
               
               <h2 className="text-center text-white font-bold">
                 {"  "}
-                +91{studentData.contact}
+                +91{studentData?.contact}
               </h2>
               <hr />
               <div className="h-14 ">
-                <p className=" p-2 font-bold">{`Address : ${studentData.address}`}</p>
+                <p className=" p-2 font-bold">{`Address : ${studentData?.address}`}</p>
               </div>
               <div className="flex justify-center mt-3 ">
                 <button className=" bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
@@ -84,7 +84,7 @@ const ViewStudentTeacher = () => {
           <div className="w-[330px] border-1 rounded-md border-[#01a9ac] p-5   hover:shadow-[rgba(6,_24,_44,_0.4)_0px_0px_0px_2px,_rgba(6,_24,_44,_0.65)_0px_4px_6px_-1px,_rgba(255,_255,_255,_0.08)_0px_1px_0px_inset]">
             <h1 className="text-center mb-3 font-extrabold">
               {" "}
-              {studentData.fullName}'s Details
+              {studentData?.fullName}'s Details
             </h1>
 
             <div className="flex">
@@ -93,55 +93,55 @@ const ViewStudentTeacher = () => {
             <h2 cclassName="w-[130px]  text-[14px] ">Roll No:</h2>
               <span className="w-[200px] font-semibold text-[#01a9ac]  text-[12px]">
                 {" "}
-                {studentData.rollNo}
+                {studentData?.rollNo}
               </span>
             </div>
             <div className="flex justify-between gap-2 border-b-1  border-green-300 p-1 ">
               <h2 cclassName="w-[130px]  text-[14px] ">Email :</h2>
               <span className="w-[200px] font-semibold text-[#01a9ac] text-[12px]  ">
-                {studentData.email}
+                {studentData?.email}
               </span>
             </div>
             <div className="flex justify-start gap-2 border-b-1  border-green-300 p-1 ">
               <h2 cclassName="w-[130px]  text-[14px] ">Gender :</h2>
               <span className="font-semibold text-[#01a9ac]  text-[12px]">
                 {" "}
-                {studentData.gender}
+                {studentData?.gender}
               </span>
             </div>
             <div className="flex justify-start gap-2 border-b-1  border-green-300 p-1 ">
               <h2 className="w-[110px] ">Joining Date :</h2>
               <span className="font-semibold text-[#01a9ac]  text-[12px]">
                 {" "}
-                {studentData.joiningDate}
+                {studentData?.joiningDate}
               </span>
             </div>
             <div className="flex justify-start gap-2 border-b-1  border-green-300 p-1 ">
               <h2 cclassName="w-[130px]  text-[14px] "> Class:</h2>
               <span className="font-semibold text-[#01a9ac]  text-[12px]">
                 {" "}
-                {studentData.class}
+                {studentData?.class}
               </span>
             </div>
             <div className="flex justify-start gap-2 border-b-1  border-green-300 p-1 ">
               <h2 cclassName="w-[130px]  text-[14px] "> Section :</h2>
               <span className="font-semibold text-[#01a9ac]  text-[12px]">
                 {" "}
-                {studentData.section}
+                {studentData?.section}
               </span>
             </div>
             <div className="flex justify-start gap-2 border-b-1  border-green-300 p-1 ">
               <h2 cclassName="w-[130px]  text-[14px] ">Subject :</h2>
               <span className="font-semibold text-[#01a9ac]  text-[12px]">
                 {" "}
-                {studentData.subject}
+                {studentData?.subject}
               </span>
             </div>
             <div className="flex justify-start gap-2 border-b-1  border-green-300 p-1 ">
               <h2 cclassName="w-[130px]  text-[14px] ">DOB :</h2>
               <span className="font-semibold text-[#01a9ac]  text-[12px]">
                 {" "}
-                {studentData.dateOfBirth}
+                {studentData?.dateOfBirth}
               </span>
             </div>
           </div>

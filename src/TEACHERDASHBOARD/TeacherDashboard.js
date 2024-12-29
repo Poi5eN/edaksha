@@ -136,7 +136,9 @@ function TeacherDashboard() {
                 {themeSettings && <ThemeSettings />}
                 <Outlet />
               </div>
-              <Footer />
+              <div className="absolute   bottom-0 flex items-center">
+            <Footer />
+            </div>
             </div>
           </div>
         </>

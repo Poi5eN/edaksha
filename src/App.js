@@ -5,6 +5,7 @@ import ReportCardGenerator from "./TEACHERDASHBOARD/ReportCard";
 import ExamList from "./TEACHERDASHBOARD/ExamList";
 import ExamResultsManager from "./TEACHERDASHBOARD/ExamResultsManager";
 import ExamSystem from "./TEACHERDASHBOARD/ExamSystem";
+import { PrimeReactProvider } from 'primereact/api';
 const LandingPage = lazy(() => import("./ShikshMitraWebsite/LandingPage"));
 const AdminDashboard = lazy(() => import("./ADMINDASHBOARD/AdminDashboard"));
 const Login = lazy(() =>
@@ -222,6 +223,7 @@ const Udise = lazy(() => import("./ADMINDASHBOARD/Udise/Udise"));
 function App() {
   return (
     <>
+    <PrimeReactProvider>
       <Suspense fallback={<Loading />}>
         <Routes>
           <Route path="/" element={<LandingPage />}>
@@ -422,6 +424,7 @@ function App() {
           </Route>
         </Routes>
       </Suspense>
+      </PrimeReactProvider>
     </>
   );
 }

@@ -39,12 +39,14 @@ const ViewExam = () => {
     const { currentColor } = useStateContext();
   return (
     <div>
-        <div 
-       className='rounded-tl-lg border flex justify-between rounded-tr-lg text-white px-2 text-[12px]'
-       style={{ background: `linear-gradient(to bottom, ${currentColor}, ${"#8d8b8b"})` }}
-      ><p>Saved Exams</p> 
+        <div  className='rounded-tl-lg border rounded-tr-lg text-white  text-[12px] lg:text-lg'
+      style={{background:currentColor}}
+      >
+      <p 
+      className='px-5'
       
-    </div>
+      > View Exam</p>
+      </div>
         
       <div className="">
         <table className="w-full border-collapse border border-gray-300">

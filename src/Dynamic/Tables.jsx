@@ -49,7 +49,7 @@ function Tables({
           <div className="col-span-full">
             <table className="table-auto border-collapse w-full dark:text-white dark:bg-secondary-dark-bg">
               <thead>
-                <tr className="bg-gray-200 text-[10px] text-white" 
+                <tr className="bg-gray-200 md:text-[10px] lg:text-lg border- text-white" 
                  style={{ backgroundColor: currentColor }}
                 // style={{background:currentColor}}
                 
@@ -63,7 +63,7 @@ function Tables({
                           ? headData?.textAlign
                           : "",
                       }}
-                      className={`px-2 py-1 font-semibold text-left  ${
+                      className={`px-2 md:py-1 lg:py-2 font-semibold text-left  ${
                         headData?.className ? headData?.className : ""
                       }`}
                     >
@@ -72,7 +72,7 @@ function Tables({
                   ))}
                 </tr>
               </thead>
-              <tbody className="bg-white text-[10px] dark:bg-secondary-dark-bg">
+              <tbody className="bg-white md:text-[10px] lg:text-lg dark:bg-secondary-dark-bg">
                 {tbody?.map((ele, index) => {
                   const keys = Object.keys(ele).filter(
                     (key) => key !== "colorcode"

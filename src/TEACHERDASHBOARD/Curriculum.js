@@ -325,7 +325,7 @@ const Curriculum = () => {
                   <td className="p-2 border border-gray-500">
                     <IconButton
                       onClick={() => handleDeleteCurriculum(index)}
-                      className="bg-red-500 border px-3 py-2 mt-2 w-full hover:bg-red-600"
+                      className=" border px-3 py-2 mt-2 w-full "
                     >
                       <DeleteIcon className="text-red-600" />
                     </IconButton>

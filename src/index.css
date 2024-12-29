@@ -51,3 +51,11 @@ body {
     }
   }
 }
+
+.form-group {
+  position: relative;
+  margin-bottom: 0.4rem;
+}
+.p-calendar .p-calendar-icon {
+  background-color: red; /* Tailwind's bg-[color] doesn't apply directly here */
+}

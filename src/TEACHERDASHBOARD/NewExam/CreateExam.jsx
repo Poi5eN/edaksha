@@ -2,19 +2,22 @@ import React, { useState } from 'react';
 import { useStateContext } from '../../contexts/ContextProvider';
 
 export default function CreateExam() {
-  const { currentColor } = useStateContext();
+  const { currentColor,teacherRoleData} = useStateContext();
   const [examData, setExamData] = useState({
-    name: '',
+    examName: '',
     examType: '',
     className: '',
     section: '',
-    maxMarks: '',
+  
     startDate: '',
     endDate: '',
+    Grade:"",
     resultPublishDate: '',
     subjects: [],
+    
   });
 
+  console.log("teacherRoleData",teacherRoleData)
   const [savedExams, setSavedExams] = useState([]); // To store all submitted exams
 
   const handleInputChange = (e) => {
@@ -40,21 +43,30 @@ export default function CreateExam() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
+    let payload={
+      className:teacherRoleData?.classTeacher,
+      section:teacherRoleData?.section,
+      examName:examData?.examName,
+      examType:examData?.examType,
+      startDate:examData?.startDate,
+      endDate:examData?.endDate,
+      resultPublishDate:examData?.resultPublishDate,
+      grade:examData?.Grade,
+      subject:examData?.subjects
+      
+    }
+    console.log("payload",payload)
+console.log("examData",examData)
     // Add current exam data to savedExams state
     setSavedExams((prevExams) => [...prevExams, examData]);
-
-    // Reset the form for new data entry
     setExamData({
-      name: '',
-      examType: '',
-      className: '',
-      section: '',
-      maxMarks: '',
+      examName: '',
+      examType: '',    
       startDate: '',
       endDate: '',
       resultPublishDate: '',
       subjects: [],
+      Grade:""
     });
 
     alert('Exam saved successfully!');
@@ -81,14 +93,14 @@ export default function CreateExam() {
             <label className="block text-[12px] lg:text-lg">Exam Name</label>
             <input
               type="text"
-              name="name"
-              value={examData.name}
+              name="examName"
+              value={examData.examName}
               onChange={handleInputChange}
               required
               className="w-full border outline-none text-[12px] lg:text-lg  px-2"
             />
           </div>
-
+       
           <div>
             <label className="block text-[12px] lg:text-lg">Exam Type</label>
             <select
@@ -107,41 +119,6 @@ export default function CreateExam() {
             </select>
           </div>
 
-          {/* <div>
-            <label className="block text-[12px] lg:text-lg">Class</label>
-            <input
-              type="text"
-              name="className"
-              value={examData.className}
-              onChange={handleInputChange}
-              required
-              className="w-full border outline-none text-[12px] lg:text-lg  px-2"
-            />
-          </div>
-
-          <div>
-            <label className="block text-[12px] lg:text-lg">Section</label>
-            <input
-              type="text"
-              name="section"
-              value={examData.section}
-              onChange={handleInputChange}
-              required
-              className="w-full border outline-none text-[12px] lg:text-lg  px-2"
-            />
-          </div> */}
-
-          {/* <div>
-            <label className="block text-[12px] lg:text-lg">Max Marks</label>
-            <input
-              type="number"
-              name="maxMarks"
-              value={examData.maxMarks}
-              onChange={handleInputChange}
-              required
-              className="w-full border outline-none text-[12px] lg:text-lg  px-2"
-            />
-          </div> */}
           <div>
             <label className="block text-[12px] lg:text-lg">Grade System</label>
             <select
@@ -225,7 +202,8 @@ export default function CreateExam() {
                   required
                 />
               </div>
-              <div>
+             <div className='flex gap-10'>
+             <div>
                 <label className="block text-[12px] lg:text-lg">Start Time</label>
                 <input
                   type="time"
@@ -248,6 +226,7 @@ export default function CreateExam() {
                   className="w-full border outline-none text-[12px] lg:text-lg  px-2"
                   required
                 />
+              </div>
               </div>
               <div>
                 <label className="block text-[12px] lg:text-lg">Total Marks</label>

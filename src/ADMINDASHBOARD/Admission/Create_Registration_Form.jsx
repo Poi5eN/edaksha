@@ -1141,7 +1141,7 @@ function Create_Registration_Form() {
       )}
 
       <div className=" items-center mt-1"></div>
-   {   console.log("submittedData",submittedData)}
+  
       <Tables  thead={THEAD} 
        tbody={ filteredData?.map((val, ind) => ({
         "S.No.":ind+1,
