@@ -7,16 +7,18 @@ import Cookies from "js-cookie";
 
 const AllotMarks = () => {
   const authToken = Cookies.get("token");
+
   const allStudent = JSON.parse(localStorage.getItem("studentsData")).map(
     (student) => ({
       ...student,
-      coScholasticMarks: [{ activityName: "", grade: "A" }],
+      coScholasticMarks: [
+       
+      ],
     })
   );
 
   const { currentColor } = useStateContext();
   const [submittedData, setSubmittedData] = useState(allStudent);
-
   const [selectedExamId, setSelectedExamId] = useState("");
   const [subjects, setSubjects] = useState([]);
   const [selectAll, setSelectAll] = useState(false);
@@ -79,6 +81,10 @@ const AllotMarks = () => {
 
   const handleAddCoScholastic = (studentIndex) => {
     const newData = [...submittedData];
+    // if (newData[studentIndex].coScholasticMarks.length >= 2) {
+    //   alert("Maximum 2 co-scholastic activities allowed per student.");
+    //   return;
+    // }
     newData[studentIndex].coScholasticMarks.push({
       activityName: "",
       grade: "A",
@@ -126,6 +132,7 @@ const AllotMarks = () => {
         }
       );
       alert("Marks submitted successfully!");
+      setSubmittedData(allStudent)
     } catch (error) {
       console.error("Error submitting marks:", error);
     }
@@ -263,6 +270,275 @@ const AllotMarks = () => {
 };
 
 export default AllotMarks;
+
+
+
+
+
+// import React, { useState, useEffect } from "react";
+// import { useStateContext } from "../../contexts/ContextProvider";
+// import Tables from "../../Dynamic/Tables";
+// import { Button } from "@mui/material";
+// import axios from "axios";
+// import Cookies from "js-cookie";
+
+// const AllotMarks = () => {
+//   const authToken = Cookies.get("token");
+//   const allStudent = JSON.parse(localStorage.getItem("studentsData")).map(
+//     (student) => ({
+//       ...student,
+//       coScholasticMarks: [{ activityName: "", grade: "A" }],
+//     })
+//   );
+
+//   const { currentColor } = useStateContext();
+//   const [submittedData, setSubmittedData] = useState(allStudent);
+//   const [selectedExamId, setSelectedExamId] = useState("");
+//   const [subjects, setSubjects] = useState([]);
+//   const [selectAll, setSelectAll] = useState(false);
+//   const [examData, setExamData] = useState([]);
+
+//   useEffect(() => {
+//     const fetchExams = async () => {
+//       try {
+//         const response = await axios.get(
+//           "https://eserver-i5sm.onrender.com/api/v1/exam/getExams",
+//           {
+//             withCredentials: true,
+//             headers: {
+//               Authorization: `Bearer ${authToken}`,
+//             },
+//           }
+//         );
+//         setExamData(response.data.exams);
+//       } catch (error) {
+//         console.error("Error fetching exams:", error);
+//       }
+//     };
+//     fetchExams();
+//   }, [authToken]);
+
+//   const handleExamChange = (event) => {
+//     const examId = event.target.value;
+//     setSelectedExamId(examId);
+
+//     const selectedExam = examData.find((exam) => exam._id === examId);
+//     if (selectedExam) {
+//       setSubjects(selectedExam.subjects || []);
+//     }
+//   };
+
+//   const handleInputChange = (index, field, value) => {
+//     const newData = [...submittedData];
+//     newData[index][field] = value;
+//     setSubmittedData(newData);
+//   };
+
+//   const handleSelectAll = () => {
+//     const newSelectAll = !selectAll;
+//     const newData = submittedData.map((data) => ({
+//       ...data,
+//       selected: newSelectAll,
+//     }));
+//     setSubmittedData(newData);
+//     setSelectAll(newSelectAll);
+//   };
+
+//   const handleCheckboxChange = (index, isChecked) => {
+//     const newData = [...submittedData];
+//     newData[index].selected = isChecked;
+//     setSubmittedData(newData);
+
+//     const allSelected = newData.every((data) => data.selected);
+//     setSelectAll(allSelected);
+//   };
+
+//   const handleAddCoScholastic = (studentIndex) => {
+//     const newData = [...submittedData];
+//     newData[studentIndex].coScholasticMarks.push({
+//       activityName: "",
+//       grade: "A",
+//     });
+//     setSubmittedData(newData);
+//   };
+
+//   const handleCoScholasticChange = (studentIndex, activityIndex, field, value) => {
+//     const newData = [...submittedData];
+//     newData[studentIndex].coScholasticMarks[activityIndex][field] = value;
+//     setSubmittedData(newData);
+//   };
+
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+//     const selectedData = {
+//       examId: selectedExamId,
+//       studentsMarks: submittedData
+//         .filter((data) => data.selected)
+//         .map((data) => ({
+//           studentId: data._id,
+//           marks: subjects.map((subject) => ({
+//             subjectName: subject.name,
+//             marks: data[subject.name] || 0,
+//             totalMarks: subject.totalMarks || 100,
+//             passingMarks: subject.passingMarks || 40,
+//             isPassed: (data[subject.name] || 0) >= (subject.passingMarks || 40),
+//           })),
+//           coScholasticMarks: data.coScholasticMarks,
+//         })),
+//     };
+
+//     console.log("Payload to Post:", selectedData);
+
+//     try {
+//       await axios.post(
+//         "https://eserver-i5sm.onrender.com/api/v1/marks/marksbulkupload",
+//         selectedData,
+//         {
+//           withCredentials: true,
+//           headers: {
+//             Authorization: `Bearer ${authToken}`,
+//             "Content-Type": "application/json",
+//           },
+//         }
+//       );
+//       alert("Marks submitted successfully!");
+//     } catch (error) {
+//       console.error("Error submitting marks:", error);
+//     }
+//   };
+
+//   const THEAD = [
+//     <input type="checkbox" checked={selectAll} onChange={handleSelectAll} />,
+//     "ID",
+//     "Name",
+//     ...subjects.map((subject) => subject.name),
+//     "Co-Scholastic Marks",
+//   ];
+
+//   return (
+//     <div>
+//       <div
+//         className="rounded-tl-lg border rounded-tr-lg text-white text-[12px] lg:text-lg"
+//         style={{ background: currentColor }}
+//       >
+//         <p className="px-5">Allot Marks</p>
+//       </div>
+
+//       <div className="p-2 border-2 border-r-2">
+//         <label htmlFor="examSelector">Select Exam:</label>
+//         <select
+//           id="examSelector"
+//           className="outline-none border-2"
+//           value={selectedExamId}
+//           onChange={handleExamChange}
+//           style={{ padding: "8px", width: "100%", maxWidth: "300px" }}
+//         >
+//           <option value="" disabled>
+//             -- Select an Exam --
+//           </option>
+//           {examData.map((exam) => (
+//             <option key={exam._id} value={exam._id}>
+//               {exam.name}
+//             </option>
+//           ))}
+//         </select>
+//       </div>
+
+//       {selectedExamId && (
+//         <div>
+//           <Tables
+//             thead={THEAD}
+//             tbody={submittedData.map((val, ind) => ({
+//               "": (
+//                 <input
+//                   type="checkbox"
+//                   checked={val.selected}
+//                   onChange={(e) => handleCheckboxChange(ind, e.target.checked)}
+//                 />
+//               ),
+//               ID: val.admissionNumber,
+//               Name: val.fullName,
+//               ...subjects.reduce((acc, subject) => {
+//                 acc[subject.name] = (
+//                   <input
+//                     className="border-2 outline-none w-[60px] px-2"
+//                     type="number"
+//                     value={val[subject.name] || ""}
+//                     onChange={(e) =>
+//                       handleInputChange(ind, subject.name, e.target.value)
+//                     }
+//                   />
+//                 );
+//                 return acc;
+//               }, {}),
+//               "Co-Scholastic Marks": (
+//                 <div>
+//                   {val.coScholasticMarks.map((activity, activityIndex) => (
+//                     <div
+//                       key={activityIndex}
+//                       className="flex items-center gap-4 mb-2"
+//                     >
+//                       <input
+//                         type="text"
+//                         placeholder="Activity Name"
+//                         value={activity.activityName}
+//                         onChange={(e) =>
+//                           handleCoScholasticChange(
+//                             ind,
+//                             activityIndex,
+//                             "activityName",
+//                             e.target.value
+//                           )
+//                         }
+//                         className="border px-2 py-1 w-[150px]"
+//                       />
+//                       <select
+//                         value={activity.grade}
+//                         onChange={(e) =>
+//                           handleCoScholasticChange(
+//                             ind,
+//                             activityIndex,
+//                             "grade",
+//                             e.target.value
+//                           )
+//                         }
+//                         className="border px-2 py-1"
+//                       >
+//                         <option value="A">A</option>
+//                         <option value="B">B</option>
+//                         <option value="C">C</option>
+//                         <option value="D">D</option>
+//                       </select>
+//                     </div>
+//                   ))}
+//                   <Button
+//                     onClick={() => handleAddCoScholastic(ind)}
+//                     style={{ background: currentColor, color: "white" }}
+//                   >
+//                     Add Activity
+//                   </Button>
+//                 </div>
+//               ),
+//             }))}
+//           />
+
+//           <Button
+//             onClick={handleSubmit}
+//             style={{
+//               marginTop: "10px",
+//               background: currentColor,
+//               color: "white",
+//             }}
+//           >
+//             Submit
+//           </Button>
+//         </div>
+//       )}
+//     </div>
+//   );
+// };
+
+// export default AllotMarks;
 
 
 

@@ -151,7 +151,7 @@ console.log("SchoolDetailsSchoolDetails",SchoolDetails)
           behavior="scroll"
           scrollamount="6"
         >
-          <p style={{ color: currentColor, padding: "0px" }} className="text-[10px]">
+          <p style={{ color: currentColor, padding: "0px" }} className="text-[14px]">
             Technical Support and Query Helpline Numbers : +91 9650388201, +91
             8920377548, +91 7079771102 \ Email:corplyxtechnologies@gmail.com
           </p>
