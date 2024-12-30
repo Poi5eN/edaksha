@@ -13,7 +13,8 @@ const ExamSystem = () => {
     viewEcam: <ViewExam/>,
     allotMarks: <AllotMarks/>,
     reportCard: <ReportCard/>,
-    guidelines: "This section provides guidelines on how to prepare for the exam."
+    // reportCard: <ReportCard/>,
+   
   };
   
   return (
@@ -51,13 +52,7 @@ const ExamSystem = () => {
        >
           Report Card
         </button>
-        <button
-          onClick={() => setActiveTab('guidelines')}
-          className={`px-4 py-[1px] lg:py-2 text-[12px] lg:text-[14px]    ${activeTab === 'guidelines' ? '  text-white  border-b-0 rounded-tl-lg border rounded-tr-lg ' : 'border rounded-tl-lg rounded-tr-lg'}`}
-          style={{ background: activeTab === 'guidelines' ? currentColor : 'transparent' }}
-       >
-          Guidelines
-        </button>
+      
       </div>
       
       <div>

@@ -1,51 +1,56 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useStateContext } from "../../contexts/ContextProvider";
 import Tables from "../../Dynamic/Tables";
 import { Button } from "@mui/material";
+import axios from "axios";
+import Cookies from "js-cookie";
 
 const AllotMarks = () => {
-  const allStudent = JSON.parse(localStorage.getItem('studentsData'));
-  console.log("allStudent",allStudent);
-  
-  const { currentColor,teacherRoleData} = useStateContext();
-  const [submittedData, setSubmittedData] = useState(allStudent);
-  // const [submittedData, setSubmittedData] = useState([
-  //   { 
-  //     Student_ID: "S001", 
-  //     Student_Name: "John Doe", 
-  //     Math: "", 
-  //     Hindi: "", 
-  //     Eng: "", 
-  //     WorkEducation: "", 
-  //     ArtEducation: "", 
-  //     PhysicalEducation: "", 
-  //     selected: false 
-  //   },
-  //   { 
-  //     Student_ID: "S002", 
-  //     Student_Name: "Anand", 
-  //     Math: "", 
-  //     Hindi: "", 
-  //     Eng: "", 
-  //     WorkEducation: "", 
-  //     ArtEducation: "", 
-  //     PhysicalEducation: "", 
-  //     selected: false 
-  //   },
-  //   { 
-  //     Student_ID: "S003", 
-  //     Student_Name: "Vishal", 
-  //     Math: "", 
-  //     Hindi: "", 
-  //     Eng: "", 
-  //     WorkEducation: "", 
-  //     ArtEducation: "", 
-  //     PhysicalEducation: "", 
-  //     selected: false 
-  //   },
-  // ]);
+  const authToken = Cookies.get("token");
+  const allStudent = JSON.parse(localStorage.getItem("studentsData")).map(
+    (student) => ({
+      ...student,
+      coScholasticMarks: [{ activityName: "", grade: "A" }],
+    })
+  );
 
+  const { currentColor } = useStateContext();
+  const [submittedData, setSubmittedData] = useState(allStudent);
+
+  const [selectedExamId, setSelectedExamId] = useState("");
+  const [subjects, setSubjects] = useState([]);
   const [selectAll, setSelectAll] = useState(false);
+  const [examData, setExamData] = useState([]);
+
+  useEffect(() => {
+    const fetchExams = async () => {
+      try {
+        const response = await axios.get(
+          "https://eserver-i5sm.onrender.com/api/v1/exam/getExams",
+          {
+            withCredentials: true,
+            headers: {
+              Authorization: `Bearer ${authToken}`,
+            },
+          }
+        );
+        setExamData(response.data.exams);
+      } catch (error) {
+        console.error("Error fetching exams:", error);
+      }
+    };
+    fetchExams();
+  }, [authToken]);
+
+  const handleExamChange = (event) => {
+    const examId = event.target.value;
+    setSelectedExamId(examId);
+
+    const selectedExam = examData.find((exam) => exam._id === examId);
+    if (selectedExam) {
+      setSubjects(selectedExam.subjects || []);
+    }
+  };
 
   const handleInputChange = (index, field, value) => {
     const newData = [...submittedData];
@@ -55,7 +60,10 @@ const AllotMarks = () => {
 
   const handleSelectAll = () => {
     const newSelectAll = !selectAll;
-    const newData = submittedData.map((data) => ({ ...data, selected: newSelectAll }));
+    const newData = submittedData.map((data) => ({
+      ...data,
+      selected: newSelectAll,
+    }));
     setSubmittedData(newData);
     setSelectAll(newSelectAll);
   };
@@ -65,39 +73,61 @@ const AllotMarks = () => {
     newData[index].selected = isChecked;
     setSubmittedData(newData);
 
-    // Update "Select All" based on individual selections
     const allSelected = newData.every((data) => data.selected);
     setSelectAll(allSelected);
   };
 
-  const handleSubmit = async () => {
-    // const selectedData = submittedData.filter((data) => data.selected);
-    const selectedData = submittedData.filter((data) => data.selected).map((data) => ({
-      Student_Name: data.fullName,  // Student ka naam
-      admissionNumber: data.admissionNumber,  // Admission number
-      Math: data.Math,  // Math ka grade/marks
-      Hindi: data.Hindi,  // Hindi ka grade/marks
-      Eng: data.Eng,  // English ka grade/marks
-      WorkEducation: data.WorkEducation,  // Work Education ka grade
-      ArtEducation: data.ArtEducation,  // Art Education ka grade
-      PhysicalEducation: data.PhysicalEducation  // Physical Education ka grade
-    }));
-    console.log("Selected Data to Post:", selectedData);
+  const handleAddCoScholastic = (studentIndex) => {
+    const newData = [...submittedData];
+    newData[studentIndex].coScholasticMarks.push({
+      activityName: "",
+      grade: "A",
+    });
+    setSubmittedData(newData);
+  };
+
+  const handleCoScholasticChange = (studentIndex, activityIndex, field, value) => {
+    const newData = [...submittedData];
+    newData[studentIndex].coScholasticMarks[activityIndex][field] = value;
+    setSubmittedData(newData);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const selectedData = {
+      examId: selectedExamId,
+      studentsMarks: submittedData
+        .filter((data) => data.selected)
+        .map((data) => ({
+          studentId: data._id,
+          marks: subjects.map((subject) => ({
+            subjectName: subject.name,
+            marks: data[subject.name] || 0,
+            totalMarks: subject.totalMarks || 100,
+            passingMarks: subject.passingMarks || 40,
+            isPassed: (data[subject.name] || 0) >= (subject.passingMarks || 40),
+          })),
+          coScholasticMarks: data.coScholasticMarks,
+        })),
+    };
+
+    console.log("Payload to Post:", selectedData);
 
     try {
-      const response = await fetch("/api/submit-marks", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(selectedData),
-      });
-
-      if (response.ok) {
-        alert("Data successfully submitted!");
-      } else {
-        alert("Failed to submit data.");
-      }
+      await axios.post(
+        "https://eserver-i5sm.onrender.com/api/v1/marks/marksbulkupload",
+        selectedData,
+        {
+          withCredentials: true,
+          headers: {
+            Authorization: `Bearer ${authToken}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      alert("Marks submitted successfully!");
     } catch (error) {
-      console.error("Error submitting data:", error);
+      console.error("Error submitting marks:", error);
     }
   };
 
@@ -105,98 +135,129 @@ const AllotMarks = () => {
     <input type="checkbox" checked={selectAll} onChange={handleSelectAll} />,
     "ID",
     "Name",
-    "Math",
-    "Hindi",
-    "Eng",
-    "Work Education",
-    "Art Education",
-    "Health & Physical Education",
+    ...subjects.map((subject) => subject.name),
+    "Co-Scholastic Marks",
   ];
 
   return (
     <div>
-       <div  className='rounded-tl-lg border rounded-tr-lg text-white  text-[12px] lg:text-lg'
-      style={{background:currentColor}}
+      <div
+        className="rounded-tl-lg border rounded-tr-lg text-white text-[12px] lg:text-lg"
+        style={{ background: currentColor }}
       >
-      <p 
-      className='px-5'
-      
-      > Allot Marks</p>
+        <p className="px-5">Allot Marks</p>
       </div>
-   
-      <div>
-        <Tables
-          thead={THEAD}
-          tbody={submittedData.map((val, ind) => ({
-            "": (
-              <input
-                type="checkbox"
-                checked={val.selected}
-                onChange={(e) => handleCheckboxChange(ind, e.target.checked)}
-              />
-            ),
-            "ID": val.admissionNumber,
-            "Name": val.fullName,
-            "Math": (
-              <input
-                type="number"
-                value={val.Math}
-                onChange={(e) => handleInputChange(ind, "Math", e.target.value)}
-              />
-            ),
-            "Hindi": (
-              <input
-                type="number"
-                value={val.Hindi}
-                onChange={(e) => handleInputChange(ind, "Hindi", e.target.value)}
-              />
-            ),
-            "Eng": (
-              <input
-                type="number"
-                value={val.Eng}
-                onChange={(e) => handleInputChange(ind, "Eng", e.target.value)}
-              />
-            ),
-            "Work Education": (
-              <select
-                value={val.WorkEducation}
-                onChange={(e) => handleInputChange(ind, "WorkEducation", e.target.value)}
-              >
-                <option value="">Select Grade</option>
-                <option value="A">A</option>
-                <option value="B">B</option>
-                <option value="C">C</option>
-              </select>
-            ),
-            "Art Education": (
-              <select
-                value={val.ArtEducation}
-                onChange={(e) => handleInputChange(ind, "ArtEducation", e.target.value)}
-              >
-                <option value="">Select Grade</option>
-                <option value="A">A</option>
-                <option value="B">B</option>
-                <option value="C">C</option>
-              </select>
-            ),
-            "Health & Physical Education": (
-              <select
-                value={val.PhysicalEducation}
-                onChange={(e) => handleInputChange(ind, "PhysicalEducation", e.target.value)}
-              >
-                <option value="">Select Grade</option>
-                <option value="A">A</option>
-                <option value="B">B</option>
-                <option value="C">C</option>
-              </select>
-            ),
-          }))}
-        />
-        <Button onClick={handleSubmit} style={{ marginTop: "10px", background: currentColor, color: "white" }}>
-          Submit
-        </Button>
+
+      <div className="p-2 border-2 border-r-2">
+        <label htmlFor="examSelector">Select Exam:</label>
+        <select
+          id="examSelector"
+          className="outline-none border-2"
+          value={selectedExamId}
+          onChange={handleExamChange}
+          style={{ padding: "8px", width: "100%", maxWidth: "300px" }}
+        >
+          <option value="" disabled>
+            -- Select an Exam --
+          </option>
+          {examData.map((exam) => (
+            <option key={exam._id} value={exam._id}>
+              {exam.name}
+            </option>
+          ))}
+        </select>
       </div>
+
+      {selectedExamId && (
+        <div>
+          <Tables
+            thead={THEAD}
+            tbody={submittedData.map((val, ind) => ({
+              "": (
+                <input
+                  type="checkbox"
+                  checked={val.selected}
+                  onChange={(e) => handleCheckboxChange(ind, e.target.checked)}
+                />
+              ),
+              ID: val.admissionNumber,
+              Name: val.fullName,
+              ...subjects.reduce((acc, subject) => {
+                acc[subject.name] = (
+                  <input
+                    className="border-2 outline-none w-[60px] px-2"
+                    type="number"
+                    value={val[subject.name] || ""}
+                    onChange={(e) =>
+                      handleInputChange(ind, subject.name, e.target.value)
+                    }
+                  />
+                );
+                return acc;
+              }, {}),
+              "Co-Scholastic Marks": (
+                <div>
+                  {val.coScholasticMarks.map((activity, activityIndex) => (
+                    <div
+                      key={activityIndex}
+                      className="flex items-center gap-4 mb-2"
+                    >
+                      <input
+                        type="text"
+                        placeholder="Activity Name"
+                        value={activity.activityName}
+                        onChange={(e) =>
+                          handleCoScholasticChange(
+                            ind,
+                            activityIndex,
+                            "activityName",
+                            e.target.value
+                          )
+                        }
+                        className="border px-2 py-1 w-[150px]"
+                      />
+                      <select
+                        value={activity.grade}
+                        onChange={(e) =>
+                          handleCoScholasticChange(
+                            ind,
+                            activityIndex,
+                            "grade",
+                            e.target.value
+                          )
+                        }
+                        className="border px-2 py-1"
+                      >
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                        <option value="D">D</option>
+                      </select>
+                    </div>
+                  ))}
+                  <Button
+                    onClick={() => handleAddCoScholastic(ind)}
+                    style={{ background: currentColor, color: "white" }}
+                  >
+                    Add Activity
+                  </Button>
+                </div>
+              ),
+            }))}
+          />
+
+          <Button
+            onClick={handleSubmit}
+            style={{
+              marginTop: "10px",
+              background: currentColor,
+              color: "white",
+            }}
+          >
+            Submit
+          </Button>
+        </div>
+      )}
     </div>
   );
 };
@@ -204,6 +265,422 @@ const AllotMarks = () => {
 export default AllotMarks;
 
 
+
+
+
+
+// import React, { useState, useEffect } from "react";
+// import { useStateContext } from "../../contexts/ContextProvider";
+// import Tables from "../../Dynamic/Tables";
+// import {Button,} from "@mui/material";
+// import axios from "axios";
+// import Cookies from "js-cookie";
+
+// const AllotMarks = () => {
+//   const authToken = Cookies.get("token");
+//   const allStudent = JSON.parse(localStorage.getItem("studentsData"));
+//   console.log("allStudent",allStudent)
+//   const { currentColor } = useStateContext();
+//   const [submittedData, setSubmittedData] = useState(allStudent);
+ 
+//   const [selectedExamId, setSelectedExamId] = useState("");
+//   const [subjects, setSubjects] = useState([]);
+//   const [selectAll, setSelectAll] = useState(false);
+//   const [examData, setExamData] = useState([]);
+  
+//   useEffect(() => {
+//     const fetchExams = async () => {
+//       try {
+//         const response = await axios.get(
+//           "https://eserver-i5sm.onrender.com/api/v1/exam/getExams",
+//           {
+//             withCredentials: true,
+//             headers: {
+//               Authorization: `Bearer ${authToken}`,
+//             },
+//           }
+//         );
+//         setExamData(response.data.exams);
+//       } catch (error) {
+//         console.error("Error fetching exams:", error);
+//       }
+//     };
+//     fetchExams();
+//   }, [authToken]);
+
+//   const handleExamChange = (event) => {
+//     const examId = event.target.value;
+//     setSelectedExamId(examId);
+
+//     const selectedExam = examData.find((exam) => exam._id === examId);
+//     if (selectedExam) {
+//       setSubjects(selectedExam.subjects || []);
+//     }
+//   };
+
+//   const handleInputChange = (index, field, value) => {
+//     const newData = [...submittedData];
+//     newData[index][field] = value;
+//     setSubmittedData(newData);
+//   };
+
+//   const handleSelectAll = () => {
+//     const newSelectAll = !selectAll;
+//     const newData = submittedData.map((data) => ({
+//       ...data,
+//       selected: newSelectAll,
+//     }));
+//     setSubmittedData(newData);
+//     setSelectAll(newSelectAll);
+//   };
+
+//   const handleCheckboxChange = (index, isChecked) => {
+//     const newData = [...submittedData];
+//     newData[index].selected = isChecked;
+//     setSubmittedData(newData);
+
+//     const allSelected = newData.every((data) => data.selected);
+//     setSelectAll(allSelected);
+//   };
+
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+//     const selectedData = {
+//       examId: selectedExamId,
+//       studentsMarks: submittedData
+//         .filter((data) => data.selected)
+//         .map((data) => ({
+//           studentId: data._id,
+//           marks: subjects.map((subject) => ({
+//             subjectName: subject.name,
+//             marks: data[subject.name] || 0,
+//             totalMarks: subject.totalMarks || 100,
+//             passingMarks: subject.passingMarks || 40,
+//             isPassed: (data[subject.name] || 0) >= (subject.passingMarks || 40),
+
+//           })),
+//           "coScholasticMarks": [
+//             {
+//               "activityName": "Physical Education",
+//               "grade": "A"
+//             },
+//             {
+//               "activityName": "Art & Craft",
+//               "grade": "B"
+//             }
+// ],      
+//         })),
+//     };
+//     // const selectedData = {
+//     //   examId: selectedExamId,
+//     //   studentsMarks: submittedData
+//     //     .filter((data) => data.selected)
+//     //     .map((data) => ({
+//     //       studentId: data._id,
+//     //       marks: subjects.map((subject) => ({
+//     //         subjectName: subject.name,
+//     //         marks: data[subject.name] || 0,
+//     //         totalMarks: subject.totalMarks || 100,
+//     //         passingMarks: subject.passingMarks || 40,
+//     //         isPassed: (data[subject.name] || 0) >= (subject.passingMarks || 40),
+//     //       })),
+//     //     })),
+//     // };
+
+//     console.log("Payload to Post:", selectedData);
+
+//     try {
+//       await axios.post(
+//         "https://eserver-i5sm.onrender.com/api/v1/marks/marksbulkupload",
+//         selectedData,
+//         {
+//           withCredentials: true,
+//           headers: {
+//             Authorization: `Bearer ${authToken}`,
+//             "Content-Type": "application/json",
+//           },
+//         }
+//       );
+//       alert("Marks submitted successfully!");
+//     } catch (error) {
+//       console.error("Error submitting marks:", error);
+//     }
+//   };
+
+
+//   const THEAD = [
+//     <input type="checkbox" checked={selectAll} onChange={handleSelectAll} />,
+//     "ID",
+//     "Name",
+//     ...subjects.map((subject) => subject.name),
+//   ];
+
+//   return (
+//     <div>
+//       <div
+//         className="rounded-tl-lg border rounded-tr-lg text-white text-[12px] lg:text-lg"
+//         style={{ background: currentColor }}
+//       >
+//         <p className="px-5">Allot Marks</p>
+//       </div>
+
+     
+//      <div className="p-2 border-2  border-r-2">
+//      <label htmlFor="examSelector" >
+//         Select Exam:
+//       </label>
+//       <select
+//         id="examSelector"
+//         className="outline-none border-2"
+//         value={selectedExamId}
+       
+//         onChange={handleExamChange}
+//         style={{ padding: "8px", width: "100%", maxWidth: "300px" }}
+//       >
+//         <option value="" disabled>
+//           -- Select an Exam --
+//         </option>
+//         {examData.map((exam) => (
+//           <option key={exam._id} value={exam._id}>
+//             {exam.name}
+//           </option>
+//         ))}
+//       </select>
+//      </div>
+
+//       {selectedExamId && (
+//         <div>
+//           <Tables
+//             thead={THEAD}
+//             tbody={submittedData.map((val, ind) => ({
+//               "": (
+//                 <input
+//                   type="checkbox"
+                 
+//                   checked={val.selected}
+//                   onChange={(e) => handleCheckboxChange(ind, e.target.checked)}
+//                 />
+//               ),
+//               ID: val.admissionNumber,
+//               Name: val.fullName,
+//               ...subjects.reduce((acc, subject) => {
+//                 acc[subject.name] = (
+//                   <input
+//                    className="border-2 outline-none w-[60px] px-2"
+//                     type="number"
+//                     value={val[subject.name] || ""}
+//                     onChange={(e) =>
+//                       handleInputChange(ind, subject.name, e.target.value)
+//                     }
+//                   />
+//                 );
+//                 return acc;
+//               }, {}),
+//             }))}
+//           />
+//           <Button
+//             onClick={handleSubmit}
+//             style={{
+//               marginTop: "10px",
+//               background: currentColor,
+//               color: "white",
+//             }}
+//           >
+//             Submit
+//           </Button>
+//         </div>
+//       )}
+//     </div>
+//   );
+// };
+
+// export default AllotMarks;
+
+// import React, { useState } from "react";
+// import { useStateContext } from "../../contexts/ContextProvider";
+// import Tables from "../../Dynamic/Tables";
+// import { Button } from "@mui/material";
+// import axios from 'axios';
+// import Cookies from 'js-cookie';
+// const AllotMarks = () => {
+//   const authToken = Cookies.get('token');
+//   const allStudent = JSON.parse(localStorage.getItem('studentsData'));
+//   console.log("allStudent",allStudent);
+
+//   const { currentColor,teacherRoleData} = useStateContext();
+//   const [submittedData, setSubmittedData] = useState(allStudent);
+//   const [selectAll, setSelectAll] = useState(false);
+//   const handleInputChange = (index, field, value) => {
+//     const newData = [...submittedData];
+//     newData[index][field] = value;
+//     setSubmittedData(newData);
+//   };
+
+//   const handleSelectAll = () => {
+//     const newSelectAll = !selectAll;
+//     const newData = submittedData.map((data) => ({ ...data, selected: newSelectAll }));
+//     setSubmittedData(newData);
+//     setSelectAll(newSelectAll);
+//   };
+
+//   const handleCheckboxChange = (index, isChecked) => {
+//     const newData = [...submittedData];
+//     newData[index].selected = isChecked;
+//     setSubmittedData(newData);
+
+//     const allSelected = newData.every((data) => data.selected);
+//     setSelectAll(allSelected);
+//   };
+
+//   const THEAD = [
+//     <input type="checkbox" checked={selectAll} onChange={handleSelectAll} />,
+//     "ID",
+//     "Name",
+//     "Math",
+//     "Hindi",
+//     "Eng",
+//     "Work Education",
+//     "Art Education",
+//     "Health & Physical Education",
+//   ];
+
+//   const handleSubmit = async (e) => {
+//     e.preventDefault()
+//     // setLoading(true)
+//     const selectedData = submittedData.filter((data) => data.selected).map((data) => (
+
+//     {
+//       "studentId":  data._id,
+//       "examId": "6762fedcb26b873554f778f8",
+//       "marks": [
+//         {
+//           "subjectName": "Hindli",
+//           "marks": 85,
+//           "totalMarks": 100,
+//           "passingMarks": 40,
+//           "isPassed": true
+//         },
+//       ]}
+//   ));
+
+//     console.log("Selected Data to Post:", selectedData);
+
+//     try {
+//       await axios.post("https://eserver-i5sm.onrender.com/api/v1/marks/marks", selectedData, {
+//         withCredentials: true,
+//       headers: {
+//         Authorization: `Bearer ${authToken}`,
+//         'Content-Type': 'application/json',
+//       }
+//       })
+//       setExamData({
+//         examName: '',
+//         examType: '',
+//         startDate: '',
+//         endDate: '',
+//         resultPublishDate: '',
+//         subjects: [],
+//         Grade:""
+//       });
+//       toast.success("Created")
+
+//       alert('Exam saved successfully!');
+//     }
+//     catch (error) {
+
+//       console.log("error", error)
+//     }
+//   };
+
+//   return (
+//     <div>
+//        <div  className='rounded-tl-lg border rounded-tr-lg text-white  text-[12px] lg:text-lg'
+//       style={{background:currentColor}}
+//       >
+//       <p
+//       className='px-5'
+
+//       > Allot Marks</p>
+//       </div>
+
+//       <div>
+//         <Tables
+//           thead={THEAD}
+//           tbody={submittedData.map((val, ind) => ({
+//             "": (
+//               <input
+//                 type="checkbox"
+//                 checked={val.selected}
+//                 onChange={(e) => handleCheckboxChange(ind, e.target.checked)}
+//               />
+//             ),
+//             "ID": val.admissionNumber,
+//             "Name": val.fullName,
+//             "Math": (
+//               <input
+//                 type="number"
+//                 value={val.Math}
+//                 onChange={(e) => handleInputChange(ind, "Math", e.target.value)}
+//               />
+//             ),
+//             "Hindi": (
+//               <input
+//                 type="number"
+//                 value={val.Hindi}
+//                 onChange={(e) => handleInputChange(ind, "Hindi", e.target.value)}
+//               />
+//             ),
+//             "Eng": (
+//               <input
+//                 type="number"
+//                 value={val.Eng}
+//                 onChange={(e) => handleInputChange(ind, "Eng", e.target.value)}
+//               />
+//             ),
+//             "Work Education": (
+//               <select
+//                 value={val.WorkEducation}
+//                 onChange={(e) => handleInputChange(ind, "WorkEducation", e.target.value)}
+//               >
+//                 <option value="">Select Grade</option>
+//                 <option value="A">A</option>
+//                 <option value="B">B</option>
+//                 <option value="C">C</option>
+//               </select>
+//             ),
+//             "Art Education": (
+//               <select
+//                 value={val.ArtEducation}
+//                 onChange={(e) => handleInputChange(ind, "ArtEducation", e.target.value)}
+//               >
+//                 <option value="">Select Grade</option>
+//                 <option value="A">A</option>
+//                 <option value="B">B</option>
+//                 <option value="C">C</option>
+//               </select>
+//             ),
+//             "Health & Physical Education": (
+//               <select
+//                 value={val.PhysicalEducation}
+//                 onChange={(e) => handleInputChange(ind, "PhysicalEducation", e.target.value)}
+//               >
+//                 <option value="">Select Grade</option>
+//                 <option value="A">A</option>
+//                 <option value="B">B</option>
+//                 <option value="C">C</option>
+//               </select>
+//             ),
+//           }))}
+//         />
+//         <Button onClick={handleSubmit} style={{ marginTop: "10px", background: currentColor, color: "white" }}>
+//           Submit
+//         </Button>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default AllotMarks;
 
 // import React, { useState } from "react";
 // import { useStateContext } from "../../contexts/ContextProvider";
@@ -213,38 +690,38 @@ export default AllotMarks;
 // const AllotMarks = () => {
 //   const { currentColor } = useStateContext();
 //   const [submittedData, setSubmittedData] = useState([
-//     { 
-//       Student_ID: "S001", 
-//       Student_Name: "John Doe", 
-//       Math: "", 
-//       Hindi: "", 
-//       Eng: "", 
-//       WorkEducation: "", 
-//       ArtEducation: "", 
-//       PhysicalEducation: "", 
-//       selected: false 
+//     {
+//       Student_ID: "S001",
+//       Student_Name: "John Doe",
+//       Math: "",
+//       Hindi: "",
+//       Eng: "",
+//       WorkEducation: "",
+//       ArtEducation: "",
+//       PhysicalEducation: "",
+//       selected: false
 //     },
-//     { 
-//       Student_ID: "S002", 
-//       Student_Name: "Anand", 
-//       Math: "", 
-//       Hindi: "", 
-//       Eng: "", 
-//       WorkEducation: "", 
-//       ArtEducation: "", 
-//       PhysicalEducation: "", 
-//       selected: false 
+//     {
+//       Student_ID: "S002",
+//       Student_Name: "Anand",
+//       Math: "",
+//       Hindi: "",
+//       Eng: "",
+//       WorkEducation: "",
+//       ArtEducation: "",
+//       PhysicalEducation: "",
+//       selected: false
 //     },
-//     { 
-//       Student_ID: "S003", 
-//       Student_Name: "Vishal", 
-//       Math: "", 
-//       Hindi: "", 
-//       Eng: "", 
-//       WorkEducation: "", 
-//       ArtEducation: "", 
-//       PhysicalEducation: "", 
-//       selected: false 
+//     {
+//       Student_ID: "S003",
+//       Student_Name: "Vishal",
+//       Math: "",
+//       Hindi: "",
+//       Eng: "",
+//       WorkEducation: "",
+//       ArtEducation: "",
+//       PhysicalEducation: "",
+//       selected: false
 //     },
 //   ]);
 
@@ -375,8 +852,6 @@ export default AllotMarks;
 
 // export default AllotMarks;
 
-
-
 // import React, { useState } from "react";
 // import { useStateContext } from "../../contexts/ContextProvider";
 // import Tables from "../../Dynamic/Tables";
@@ -493,9 +968,6 @@ export default AllotMarks;
 
 // export default AllotMarks;
 
-
-
-
 // import React, { useState } from 'react'
 // import { useStateContext } from '../../contexts/ContextProvider';
 // import Tables from '../../Dynamic/Tables';
@@ -518,24 +990,23 @@ export default AllotMarks;
 //     },
 //   ]);
 //   const THEAD = [
-   
+
 //     "",
 //     "ID",
 //     "Name",
 //     "Math",
 //     "Hindi",
 //     "Eng",
-   
-   
+
 //   ];
 //   return (
 //     <div>
-//         <p 
+//         <p
 //        className='rounded-tl-lg border rounded-tr-lg text-white px-2 text-[12px] lg:text-lg'
 //        style={{ background: `linear-gradient(to bottom, ${currentColor}, ${"#8d8b8b"})` }}
 //       >AllotMarks</p>
 //       <div>
-//        <Tables  thead={THEAD} 
+//        <Tables  thead={THEAD}
 //        tbody={ submittedData?.map((val, ind) => ({
 //         "":<input type="checkbox" key={ind} />,
 //         "S.No.":val.Student_ID,
@@ -543,9 +1014,9 @@ export default AllotMarks;
 //         "Math": <input type='number'/>,
 //         "Hindi":<input type='number'/>,
 //         "Eng": <input type='number'/>,
-      
+
 //       }))}
-            
+
 //             />
 //             <Button>
 //               submit
@@ -556,8 +1027,6 @@ export default AllotMarks;
 // }
 
 // export default AllotMarks
-
-
 
 // import React, { useState, useEffect } from 'react';
 
@@ -705,7 +1174,6 @@ export default AllotMarks;
 //   );
 // }
 
-
 // import React, { useState, useEffect } from 'react';
 // import { api } from '../api/api';
 // import { Button, Input, Select } from '@/components/ui';
@@ -820,4 +1288,3 @@ export default AllotMarks;
 //     </form>
 //   );
 // }
-

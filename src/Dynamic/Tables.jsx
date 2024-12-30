@@ -63,7 +63,7 @@ function Tables({
                           ? headData?.textAlign
                           : "",
                       }}
-                      className={`px-2 md:py-1 lg:py-2 font-semibold text-left  ${
+                      className={`px-2 md:py-1 lg:py-2 font-semibold text-left   ${
                         headData?.className ? headData?.className : ""
                       }`}
                     >

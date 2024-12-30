@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
 import { useStateContext } from '../../contexts/ContextProvider';
-
+import axios from 'axios';
+import Cookies from 'js-cookie';
+import { toast } from "react-toastify";
 export default function CreateExam() {
   const { currentColor,teacherRoleData} = useStateContext();
+  const authToken = Cookies.get('token');
+  const [examCreated, setExamCreated] = useState(false); 
+  const [loading, setLoading] = useState(false);
   const [examData, setExamData] = useState({
     examName: '',
     examType: '',
     className: '',
     section: '',
-  
     startDate: '',
     endDate: '',
     Grade:"",
@@ -17,9 +21,8 @@ export default function CreateExam() {
     
   });
 
-  console.log("teacherRoleData",teacherRoleData)
+  // console.log("teacherRoleData",teacherRoleData)
   const [savedExams, setSavedExams] = useState([]); // To store all submitted exams
-
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setExamData((prevData) => ({ ...prevData, [name]: value }));
@@ -41,35 +44,65 @@ export default function CreateExam() {
     }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    let payload={
-      className:teacherRoleData?.classTeacher,
-      section:teacherRoleData?.section,
-      examName:examData?.examName,
-      examType:examData?.examType,
-      startDate:examData?.startDate,
-      endDate:examData?.endDate,
-      resultPublishDate:examData?.resultPublishDate,
-      grade:examData?.Grade,
-      subject:examData?.subjects
-      
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    setLoading(true)
+    if (
+      !examData?.examName ||
+      !examData?.examType ||
+      !teacherRoleData?.classTeacher ||
+      !teacherRoleData?.section ||
+      !examData?.Grade ||
+      !examData?.startDate ||
+      !examData?.endDate ||
+      !examData?.resultPublishDate ||
+      examData?.subjects.length === 0
+    ) {
+      alert("Please fill in all the required fields!");
+      setLoading(false);
+      return;
     }
-    console.log("payload",payload)
-console.log("examData",examData)
-    // Add current exam data to savedExams state
-    setSavedExams((prevExams) => [...prevExams, examData]);
-    setExamData({
-      examName: '',
-      examType: '',    
-      startDate: '',
-      endDate: '',
-      resultPublishDate: '',
-      subjects: [],
-      Grade:""
-    });
+    let payload={
+      "name": examData?.examName,
+      "examType": examData?.examType,
+      "className":teacherRoleData?.classTeacher,
+      "section": teacherRoleData?.section,
+      "gradeSystem":examData?.Grade,
+      "startDate":examData?.startDate,
+      "endDate":examData?.endDate,
+      "resultPublishDate":examData?.resultPublishDate,
+      subjects:examData?.subjects,
+    }
 
-    alert('Exam saved successfully!');
+    try {
+      await axios.post("https://eserver-i5sm.onrender.com/api/v1/exam/createExams", payload, {
+        withCredentials: true,
+      headers: {
+        Authorization: `Bearer ${authToken}`,
+        'Content-Type': 'application/json',
+      }
+      })
+      setExamData({
+        examName: '',
+        examType: '',    
+        startDate: '',
+        endDate: '',
+        resultPublishDate: '',
+        subjects: [],
+        Grade:""
+      });
+      toast.success("Created")
+      setExamCreated(!examCreated);
+      // setIsModalOpen(false);
+      setLoading(false);
+      alert('Exam saved successfully!');
+    }
+    catch (error) {
+   
+       setLoading(false);
+      //  toast.error("error",error)
+      console.log("error", error)
+    }
   };
 
   return (

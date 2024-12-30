@@ -50,9 +50,19 @@ const Navbar = () => {
         }
       )
       .then((response) => {
+        // console.log("response",response)
+        // localStorage.setItem("SchoolDetails",response.data)
+        // const SchoolDetails = localStorage.getItem("SchoolDetails")
+        // console.log("SchoolDetailsSchoolDetails",SchoolDetails)
+        localStorage.setItem("SchoolDetails", JSON.stringify(response.data.admin));
+
+// Retrieve data from localStorage
+const SchoolDetails = JSON.parse(localStorage.getItem("SchoolDetails"));
+console.log("SchoolDetailsSchoolDetails",SchoolDetails)
         const schoolImage = response.data.admin.image.url;
         const schoolName = response.data.admin.schoolName;
         const role = response.data.admin.role;
+        localStorage.setItem("schoolName",schoolName)
         sessionStorage.setItem("schoolName", schoolName);
         sessionStorage.setItem("schoolImage", schoolImage);
         setSchoolInfo({
