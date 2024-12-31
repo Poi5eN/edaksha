@@ -115,7 +115,7 @@ const Attendance = lazy(() => import("./TEACHERDASHBOARD/Attendance"));
 const Curriculum = lazy(() => import("./TEACHERDASHBOARD/Curriculum"));
 const Lectures = lazy(() => import("./TEACHERDASHBOARD/Lectures"));
 const Study = lazy(() => import("./TEACHERDASHBOARD/Study"));
-const Results = lazy(() => import("./TEACHERDASHBOARD/Results"));
+// const Results = lazy(() => import("./TEACHERDASHBOARD/Results"));
 const AboutTeacher = lazy(() => import("./TEACHERDASHBOARD/AboutTeacher"));
 const StudentDashboard = lazy(() =>
   import("./STUDENTDASHBOARD/StudentDashboard")
@@ -144,7 +144,7 @@ const Expenses = lazy(() => import("./PARENTDASHBOARD/Expenses"));
 const Queries = lazy(() => import("./PARENTDASHBOARD/Queries"));
 const StudentHome = lazy(() => import("./STUDENTDASHBOARD/StudentHome"));
 const AdmitCard = lazy(() => import("./ADMINDASHBOARD/Exams/AdmitCard"));
-const CreateExams = lazy(() => import("./TEACHERDASHBOARD/CreateExams"));
+// const CreateExams = lazy(() => import("./TEACHERDASHBOARD/CreateExams"));
 const ParentHome = lazy(() => import("./PARENTDASHBOARD/ParentHome"));
 const StudentFeeStatus = lazy(() =>
   import("./ADMINDASHBOARD/Student/AllStudent/StudentFeeStatus")
@@ -218,7 +218,7 @@ const BulkAdmission = lazy(() =>
 const NewCheckFee = lazy(() => import("./ADMINDASHBOARD/Fees/NewCheckFee"));
 const NewCheckFee2 = lazy(() => import("./ADMINDASHBOARD/Fees/NewCheckFee2"));
 const NewCheckFee3 = lazy(() => import("./ADMINDASHBOARD/Fees/NewCheckFee3"));
-const StudentReport = lazy(() => import("./TEACHERDASHBOARD/StudentReport"));
+// const StudentReport = lazy(() => import("./TEACHERDASHBOARD/StudentReport"));
 const Udise = lazy(() => import("./ADMINDASHBOARD/Udise/Udise"));
 function App() {
   return (
@@ -389,13 +389,13 @@ function App() {
             <Route path="curriculum" element={<Curriculum />} />
             <Route path="lectures" element={<Lectures />} />
             <Route path="study" element={<Study />} />
-            <Route path="results" element={<Results />} />
-            <Route path="createExam" element={<CreateExams />} />
+            {/* <Route path="results" element={<Results />} /> */}
+            {/* <Route path="createExam" element={<CreateExams />} /> */}
             <Route path="ReportCardGenerator" element={<ReportCardGenerator />} />
             <Route path="ExamList" element={<ExamList />} />
             <Route path="ExamResultsManager" element={<ExamResultsManager />} />
             <Route path="aboutTeacher" element={<AboutTeacher />} />
-            <Route path="studentReport" element={<StudentReport />} />
+            {/* <Route path="studentReport" element={<StudentReport />} /> */}
             <Route path="examsystem" element={<ExamSystem />} />
           </Route>
           <Route path="/student" element={<StudentDashboard />}>

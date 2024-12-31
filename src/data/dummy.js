@@ -458,13 +458,13 @@ export const Teacherslinks = [
         icon: <GiTeacher />,
         route: "teacher/assignments",
       },
-      {
-        id: "3",
+      // {
+      //   id: "3",
 
-        name: "Results",
-        icon: <PiStudentFill />,
-        route: "teacher/results",
-      },
+      //   name: "Results",
+      //   icon: <PiStudentFill />,
+      //   route: "teacher/results",
+      // },
       {
         id: "4",
 
@@ -493,13 +493,13 @@ export const Teacherslinks = [
         icon: <BiSolidStoreAlt />,
         route: "teacher/study",
       },
-      {
-        id: "8",
+      // {
+      //   id: "8",
 
-        name: "Create Exam",
-        icon: <BiSolidStoreAlt />,
-        route: "teacher/CreateExam",
-      },
+      //   name: "Create Exam",
+      //   icon: <BiSolidStoreAlt />,
+      //   route: "teacher/CreateExam",
+      // },
       {
         id: "9",
 
@@ -507,13 +507,13 @@ export const Teacherslinks = [
         icon: <BiSolidStoreAlt />,
         route: "teacher/AboutTeacher",
       },
-      {
-        id: "10",
+      // {
+      //   id: "10",
 
-        name: "Students Report",
-        icon: <BiSolidStoreAlt />,
-        route: "teacher/studentReport",
-      },
+      //   name: "Students Report",
+      //   icon: <BiSolidStoreAlt />,
+      //   route: "teacher/studentReport",
+      // },
       {
         id: "11",
 

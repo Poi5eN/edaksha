@@ -19,7 +19,7 @@ import {
   DialogContent,
   DialogActions
 } from '@mui/material';
-import { FileSpreadsheet, Download, Printer, Eye, Upload } from 'lucide-react';
+// import { FileSpreadsheet, Download, Printer, Eye, Upload } from 'lucide-react';
 import { useParams } from 'react-router-dom';
 import ReportCardGenerator from './ReportCard';
 
@@ -172,7 +172,7 @@ const ExamResultsManager = () => {
         <div className="flex gap-2">
           <Button
             variant="outlined"
-            startIcon={<Upload />}
+            // startIcon={<Upload />}
             component="label"
           >
             Upload Results
@@ -185,14 +185,14 @@ const ExamResultsManager = () => {
           </Button>
           <Button
             variant="outlined"
-            startIcon={<Download />}
+            // startIcon={<Download />}
             onClick={downloadResultSheet}
           >
             Download Template
           </Button>
           <Button
             variant="contained"
-            startIcon={<FileSpreadsheet />}
+            // startIcon={<FileSpreadsheet />}
             onClick={generateBulkReportCards}
           >
             Generate All Report Cards
@@ -274,7 +274,7 @@ const ExamResultsManager = () => {
                       setShowReportCard(true);
                     }}
                   >
-                    <Eye />
+                    {/* <Eye /> */}
                   </IconButton>
                 </TableCell>
               </TableRow>
@@ -312,7 +312,7 @@ const ExamResultsManager = () => {
           <Button onClick={() => setShowReportCard(false)}>Close</Button>
           <Button
             variant="contained"
-            startIcon={<Printer />}
+            // startIcon={<Printer />}
             onClick={() => window.print()}
           >
             Print

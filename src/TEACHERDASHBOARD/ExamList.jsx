@@ -10,7 +10,7 @@ import {
   MenuItem,
   IconButton
 } from '@mui/material';
-import { Eye, Edit, FileSpreadsheet, Calendar } from 'lucide-react';
+// import { Eye, Edit, FileSpreadsheet, Calendar } from 'lucide-react';
 import { format } from 'date-fns';
 
 const ExamList = () => {
@@ -142,13 +142,13 @@ const ExamList = () => {
 
                 <div className="space-y-2 mb-4">
                   <div className="flex items-center gap-2">
-                    <Calendar className="w-4 h-4" />
+                    {/* <Calendar className="w-4 h-4" /> */}
                     <Typography variant="body2">
                       {exam.academicYear} - {exam.term}
                     </Typography>
                   </div>
                   <div className="flex items-center gap-2">
-                    <FileSpreadsheet className="w-4 h-4" />
+                    {/* <FileSpreadsheet className="w-4 h-4" /> */}
                     <Typography variant="body2">
                       {exam.examType.replace('_', ' ')}
                     </Typography>
@@ -166,16 +166,16 @@ const ExamList = () => {
                     size="small"
                     onClick={() => window.location.href = `/exams/${exam._id}`}
                   >
-                    <Eye className="w-5 h-5" />
+                    {/* <Eye className="w-5 h-5" /> */}
                   </IconButton>
-                  {exam.status === 'DRAFT' && (
+                  {/* {exam.status === 'DRAFT' && (
                     <IconButton 
                       size="small"
                       onClick={() => window.location.href = `/exams/${exam._id}/edit`}
                     >
                       <Edit className="w-5 h-5" />
                     </IconButton>
-                  )}
+                  )} */}
                 </div>
               </CardContent>
             </Card>

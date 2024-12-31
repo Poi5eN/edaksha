@@ -4,6 +4,7 @@ import ViewExam from './NewExam/ViewExam';
 import AllotMarks from './NewExam/AllotMarks';
 import ReportCard from './NewExam/ReportCard';
 import { useStateContext } from '../contexts/ContextProvider';
+import AdmitCard from './NewExam/AdmitCard';
 
 const ExamSystem = () => {
   const [activeTab, setActiveTab] = useState('createExam');
@@ -13,7 +14,7 @@ const ExamSystem = () => {
     viewEcam: <ViewExam/>,
     allotMarks: <AllotMarks/>,
     reportCard: <ReportCard/>,
-    // reportCard: <ReportCard/>,
+    admitCard: <AdmitCard/>,
    
   };
   
@@ -51,6 +52,13 @@ const ExamSystem = () => {
           style={{ background: activeTab === 'reportCard' ? currentColor : 'transparent' }}
        >
           Report Card
+        </button>
+        <button
+          onClick={() => setActiveTab('admitCard')}
+          className={`px-4 py-[1px] lg:py-2 text-[12px] lg:text-[14px]    ${activeTab === 'admitCard' ? '  text-white  border-b-0 rounded-tl-lg border rounded-tr-lg ' : 'border rounded-tl-lg rounded-tr-lg'}`}
+          style={{ background: activeTab === 'admitCard' ? currentColor : 'transparent' }}
+       >
+          Admit Card
         </button>
       
       </div>

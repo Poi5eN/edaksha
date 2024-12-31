@@ -18,7 +18,7 @@ const ReportCard = () => {
     const [loading, setLoading] = useState(false);
   
     const schoolImage = sessionStorage.getItem("schoolImage");
-    const schoolName = localStorage.getItem("schoolName");
+   
     const SchoolDetails = JSON.parse(localStorage.getItem("SchoolDetails"));
   
     const { currentColor } = useStateContext();
@@ -173,7 +173,7 @@ const ReportCard = () => {
       <>
         <div className="mb-4 mx-auto">
           <div
-            className="rounded-tl-lg rounded-tr-lg border flex justify-between text-white px-2 py-2 px-2"
+            className="rounded-tl-lg rounded-tr-lg border flex justify-between text-white  py-2 px-2"
             style={{
               background: `linear-gradient(to bottom, ${currentColor}, #8d8b8b)`,
             }}
@@ -478,7 +478,6 @@ const ReportCard = () => {
   export default ReportCard;
 
 
-
 // import React, { useEffect, useRef, useState } from "react";
 // import { useReactToPrint } from "react-to-print";
 // import { useStateContext } from "../../contexts/ContextProvider";
@@ -614,61 +613,7 @@ const ReportCard = () => {
 //      .map((ex) => ex.name);
 //     setExamName(updatedExamNames);
 //   }, [marks, selectedStudent,selectedExams]);
-//   // useEffect(() => {
-//   //   if (!selectedStudent || marks.length === 0) {
-//   //       setExamResults([]);
-//   //       setCoScholasticMarks([]);
-//   //       return;
-//   //   }
-
-//   //   const studentMarks = marks.filter((mark) => mark?.studentId?._id === selectedStudent?._id);
-    
-//   //   const filteredMarks = studentMarks.filter(mark => selectedExams.includes(mark.examId));
-//   //   // Combine and set the results for the selected student
-//   //   const combinedResults = filteredMarks.reduce((acc, curr) => {
-//   //     curr.marks.forEach((mark) => {
-//   //       const existingMark = acc?.find((m) => m?.subjectName === mark?.subjectName);
-//   //       if (!existingMark) {
-//   //         acc?.push({
-//   //           ...mark,
-//   //           examResults: [
-//   //             {
-//   //               examId: curr.examId,
-//   //               marks: mark.marks,
-//   //               totalMarks: mark.totalMarks,
-//   //             },
-//   //           ],
-//   //         });
-//   //       } else {
-//   //         existingMark.examResults = [
-//   //           ...existingMark.examResults,
-//   //           {
-//   //             examId: curr.examId,
-//   //             marks: mark.marks,
-//   //             totalMarks: mark.totalMarks,
-//   //           },
-//   //         ];
-//   //       }
-//   //     });
-//   //     return acc;
-//   //   }, []);
   
-//   //   // Update state with combined results
-//   //   setExamResults({ marks: combinedResults });
-  
-//   //   // Also handle coScholasticMarks for selected student
-//   //   const coScholasticData = filteredMarks.flatMap((result) => result.coScholasticMarks);
-//   //   setCoScholasticMarks(coScholasticData);
-
-//   //    // Update exam names with newly selected exam
-//   //    const updatedExamNames = examData
-//   //    .filter((ex) => selectedExams.includes(ex._id))
-//   //    .map((ex) => ex.name);
-//   //   setExamName(updatedExamNames);
-//   // }, [marks, selectedStudent,selectedExams]);
-
-
-
 //   const handleCheckboxChange = (exam) => {
 //     setSelectedExams((prevSelected) => {
 //       const isExamSelected = prevSelected.includes(exam._id);

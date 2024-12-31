@@ -8,7 +8,7 @@ import Cookies from "js-cookie";
 const AllotMarks = () => {
   const authToken = Cookies.get("token");
 
-  const allStudent = JSON.parse(localStorage.getItem("studentsData")).map(
+  const allStudent = JSON.parse(localStorage.getItem("studentsData"))?.map(
     (student) => ({
       ...student,
       coScholasticMarks: [
@@ -149,8 +149,10 @@ const AllotMarks = () => {
   return (
     <div>
       <div
-        className="rounded-tl-lg border rounded-tr-lg text-white text-[12px] lg:text-lg"
-        style={{ background: currentColor }}
+        className="rounded-tl-lg border rounded-tr-lg text-white text-[12px] lg:text-lg py-2"
+        style={{
+          background: `linear-gradient(to bottom, ${currentColor}, #8d8b8b)`,
+        }}
       >
         <p className="px-5">Allot Marks</p>
       </div>
