@@ -32,10 +32,11 @@ const ViewExam = () => {
         }
     };
     const handleDelete = async (examId) => {
+        console.log("examIdexamIdexamIdexamId",examId)
       setLoading(true)
         try {
             await axios.delete(
-                `https://eserver-i5sm.onrender.com/api/v1/exam/deleteExam/${examId}`,
+                `https://eserver-i5sm.onrender.com/api/v1/exam/exams/${examId}`,
                 {
                     withCredentials: true,
                     headers: {

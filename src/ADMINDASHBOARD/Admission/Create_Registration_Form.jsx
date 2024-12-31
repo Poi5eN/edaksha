@@ -107,18 +107,7 @@ function Create_Registration_Form() {
   }
 )
 
-  // const handleImagePreview = (e, setImagePreview) => {
-  //   const file = e.target.files[0];
-  //   if (file) {
-  //     const reader = new FileReader();
-  //     reader.onload = () => {
-  //       setImagePreview(reader.result);
-  //     };
-  //     reader.readAsDataURL(file);
-  //   } else {
-  //     setImagePreview(null);
-  //   }
-  // };
+
 
   const handleImagePreview = (event, setPreview) => {
     const file = event.target.files[0];
@@ -456,15 +445,9 @@ function Create_Registration_Form() {
 
   return (
     <div className="md:h-screen mt-20 md:mt-1 px-1">
-      {/* <h1
-        className="text-4xl font-bold mb-4 uppercase text-center  hover-text "
-        style={{ color: currentColor }}
-      >
-        New Admission
-      </h1> */}
+      
       <Heading Name="New Admission" />
       
-      {/* <div className=""> */}
       <Button
         variant="contained"
         style={{
@@ -491,8 +474,7 @@ function Create_Registration_Form() {
         // Add your onChange handler here for student image
       />
       </div>
-      {/* </div> */}
-      {/* <div className=" mb-4"></div> */}
+    
       {isOpen && (
         <div
           id="default-modal"
@@ -1066,14 +1048,7 @@ function Create_Registration_Form() {
                   ) : (
                     <div className="  bg-gray-100">
                       <div className="px-5 md:max-w-[25%] w-full  text-center ">
-                        {/* <label className="block text-[12px] font-medium text-gray-700">
-                          Parent's Admission Number:
-                        </label>
-                        <input
-                          type="text"
-                          name="parentAdmissionNumber"
-                          className="border border-gray-300 px-2 py-1  rounded"
-                        /> */}
+                        
                         <Input
                           type="text"
                           name="parentAdmissionNumber"

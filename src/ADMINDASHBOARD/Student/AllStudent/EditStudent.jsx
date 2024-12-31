@@ -481,16 +481,13 @@ const EditStudent = () => {
     // Append image if it exists
     if (image && typeof image === "object" && image instanceof File) {
       data.append("image", image);
-      // data.append("studentImage", image);
-      console.log("Appended image:", image);
+  
     } else {
       console.log("No valid image to append");
     }
 
     if (image && typeof image === "object" && image instanceof File) {
       data.append("image", image);
-      // data.append("studentImage", image);
-      console.log("Appended image:", image);
     } else {
       console.log("No valid image to append");
     }
@@ -498,14 +495,14 @@ const EditStudent = () => {
     try {
       const response = await axios.put(
         `https://eserver-i5sm.onrender.com/api/v1/adminRoute/editStudentParent/${email}`,
-        data, // Sending FormData as payload
+        data, 
         {
           withCredentials: true,
           headers: {
             Authorization: `Bearer ${authToken}`,
-            // "Content-Type": "application/json",
+            
             "Content-Type": "multipart/form-data",
-            // Don't set "Content-Type", axios will automatically set it for FormData
+        
           },
         }
       );
