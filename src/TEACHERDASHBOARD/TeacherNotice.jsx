@@ -53,12 +53,10 @@ const TeacherNotice = () => {
     if (newNotice.image) {
       formData.append("image", newNotice.image);
     } else if (editingNotice !== null && notice[editingNotice].image) {
-      // Use the existing image URL when editing if no new image is provided
       formData.append("image", notice[editingNotice].image);
     }
 
     if (editingNotice !== null) {
-      // Handle saving changes for an existing notice
       axios
         .put(API_EDIT + notice[editingNotice]._id, formData, {
           withCredentials: true,
@@ -68,14 +66,12 @@ const TeacherNotice = () => {
           },
         })
         .then((response) => {
-          // Handle success and make any necessary updates
           setShouldFetchData(true);
         })
         .catch((error) => {
           console.error("Error updating notice:", error);
         });
     } else {
-      // Handle adding a new notice
       axios
         .post(API_BASE_URL, formData, {
           withCredentials: true,
@@ -85,7 +81,6 @@ const TeacherNotice = () => {
           },
         })
         .then((response) => {
-          // Handle success and make any necessary updates
           setShouldFetchData(true);
         })
         .catch((error) => {
@@ -93,13 +88,12 @@ const TeacherNotice = () => {
         });
     }
 
-    // Reset the state and close the modal
     setNewNotice({ title: "", content: "", image: null });
     setIsModalOpen(false);
   };
 
   const handleDeleteNotice = (index) => {
-    const noticeId = notice[index]._id; // Replace with the actual property name for the notice ID
+    const noticeId = notice[index]._id; 
     axios
       .delete(API_DELETE + noticeId, {
         withCredentials: true,
@@ -118,7 +112,6 @@ const TeacherNotice = () => {
   };
 
   useEffect(() => {
-    // GET Request to fetch existing notices
     axios
       .get(API_GET_DATA, {
         withCredentials: true,
@@ -138,14 +131,7 @@ const TeacherNotice = () => {
 
   return (
     <div className=" rounded-lg  dark:text-white dark:bg-secondary-dark-bg">
-      {/* <h1
-        className="text-xl font-semibold  text-center"
-        style={{ color: currentColor }}
-      >
-        Recent Activity
-      </h1> */}
-
-      {/* Create Notice Button */}
+     
       <div className="mb-1">
         <Button
           onClick={() => {
@@ -159,7 +145,6 @@ const TeacherNotice = () => {
         </Button>
       </div>
 
-      {/* Modal for Creating/Editing Notice */}
       <Modal
         isOpen={isModalOpen}
         onRequestClose={() => {
@@ -221,7 +206,6 @@ const TeacherNotice = () => {
               setEditingNotice(null);
             }}
             style={{ backgroundColor: "#616161", color: "white" }}
-            // className="bg-gray-400 text-white px-5 py-2 ml-2 rounded hover:bg-gray-600"
           >
             Cancel
           </Button>
@@ -252,7 +236,6 @@ const TeacherNotice = () => {
                     )}
                     <CiEdit
                       onClick={() => handleEditNotice(index)}
-                      //  style={{ backgroundColor: currentColor }}
                       className="cursor-pointer text-[#2c387e] "
                     />
                     <TiDelete
@@ -274,48 +257,7 @@ const TeacherNotice = () => {
             </div>
           )}
           </Marquee>
-          {/* {notice.length > 0 ? (
-            notice?.map((notice, index) => (
-              <li
-                key={index}
-                className="bg-white dark:text-white dark:bg-secondary-dark-bg p-2 rounded-sm border mb-1"
-                
-              >
-                <div className="w-full bg-red-400 relative ">
-                  <div className="absolute right-0 flex space-x-3 text-2xl">
-                    {notice.file && (
-                      <a
-                        href={notice.file.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className=" hover:underline"
-                      >
-                        <GrFormView style={{ color: currentColor }} />
-                      </a>
-                    )}
-                    <CiEdit
-                      onClick={() => handleEditNotice(index)}
-                      //  style={{ backgroundColor: currentColor }}
-                      className="cursor-pointer text-[#2c387e] "
-                    />
-                    <TiDelete
-                      onClick={() => handleDeleteNotice(index)}
-                      className="cursor-pointer text-[#ff1744] "
-                    />
-                  </div>
-                </div>
-                <p className=" uppercase" style={{ color: currentColor }}>
-                  {notice.role}
-                </p>
-                <h2 className="text-[14px] font-semibold  mb-2">{notice.title}</h2>
-                <p className="text-gray-600 text-[12px]">{notice.content}</p>
-              </li>
-            ))
-          ) : (
-            <div className="bg-white dark:text-white dark:bg-secondary-dark-bg p-4 rounded-lg shadow-md mb-4">
-              <p className="text-[#01579b]">No items created</p>
-            </div>
-          )} */}
+         
         </div>
       </ul>
     </div>

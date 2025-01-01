@@ -5,11 +5,19 @@ import { useStateContext } from "../contexts/ContextProvider";
 import { Button } from "@mui/material";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Heading2 from "../Dynamic/Heading2";
+import Modal from "../Dynamic/Modal";
+import { FaPlus } from "react-icons/fa";
 const authToken = Cookies.get("token");
 const Api_Create =
   "https://eserver-i5sm.onrender.com/api/v1/adminRoute/createAssignment";
 
 const Assignments = () => {
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const handleOpenModal = () => {
+    setModalOpen(true);
+  };
   const classdata = JSON.parse(sessionStorage.getItem("response"));
   // console.log("classdata",classdata)
   const [classData, setClassData] = useState([]);
@@ -125,6 +133,7 @@ const Assignments = () => {
           subject: "",
           image: null,
         });
+        setModalOpen(false);
         setShouldFetchData(!shouldFetchData);
         setSelectedGrade("");
         setSelectedSection("");
@@ -145,26 +154,6 @@ const Assignments = () => {
 
   };
 
-  // useEffect(() => {
-  //   axios
-  //     .get(
-  //       "https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAllClasses",
-  //       {
-  //         withCredentials: true,
-  //         headers: {
-  //           Authorization: `Bearer ${authToken}`,
-  //         },
-  //       }
-  //     )
-  //     .then((response) => {
-  //       const { classList } = response.data;
-  //       console.log("GetALLCLASS--->", classList);
-  //       setData(classList);
-  //     })
-  //     .catch((error) => {
-  //       console.error("Error fetching class data:", error);
-  //     });
-  // }, []);
 
   useEffect(() => {
     axios
@@ -212,32 +201,21 @@ const Assignments = () => {
       });
   };
 
-  // const handleSectionChange = (e) => {
-  //   console.log(data);
-  // const selectedSection = e.target.value;
-  // setSelectedSection(selectedSection);
-  // setFormData({ ...formData, section: [selectedSection] });
-  // };
 
-  // const handleSubjectChange = (e) => {
-  //   const selectedSubject = e.target.value;
-  //   setSelectedSubject(selectedSubject);
-  //   setFormData({ ...formData, subject: [selectedSubject] });
-  // };
-
-  // console.log(assignmentData);
   return (
     <>
-      {/* <div className="p-6 w-full max-w-md mx-auto  rounded-md shadow-md"> */}
-      <h1
-        className="text-xl font-bold mb-4 uppercase text-center  hover-text "
-        style={{ color: currentColor }}
-      >
-        Create Homework Assignment
-      </h1>
+    <Heading2 title={"Create Homework Assignment"}>
+    <button onClick={handleOpenModal}
+       className="py-1 p-3 rounded-tl-lg rounded-tr-lg  flex items-center space-x-1 text-white"
+       style={{ background: currentColor }}
+       >  <FaPlus /><span>Create Assignment</span>
+       </button>
+    </Heading2>
+   
+    <Modal isOpen={modalOpen} setIsOpen={setModalOpen} title={"Create Assignment"}>
       <form onSubmit={handleSubmit}>
-        <div className="grid md:grid-cols-4 grid-cols-1 sm:grid-cols-1 lg:grid-cols-5 gap-2 px-5">
-          <div className="mb-4">
+        <div className="grid md:grid-cols-3 grid-cols-1 sm:grid-cols-1 lg:grid-cols-43 gap-2 px-5 pb-2">
+          <div className="">
             <label className="block mb-2">Class:</label>
             <select
               value={selectedClass}
@@ -252,7 +230,7 @@ const Assignments = () => {
               ))}
             </select>
           </div>
-          <div className="mb-4">
+          <div className="">
             <label className="block mb-2">Section:</label>
             <select
               value={selectedSection}
@@ -270,7 +248,7 @@ const Assignments = () => {
             </select>
           </div>
 
-          <div className="mb-4">
+          <div className="">
             <label className="block mb-2">Subject:</label>
             <select
               value={selectedSubject}
@@ -290,7 +268,7 @@ const Assignments = () => {
             </select>
           </div>
 
-          <div className="mb-4">
+          <div className="">
             <label
               htmlFor="title"
               className="text-sm font-medium text-gray-600 block  mb-3"
@@ -309,7 +287,7 @@ const Assignments = () => {
               required
             />
           </div>
-          <div className="mb-4">
+          <div className="">
             <label
               htmlFor="description"
               className="text-sm font-medium text-gray-600 block  mb-3"
@@ -327,25 +305,8 @@ const Assignments = () => {
               required
             />
           </div>
-          {/* <div className="mb-4">
-            <label
-              htmlFor="dueDate"
-              className="text-sm font-medium text-gray-600 block  mb-3"
-            >
-              Date
-            </label>
-            <input
-              type="date"
-              id="dueDate"
-              className="w-full p-2  border  focus:outline-none focus:border-indigo-500"
-              value={formData.dueDate}
-              onChange={(e) =>
-                setFormData({ ...formData, dueDate: e.target.value })
-              }
-              required
-            />
-          </div> */}
-          <div className="mb-4">
+          
+          <div className="">
             <label
               htmlFor="pdfFile"
               className="text-sm font-medium text-gray-600 block  mb-3"
@@ -361,7 +322,7 @@ const Assignments = () => {
             />
           </div>
         </div>
-        <div className=" text-center">
+        <div className=" text-end mb-2 px-5">
           <Button
             onclick={handleSubmit}
             type="submit"
@@ -406,11 +367,13 @@ const Assignments = () => {
             </button> */}
         </div>
       </form>
-      {/* </div> */}
-      <div className="mt-4 p-3">
-        <h2 className="text-lg font-semibold text-cyan-700 text-center uppercase my-3">
+      </Modal>
+    
+     
+      <div className="px-3">
+        {/* <h2 className="text-lg font-semibold text-cyan-700 text-center uppercase my-3">
           Created Assignments
-        </h2>
+        </h2> */}
 
         <div className="overflow-x-auto">
           <table className="min-w-full  rounded-md border-collapse">

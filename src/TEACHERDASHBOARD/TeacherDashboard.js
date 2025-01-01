@@ -9,7 +9,8 @@ import { getAllStudent, teacherApi } from "./Api";
 function TeacherDashboard() {
   const {
     setCurrentColor,
-    numberOfStudent,setNumberOfStudent,
+    numberOfStudent,
+    setNumberOfStudent,
     setCurrentMode,
     currentMode,
     activeMenu,
@@ -31,7 +32,6 @@ function TeacherDashboard() {
   const email = sessionStorage.getItem("email");
 
   useEffect(() => {
-    // About Teacher Api ................ start
     try {
       teacherApi(email)
         .then((response) => {
@@ -43,27 +43,19 @@ function TeacherDashboard() {
     } catch (error) {
       console.log("first", error);
     }
-    // About Teacher Api ................ end
-
-    // AllStudent Api ................start
-    try {
-      getAllStudent().then((response)=>{
-        setNumberOfStudent( response.data.allStudent.length)
-      }).catch((error)=>{
-        console.error("Error fetching student count:", error);
-      })
-
-    } catch (error) {
-      
-    }
-    // AllStudent Api ................end
-
 
     try {
-      
-    } catch (error) {
-      
-    }
+      getAllStudent()
+        .then((response) => {
+          setNumberOfStudent(response.data.allStudent.length);
+        })
+        .catch((error) => {
+          console.error("Error fetching student count:", error);
+        });
+    } catch (error) {}
+
+    try {
+    } catch (error) {}
   }, []);
 
   useEffect(() => {
@@ -137,8 +129,8 @@ function TeacherDashboard() {
                 <Outlet />
               </div>
               <div className="absolute   bottom-0 flex items-center">
-            <Footer />
-            </div>
+                <Footer />
+              </div>
             </div>
           </div>
         </>

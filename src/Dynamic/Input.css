@@ -1,4 +1,4 @@
-
+/* 
   
   .material-textfield {
     position: relative;  
@@ -6,7 +6,6 @@
   
   .input_label {
     position: absolute;
-    /* font-size: 1rem; */
     font-size: "12px";
     left: 0;
     top: 50%;
@@ -21,7 +20,6 @@
     pointer-events: none;
   }
   .input_text {
-    /* font-size: 1rem; */
     font-size: "12px";
     outline: none;
     border: 1px solid gray;
@@ -32,17 +30,15 @@
     background:#f3f4f6;
   }
   .input_text:focus {
-    /* border-color: #6200EE;   */
   }
   .input_text:focus + label {
-    /* color: #6200EE; */
     top: 0;
     transform: translateY(-50%) scale(.9);
   }
   .input_text:not(:placeholder-shown) + label {
     top: 0;
     transform: translateY(-50%) scale(.9);
-  }
-  .required_field{
+  } */
+  /* .required_field{
     border-bottom: 2px solid red !important;
-  }
+  } */

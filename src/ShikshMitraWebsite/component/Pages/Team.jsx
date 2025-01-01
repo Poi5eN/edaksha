@@ -1,11 +1,6 @@
 import React from "react";
 import gaurav from "../../assets/images/Gaurav.jpeg";
-import chhaya from "../../assets/images/Chhaya.jpeg";
-import aman from "../../assets/images/amanimg.jpeg";
 import anand from "../../assets/images/annadimg.jpg";
-import praveen from "../../assets/images/praveenimg.jpeg";
-import ajay from "../../assets/images/ajayimage.jpeg";
-import badal from "../../assets/images/Badal.jpeg";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 
 const Team = () => {
@@ -28,56 +23,10 @@ const Team = () => {
       github: "https://github.com/ANAND2023?tab=repositories",
       email: "anandkumar2022bth@gmail.com",
     },
-    // {
-    //   name: "Ajay Raj",
-    //   designation: "Backend Developer",
-    //   img: ajay,
-    //   des: "Node.js Backend Developer experienced in database design, optimization, and cloud-based deployments.",
-    //   linkedin:
-    //     "https://www.linkedin.com/in/ajay-raj-850774280?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
-    //   github: "https://github.com/ajayraj2001",
-    //   email: "ajayraj200119@gmail.com",
-    // },
+
   ];
   const Team2 = [
-    // {
-    //   name: "Parveen Pal",
-    //   designation: "Backend Developer ",
-    //   img: praveen,
-    //   des: " Node.js Backend Developer with expertise in building scalable APIs  using JavaScript.",
-    //   linkedin: "https://www.linkedin.com/in/anandkumarjaiswal/",
-    //   github: "https://github.com/Parveen-Pal",
-    //   email: "",
-    // },
-    // {
-    //   name: "Aman Sharma",
-    //   designation: "Frontend Developer",
-    //   img: aman,
-    //   des: " React Frontend Developer enthusiastic about crafting interactive and visually appealing web applications with a focus on user experience",
-    //   linkedin: "https://www.linkedin.com/in/anandkumarjaiswal/",
-    //   github: "https://github.com/half-1999",
-    //   email: "",
-    // },
-
-    // {
-    //   name: "Badal Kumar",
-    //   designation: " Frontend Developer",
-    //   img: badal,
-    //   des: " React Frontend Developer focused on optimizing performance and accessibility in web applications.",
-    //   linkedin: "https://www.linkedin.com/in/badalkumar-singh-5577781b7",
-    //   github: "https://github.com/BadalkumarSingh11",
-    //   email: "dev.badalsingh@gmail.com",
-    // },
-
-    // {
-    //   name: "Chhaya Sengar",
-    //   designation: "Frontend Developer",
-    //   img: chhaya,
-    //   des: " React Frontend Developer passionate about creating elegant user interfaces with a knack for responsive design.",
-    //   linkedin: "https://www.linkedin.com/in/anandkumarjaiswal/",
-    //   github: "https://github.com/ChhayaSengar",
-    //   email: "",
-    // },
+   
   ];
   return (
     <>

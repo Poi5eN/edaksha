@@ -5,7 +5,6 @@ import Cookies from "js-cookie";
 const authToken = Cookies.get("token");
 
 const StudentApexChart = () => {
-  // Initialize state variables at the top of the component
   const [data, setData] = useState({
     boys: null,
     girls: null,
@@ -34,12 +33,9 @@ const StudentApexChart = () => {
   });
 
   const student = JSON.parse(sessionStorage.response);
-
-  // Assuming classTeacher contains the class information
   const classTeacherClass = student.classTeacher;
   const classTeacherSection = student.section;
- 
-  // Use useEffect for side effects like data fetching
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -54,12 +50,12 @@ const StudentApexChart = () => {
         );
 
         if (Array.isArray(response.data.allStudent)) {
-          // Filter students based on classTeacherClass
           const filteredStudents = response.data.allStudent.filter(
-     (student) => student.class === classTeacherClass && student.section === classTeacherSection
-            // (student) => student.class === classTeacherClass
+            (student) =>
+              student.class === classTeacherClass &&
+              student.section === classTeacherSection
           );
-
+          localStorage.setItem('studentsData', JSON.stringify(filteredStudents));
           const boysCount = filteredStudents.filter(
             (student) => student.gender === "Male"
           ).length;
@@ -81,7 +77,7 @@ const StudentApexChart = () => {
     };
 
     fetchData();
-  }, []); // Include classTeacherClass as a dependency to re-run the effect when it changes
+  }, []);
 
   return (
     <div id="chart" className="dark:text-white dark:bg-secondary-dark-bg">
@@ -93,7 +89,6 @@ const StudentApexChart = () => {
             All Student : {series[1] + series[0]}{" "}
           </h1>
           <ReactApexChart
-     
             options={options}
             series={series}
             type="pie"

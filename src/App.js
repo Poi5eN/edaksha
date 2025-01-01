@@ -1,28 +1,30 @@
 import React, { Suspense, lazy } from "react";
 import { Route, Routes } from "react-router-dom";
 import Loading from "./Loading";
-import ReportCardGenerator from "./TEACHERDASHBOARD/ReportCard";
-import ExamList from "./TEACHERDASHBOARD/ExamList";
-import ExamResultsManager from "./TEACHERDASHBOARD/ExamResultsManager";
-import ExamSystem from "./TEACHERDASHBOARD/ExamSystem";
+
+
+import CreateExam from "./TEACHERDASHBOARD/NewExam/CreateExam";
+import AllotMarks from "./TEACHERDASHBOARD/NewExam/AllotMarks";
+import ReportCard from "./TEACHERDASHBOARD/NewExam/ReportCard";
+import AdmitCardTeacher from "./TEACHERDASHBOARD/NewExam/AdmitCard";
 const LandingPage = lazy(() => import("./ShikshMitraWebsite/LandingPage"));
 const AdminDashboard = lazy(() => import("./ADMINDASHBOARD/AdminDashboard"));
 const Login = lazy(() =>
-  import("./ShikshMitraWebsite/component/LoginPage/Login")
+    import("./ShikshMitraWebsite/component/LoginPage/Login")
 );
 const Services = lazy(() =>
-  import("./ShikshMitraWebsite/component/Pages/Services/Services")
+    import("./ShikshMitraWebsite/component/Pages/Services/Services")
 );
 const About = lazy(() =>
-  import("./ShikshMitraWebsite/component/Pages/About/About")
+    import("./ShikshMitraWebsite/component/Pages/About/About")
 );
 const Demo = lazy(() => import("./ShikshMitraWebsite/component/Demo/Demo"));
 const Contact = lazy(() =>
-  import("./ShikshMitraWebsite/component/Pages/Contact/Contact")
+    import("./ShikshMitraWebsite/component/Pages/Contact/Contact")
 );
 const Home = lazy(() => import("./ShikshMitraWebsite/component/Pages/Home"));
 const ScreenShorts = lazy(() =>
-  import("./ShikshMitraWebsite/component/Pages/Screenshots/Screenshot")
+    import("./ShikshMitraWebsite/component/Pages/Screenshots/Screenshot")
 );
 const DashboardHome = lazy(() => import("./ADMINDASHBOARD/DashboardHome"));
 const AllTeachers = lazy(() => import("./ADMINDASHBOARD/Teacher/AllTeachers"));
@@ -30,35 +32,35 @@ const ViewTeacher = lazy(() => import("./ADMINDASHBOARD/Teacher/ViewTeacher"));
 const EditTeacher = lazy(() => import("./ADMINDASHBOARD/Teacher/EditTeacher"));
 const Payment = lazy(() => import("./ADMINDASHBOARD/Payment/Payment"));
 const AdditionalFee = lazy(() =>
-  import("./ADMINDASHBOARD/Fees/Additional/AdditionalFee")
+    import("./ADMINDASHBOARD/Fees/Additional/AdditionalFee")
 );
 const ClasswiseFee = lazy(() =>
-  import("./ADMINDASHBOARD/Fees/ClassWise/ClasswiseFee")
+    import("./ADMINDASHBOARD/Fees/ClassWise/ClasswiseFee")
 );
 const EditClasswiseFees = lazy(() =>
-  import("./ADMINDASHBOARD/Fees/ClassWise/EditClassWise")
+    import("./ADMINDASHBOARD/Fees/ClassWise/EditClassWise")
 );
 const EditAdditional = lazy(() =>
-  import("./ADMINDASHBOARD/Fees/Additional/EditAdditional")
+    import("./ADMINDASHBOARD/Fees/Additional/EditAdditional")
 );
 const Allstudent = lazy(() =>
-  import("./ADMINDASHBOARD/Student/AllStudent/Allstudent")
+    import("./ADMINDASHBOARD/Student/AllStudent/Allstudent")
 );
 const EditStudent = lazy(() =>
-  import("./ADMINDASHBOARD/Student/AllStudent/EditStudent")
+    import("./ADMINDASHBOARD/Student/AllStudent/EditStudent")
 );
 const Promotion = lazy(() =>
-  import("./ADMINDASHBOARD/Student/Promotion/Promotion")
+    import("./ADMINDASHBOARD/Student/Promotion/Promotion")
 );
 const CreateParents = lazy(() =>
-  import("./ADMINDASHBOARD/Parents/AllParent/CreateParents")
+    import("./ADMINDASHBOARD/Parents/AllParent/CreateParents")
 );
 const FeeStatus = lazy(() =>
-  import("./ADMINDASHBOARD/Parents/FeesStatus/FeeStatus")
+    import("./ADMINDASHBOARD/Parents/FeesStatus/FeeStatus")
 );
 const Income = lazy(() => import("./ADMINDASHBOARD/Account/Income"));
 const Expenditure = lazy(() =>
-  import("./ADMINDASHBOARD/Account/Expenditure/Expenditure")
+    import("./ADMINDASHBOARD/Account/Expenditure/Expenditure")
 );
 const Stocks = lazy(() => import("./ADMINDASHBOARD/Inventory/Stocks"));
 const EditStocks = lazy(() => import("./ADMINDASHBOARD/Inventory/Edit_Stocks"));
@@ -68,46 +70,46 @@ const EditBook = lazy(() => import("./ADMINDASHBOARD/Library/EditBook"));
 const ViewBooks = lazy(() => import("./ADMINDASHBOARD/Library/ViewBooks"));
 const IssuedBook = lazy(() => import("./ADMINDASHBOARD/Library/IssuedBook"));
 const Registration = lazy(() =>
-  import("./ADMINDASHBOARD/Admission/Registration")
+    import("./ADMINDASHBOARD/Admission/Registration")
 );
 const AdmissionStatus = lazy(() =>
-  import("./ADMINDASHBOARD/Admission/AdmissionStatus")
+    import("./ADMINDASHBOARD/Admission/AdmissionStatus")
 );
 const Primary = lazy(() => import("./ADMINDASHBOARD/Classes/Primary/Primary"));
 const Staff = lazy(() => import("./ADMINDASHBOARD/Employees/Staff"));
 const AllExams = lazy(() => import("./ADMINDASHBOARD/Exams/AllExams"));
 const ViewExams = lazy(() =>
-  import("./ADMINDASHBOARD/Exams/AllExams/ViewExams")
+    import("./ADMINDASHBOARD/Exams/AllExams/ViewExams")
 );
 const EditExams = lazy(() =>
-  import("./ADMINDASHBOARD/Exams/AllExams/EditExams")
+    import("./ADMINDASHBOARD/Exams/AllExams/EditExams")
 );
 const Wages = lazy(() => import("./ADMINDASHBOARD/Employees/Wages"));
 const EditAdmission = lazy(() =>
-  import("./ADMINDASHBOARD/Admission/EditAdmission")
+    import("./ADMINDASHBOARD/Admission/EditAdmission")
 );
 const ViewPrimary = lazy(() =>
-  import("./ADMINDASHBOARD/Classes/Primary/ViewPrimary")
+    import("./ADMINDASHBOARD/Classes/Primary/ViewPrimary")
 );
 const EditPrimary = lazy(() =>
-  import("./ADMINDASHBOARD/Classes/Primary/EditPrimary")
+    import("./ADMINDASHBOARD/Classes/Primary/EditPrimary")
 );
 const ViewStaff = lazy(() =>
-  import("./ADMINDASHBOARD/Employees/Staff/ViewStaff")
+    import("./ADMINDASHBOARD/Employees/Staff/ViewStaff")
 );
 const EditStaff = lazy(() =>
-  import("./ADMINDASHBOARD/Employees/Staff/EditStaff")
+    import("./ADMINDASHBOARD/Employees/Staff/EditStaff")
 );
 const TeacherDashboard = lazy(() =>
-  import("./TEACHERDASHBOARD/TeacherDashboard")
+    import("./TEACHERDASHBOARD/TeacherDashboard")
 );
 const TeacherHome = lazy(() => import("./TEACHERDASHBOARD/TeacherHome"));
 const MyStudent = lazy(() => import("./TEACHERDASHBOARD/MyStudent/MyStudent"));
 const ViewStudentTeacher = lazy(() =>
-  import("./TEACHERDASHBOARD/MyStudent/ViewStudent")
+    import("./TEACHERDASHBOARD/MyStudent/ViewStudent")
 );
 const EditStudentTeacher = lazy(() =>
-  import("./TEACHERDASHBOARD/MyStudent/EditStudent")
+    import("./TEACHERDASHBOARD/MyStudent/EditStudent")
 );
 const Assignments = lazy(() => import("./TEACHERDASHBOARD/Assignments"));
 const Attendance = lazy(() => import("./TEACHERDASHBOARD/Attendance"));
@@ -117,27 +119,27 @@ const Study = lazy(() => import("./TEACHERDASHBOARD/Study"));
 // const Results = lazy(() => import("./TEACHERDASHBOARD/Results"));
 const AboutTeacher = lazy(() => import("./TEACHERDASHBOARD/AboutTeacher"));
 const StudentDashboard = lazy(() =>
-  import("./STUDENTDASHBOARD/StudentDashboard")
+    import("./STUDENTDASHBOARD/StudentDashboard")
 );
 const ParentDashboard = lazy(() => import("./ParentDashboard"));
 const Subjects = lazy(() => import("./STUDENTDASHBOARD/Subjects"));
 const StudentResults = lazy(() => import("./STUDENTDASHBOARD/StudentResults"));
 const StudentStudyMaterial = lazy(() =>
-  import("./STUDENTDASHBOARD/StudentStudyMaterial")
+    import("./STUDENTDASHBOARD/StudentStudyMaterial")
 );
 const TimeTable = lazy(() => import("./STUDENTDASHBOARD/TimeTable"));
 const StudentAssigments = lazy(() =>
-  import("./STUDENTDASHBOARD/StudentAssigments")
+    import("./STUDENTDASHBOARD/StudentAssigments")
 );
 const Syllabus = lazy(() => import("./STUDENTDASHBOARD/Syllabus"));
 const MyKids = lazy(() => import("./PARENTDASHBOARD/MyKids"));
 const Events = lazy(() => import("./PARENTDASHBOARD/Events"));
 const ParentResults = lazy(() => import("./PARENTDASHBOARD/ParentResults"));
 const ParentCurriculum = lazy(() =>
-  import("./PARENTDASHBOARD/ParentCurriculum")
+    import("./PARENTDASHBOARD/ParentCurriculum")
 );
 const ParentNotification = lazy(() =>
-  import("./PARENTDASHBOARD/ParentNotification")
+    import("./PARENTDASHBOARD/ParentNotification")
 );
 const Expenses = lazy(() => import("./PARENTDASHBOARD/Expenses"));
 const Queries = lazy(() => import("./PARENTDASHBOARD/Queries"));
@@ -146,73 +148,73 @@ const AdmitCard = lazy(() => import("./ADMINDASHBOARD/Exams/AdmitCard"));
 // const CreateExams = lazy(() => import("./TEACHERDASHBOARD/CreateExams"));
 const ParentHome = lazy(() => import("./PARENTDASHBOARD/ParentHome"));
 const StudentFeeStatus = lazy(() =>
-  import("./ADMINDASHBOARD/Student/AllStudent/StudentFeeStatus")
+    import("./ADMINDASHBOARD/Student/AllStudent/StudentFeeStatus")
 );
 const Issue = lazy(() => import("./ADMINDASHBOARD/Library/IssueBook/Issue"));
 const ReturnBook = lazy(() =>
-  import("./ADMINDASHBOARD/Library/ReturnBook/ReturnBook")
+    import("./ADMINDASHBOARD/Library/ReturnBook/ReturnBook")
 );
 const ParentExam = lazy(() => import("./PARENTDASHBOARD/ParentExam"));
 const ParentFees = lazy(() => import("./PARENTDASHBOARD/ParentFees"));
 const StudentExam = lazy(() => import("./STUDENTDASHBOARD/StudentExam"));
 const StudentAdmitCard = lazy(() =>
-  import("./STUDENTDASHBOARD/StudentAdmitCard")
+    import("./STUDENTDASHBOARD/StudentAdmitCard")
 );
 const SalaryStatus = lazy(() =>
-  import("./ADMINDASHBOARD/Teacher/SalaryStatus")
+    import("./ADMINDASHBOARD/Teacher/SalaryStatus")
 );
 const ViewAdmitCard = lazy(() =>
-  import("./ADMINDASHBOARD/Exams/ViewAdmitCard")
+    import("./ADMINDASHBOARD/Exams/ViewAdmitCard")
 );
 const StudentsResult = lazy(() =>
-  import("./ADMINDASHBOARD/Result/StudentsResult")
+    import("./ADMINDASHBOARD/Result/StudentsResult")
 );
 const ViewResultCard = lazy(() =>
-  import("./ADMINDASHBOARD/Result/ViewResultCard")
+    import("./ADMINDASHBOARD/Result/ViewResultCard")
 );
 const EmployeeSalaryStatus = lazy(() =>
-  import("./ADMINDASHBOARD/Employees/SalaryStatus")
+    import("./ADMINDASHBOARD/Employees/SalaryStatus")
 );
 const CreateCurriculum = lazy(() =>
-  import("./ADMINDASHBOARD/CreateCurriculum")
+    import("./ADMINDASHBOARD/CreateCurriculum")
 );
 const BookManagement = lazy(() => import("./STUDENTDASHBOARD/BookManagement"));
 const TermsAndCondition = lazy(() =>
-  import("./ShikshMitraWebsite/component/PrivacyPolicy/TermsAndCondition")
+    import("./ShikshMitraWebsite/component/PrivacyPolicy/TermsAndCondition")
 );
 const StudentIdCardNew = lazy(() =>
-  import("./ADMINDASHBOARD/Student/AllStudent/StudentIdCardNew")
+    import("./ADMINDASHBOARD/Student/AllStudent/StudentIdCardNew")
 );
 const FeeReceipt = lazy(() =>
-  import("./ADMINDASHBOARD/Fees/Additional/FeeReceipt")
+    import("./ADMINDASHBOARD/Fees/Additional/FeeReceipt")
 );
 const AdmissioReceipt = lazy(() =>
-  import("./ADMINDASHBOARD/Admission/AdmissioReceipt")
+    import("./ADMINDASHBOARD/Admission/AdmissioReceipt")
 );
 const ViewReg = lazy(() => import("./ADMINDASHBOARD/NewRegistration/ViewReg"));
 const Newegistrations = lazy(() =>
-  import("./ADMINDASHBOARD/NewRegistration/Newegistrations")
+    import("./ADMINDASHBOARD/NewRegistration/Newegistrations")
 );
 
 const CheckFee = lazy(() => import("./ADMINDASHBOARD/Fees/CheckFee"));
 const AdmissionsForms = lazy(() =>
-  import("./ADMINDASHBOARD/Admission/NewAdmissionForm")
+    import("./ADMINDASHBOARD/Admission/NewAdmissionForm")
 );
 const AdmissionPrint = lazy(() =>
-  import("./ADMINDASHBOARD/Admission/AdmissionPrint")
+    import("./ADMINDASHBOARD/Admission/AdmissionPrint")
 );
 const IdCard = lazy(() => import("./ADMINDASHBOARD/IdCard/IdCard"));
 const AdmitCardUi = lazy(() =>
-  import("./ADMINDASHBOARD/Exams/AllExams/AdmidCardUi")
+    import("./ADMINDASHBOARD/Exams/AllExams/AdmidCardUi")
 );
 const AdmissionFormblank = lazy(() =>
-  import("./ADMINDASHBOARD/Form/AdmissionForm")
+    import("./ADMINDASHBOARD/Form/AdmissionForm")
 );
 const LeavingCertificate = lazy(() =>
-  import("./Certificate/LeavingCertificate/LeavingCertificate")
+    import("./Certificate/LeavingCertificate/LeavingCertificate")
 );
 const BulkAdmission = lazy(() =>
-  import("./ADMINDASHBOARD/Admission/BulkAdmission")
+    import("./ADMINDASHBOARD/Admission/BulkAdmission")
 );
 const NewCheckFee = lazy(() => import("./ADMINDASHBOARD/Fees/NewCheckFee"));
 const NewCheckFee2 = lazy(() => import("./ADMINDASHBOARD/Fees/NewCheckFee2"));
@@ -220,215 +222,642 @@ const NewCheckFee3 = lazy(() => import("./ADMINDASHBOARD/Fees/NewCheckFee3"));
 // const StudentReport = lazy(() => import("./TEACHERDASHBOARD/StudentReport"));
 const Udise = lazy(() => import("./ADMINDASHBOARD/Udise/Udise"));
 function App() {
-  return (
-    <>
-  
-      <Suspense fallback={<Loading />}>
-        <Routes>
-          <Route path="/" element={<LandingPage />}>
-            <Route index element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/services" element={<Services />} />
-            <Route path="/screenshot" element={<ScreenShorts />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/demo" element={<Demo />} />
-            <Route path="/privacyPolicy" element={<TermsAndCondition />} />
-          </Route>
-          <Route path="/admin" element={<AdminDashboard />}>
-            <Route index element={<DashboardHome />} />
-            {/* Teachers Route */}
-            <Route path="allteachers" element={<AllTeachers />} />
-            <Route path="payment" element={<Payment />} />
-            <Route
-              path="/admin/allteachers/view-profile/:email"
-              element={<ViewTeacher />}
-            />
-            <Route
-              path="/admin/allteachers/edit-profile/:email"
-              element={<EditTeacher />}
-            />
-            <Route
-              path="/admin/allteachers/salaryStatus/:email"
-              element={<SalaryStatus />}
-            />
-            <Route path="additional" element={<AdditionalFee />} />
-            <Route path="classwise" element={<ClasswiseFee />} />
-            <Route
-              path="/admin/classwise/edit-fees/:_id"
-              element={<EditClasswiseFees />}
-            />
-            <Route
-              path="/admin/additional/edit-fees/:_id"
-              element={<EditAdditional />}
-            />
-            <Route path="allstudent" element={<Allstudent />} />
-            <Route
-              path="/admin/allstudent/viewstudent/view-profile/:email"
-              element={<StudentIdCardNew />}
-            />
-            <Route
-              path="/admin/allstudent/editstudent/edit-profile/:email"
-              element={<EditStudent />}
-            />
-            <Route
-              path="/admin/allstudent/StudentFeeStatus/:email"
-              element={<StudentFeeStatus />}
-            />
-            <Route path="promotion" element={<Promotion />} />
-            <Route path="allparents" element={<CreateParents />} />
-            <Route path="feestatus" element={<FeeStatus />} />
-            <Route path="income" element={<Income />} />
-            <Route path="expenditure" element={<Expenditure />} />
-            <Route path="stocks" element={<Stocks />} />
-            <Route
-              path="/admin/stocks/editstock/:_id"
-              element={<EditStocks />}
-            />
-            <Route path="sales" element={<Sales />} />
-            <Route path="books" element={<AllBooks />} />
-            <Route path="/admin/books/edit-book/:_id" element={<EditBook />} />
-            <Route path="/admin/books/view-book/:_id" element={<ViewBooks />} />
-            <Route path="books" element={<AllBooks />} />
-            <Route path="/admin/books/edit-book/:_id" element={<EditBook />} />
-            <Route path="/admin/books/view-book/:_id" element={<ViewBooks />} />
-            <Route path="issued" element={<IssuedBook />} />
-            <Route path="/admin/books/issue-book/:_id" element={<Issue />} />
-            <Route
-              path="/admin/books/return-book/:_id"
-              element={<ReturnBook />}
-            />
-            <Route path="registration" element={<Newegistrations />} />
-            <Route
-              path="/admin/newregistration/:registrationNumber"
-              element={<ViewReg />}
-            />
-            <Route path="checkfee" element={<NewCheckFee2 />} />
-            <Route path="admission" element={<Registration />} />
-            <Route path="admission/bulkadmission" element={<BulkAdmission />} />
-            <Route
-              path="/admin/admission/admissionform"
-              element={<AdmissionsForms />}
-            />
-            <Route
-              path="/admin/admission/view-admission/:email"
-              element={<AdmissionPrint />}
-            />
-            <Route path="/admin/ad" element={<AdmissioReceipt />} />
-            <Route path="/admin/idcard" element={<IdCard />} />
-            <Route path="/admin/admitcards" element={<AdmitCardUi />} />
-            <Route
-              path="/admin/admission/edit-admission/:email"
-              element={<EditAdmission />}
-            />
-            <Route path="/admin/fee-receipt" element={<FeeReceipt />} />
-            <Route path="status" element={<AdmissionStatus />} />
-            <Route path="classes" element={<Primary />} />
-            <Route
-              path="/admin/classes/view-classes/:_id"
-              element={<ViewPrimary />}
-            />
-            <Route
-              path="/admin/classes/edit-classes/:className"
-              element={<EditPrimary />}
-            />
-            <Route path="staff" element={<Staff />} />
-            <Route
-              path="/admin/staff/view-profile/:email"
-              element={<ViewStaff />}
-            />
-            <Route
-              path="/admin/staff/edit-profile/:email"
-              element={<EditStaff />}
-            />
-            <Route
-              path="/admin/staff/salaryStatus/:email"
-              element={<EmployeeSalaryStatus />}
-            />
-            <Route path="wages" element={<Wages />} />
+    return (
+        <>
+            <Suspense fallback={<Loading />}>
+                <Routes>
+                    <Route path="/" element={<LandingPage />}>
+                        <Route index element={<Home />} />
+                        <Route path="/services" element={<Services />} />
+                        <Route path="/screenshot" element={<ScreenShorts />} />
+                        <Route path="/contact" element={<Contact />} />
+                        <Route path="/about" element={<About />} />
+                        <Route path="/demo" element={<Demo />} />
+                        <Route path="/privacyPolicy" element={<TermsAndCondition />} />
+                    </Route>
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/admin" element={<AdminDashboard />}>
+                        <Route index element={<DashboardHome />} />
+                        {/* Teachers Route */}
+                        <Route path="allteachers" element={<AllTeachers />} />
+                        <Route path="payment" element={<Payment />} />
+                        <Route
+                            path="/admin/allteachers/view-profile/:email"
+                            element={<ViewTeacher />}
+                        />
+                        <Route
+                            path="/admin/allteachers/edit-profile/:email"
+                            element={<EditTeacher />}
+                        />
+                        <Route
+                            path="/admin/allteachers/salaryStatus/:email"
+                            element={<SalaryStatus />}
+                        />
+                        <Route path="additional" element={<AdditionalFee />} />
+                        <Route path="classwise" element={<ClasswiseFee />} />
+                        <Route
+                            path="/admin/classwise/edit-fees/:_id"
+                            element={<EditClasswiseFees />}
+                        />
+                        <Route
+                            path="/admin/additional/edit-fees/:_id"
+                            element={<EditAdditional />}
+                        />
+                        <Route path="allstudent" element={<Allstudent />} />
+                        <Route
+                            path="/admin/allstudent/viewstudent/view-profile/:email"
+                            element={<StudentIdCardNew />}
+                        />
+                        <Route
+                            path="/admin/allstudent/editstudent/edit-profile/:email"
+                            element={<EditStudent />}
+                        />
+                        <Route
+                            path="/admin/allstudent/StudentFeeStatus/:email"
+                            element={<StudentFeeStatus />}
+                        />
+                        <Route path="promotion" element={<Promotion />} />
+                        <Route path="allparents" element={<CreateParents />} />
+                        <Route path="feestatus" element={<FeeStatus />} />
+                        <Route path="income" element={<Income />} />
+                        <Route path="expenditure" element={<Expenditure />} />
+                        <Route path="stocks" element={<Stocks />} />
+                        <Route
+                            path="/admin/stocks/editstock/:_id"
+                            element={<EditStocks />}
+                        />
+                        <Route path="sales" element={<Sales />} />
+                        <Route path="books" element={<AllBooks />} />
+                        <Route path="/admin/books/edit-book/:_id" element={<EditBook />} />
+                        <Route path="/admin/books/view-book/:_id" element={<ViewBooks />} />
+                        <Route path="books" element={<AllBooks />} />
+                        <Route path="/admin/books/edit-book/:_id" element={<EditBook />} />
+                        <Route path="/admin/books/view-book/:_id" element={<ViewBooks />} />
+                        <Route path="issued" element={<IssuedBook />} />
+                        <Route path="/admin/books/issue-book/:_id" element={<Issue />} />
+                        <Route
+                            path="/admin/books/return-book/:_id"
+                            element={<ReturnBook />}
+                        />
+                        <Route path="registration" element={<Newegistrations />} />
+                        <Route
+                            path="/admin/newregistration/:registrationNumber"
+                            element={<ViewReg />}
+                        />
+                        <Route path="checkfee" element={<NewCheckFee2 />} />
+                        <Route path="admission" element={<Registration />} />
+                        <Route path="admission/bulkadmission" element={<BulkAdmission />} />
+                        <Route
+                            path="/admin/admission/admissionform"
+                            element={<AdmissionsForms />}
+                        />
+                        <Route
+                            path="/admin/admission/view-admission/:email"
+                            element={<AdmissionPrint />}
+                        />
+                        <Route path="/admin/ad" element={<AdmissioReceipt />} />
+                        <Route path="/admin/idcard" element={<IdCard />} />
+                        <Route path="/admin/admitcards" element={<AdmitCardUi />} />
+                        <Route
+                            path="/admin/admission/edit-admission/:email"
+                            element={<EditAdmission />}
+                        />
+                        <Route path="/admin/fee-receipt" element={<FeeReceipt />} />
+                        <Route path="status" element={<AdmissionStatus />} />
+                        <Route path="classes" element={<Primary />} />
+                        <Route
+                            path="/admin/classes/view-classes/:_id"
+                            element={<ViewPrimary />}
+                        />
+                        <Route
+                            path="/admin/classes/edit-classes/:className"
+                            element={<EditPrimary />}
+                        />
+                        <Route path="staff" element={<Staff />} />
+                        <Route
+                            path="/admin/staff/view-profile/:email"
+                            element={<ViewStaff />}
+                        />
+                        <Route
+                            path="/admin/staff/edit-profile/:email"
+                            element={<EditStaff />}
+                        />
+                        <Route
+                            path="/admin/staff/salaryStatus/:email"
+                            element={<EmployeeSalaryStatus />}
+                        />
+                        <Route path="wages" element={<Wages />} />
 
-            <Route
-              path="/admin/exams/view-profile/:email"
-              element={<ViewExams />}
-            />
-            <Route
-              path="/admin/exams/edit-profile/:email"
-              element={<EditExams />}
-            />
-            <Route path="results" element={<StudentsResult />} />
+                        <Route
+                            path="/admin/exams/view-profile/:email"
+                            element={<ViewExams />}
+                        />
+                        <Route
+                            path="/admin/exams/edit-profile/:email"
+                            element={<EditExams />}
+                        />
+                        <Route path="results" element={<StudentsResult />} />
 
-            <Route path="admitcard" element={<AdmitCard />} />
-            <Route
-              path="/admin/viewadmitcard/:email"
-              element={<ViewAdmitCard />}
-            />
-            <Route path="studentsresult" element={<StudentsResult />} />
-            <Route
-              path="/admin/viewresultcard/:email"
-              element={<ViewResultCard />}
-            />
-            <Route path="/admin/curriculum" element={<CreateCurriculum />} />
-            <Route path="/admin/allexam" element={<AllExams />} />
-            <Route path="allforms" element={<AdmissionFormblank />} />
-            <Route path="leavingcertificate" element={<LeavingCertificate />} />
-            <Route path="udise" element={<Udise />} />
-          </Route>
-          <Route path="/teacher" element={<TeacherDashboard />}>
-            <Route index element={<TeacherHome />} />
-            <Route path="mystudents" element={<MyStudent />} />
-            <Route
-              path="/teacher/mystudents/view-profile/:email"
-              element={<ViewStudentTeacher />}/>
-            <Route
-              path="/teacher/mystudents/edit-profile/:email"
-              element={<EditStudentTeacher />}
-            />
-            <Route path="assignments" element={<Assignments />} />
-            <Route path="attendance" element={<Attendance />} />
-            <Route path="curriculum" element={<Curriculum />} />
-            <Route path="lectures" element={<Lectures />} />
-            <Route path="study" element={<Study />} />
-            {/* <Route path="results" element={<Results />} /> */}
-            {/* <Route path="createExam" element={<CreateExams />} /> */}
-            <Route path="ReportCardGenerator" element={<ReportCardGenerator />} />
-            <Route path="ExamList" element={<ExamList />} />
-            <Route path="ExamResultsManager" element={<ExamResultsManager />} />
-            <Route path="aboutTeacher" element={<AboutTeacher />} />
-            {/* <Route path="studentReport" element={<StudentReport />} /> */}
-            <Route path="examsystem" element={<ExamSystem />} />
-          </Route>
-          <Route path="/student" element={<StudentDashboard />}>
-            <Route index element={<StudentHome />} />
-            <Route path="subjects" element={<Subjects />} />
-            <Route path="results" element={<StudentResults />} />
-            <Route path="StudyMaterial" element={<StudentStudyMaterial />} />
-            <Route path="timetable" element={<TimeTable />} />
-            <Route path="assigments" element={<StudentAssigments />} />
-            <Route path="syllabus" element={<Syllabus />} />
-            <Route path="exams" element={<StudentExam />} />
-            <Route path="admitcard" element={<StudentAdmitCard />} />
-            <Route path="issuedBooks" element={<BookManagement />} />
-          </Route>
-          <Route path="/parent" element={<ParentDashboard />}>
-            <Route index element={<ParentHome />} />
-            <Route path="mykids" element={<MyKids />} />
-            <Route path="events" element={<Events />} />
-            <Route path="results" element={<ParentResults />} />
-            <Route path="curriculum" element={<ParentCurriculum />} />
-            <Route path="notification" element={<ParentNotification />} />
-            <Route path="expenses" element={<Expenses />} />
-            <Route path="exams" element={<ParentExam />} />
-            <Route path="fees" element={<ParentFees />} />
-            <Route path="queries" element={<Queries />} />
-          </Route>
-        </Routes>
-      </Suspense>
-      
-    </>
-  );
+                        <Route path="admitcard" element={<AdmitCard />} />
+                        <Route
+                            path="/admin/viewadmitcard/:email"
+                            element={<ViewAdmitCard />}
+                        />
+                        <Route path="studentsresult" element={<StudentsResult />} />
+                        <Route
+                            path="/admin/viewresultcard/:email"
+                            element={<ViewResultCard />}
+                        />
+                        <Route path="/admin/curriculum" element={<CreateCurriculum />} />
+                        <Route path="/admin/allexam" element={<AllExams />} />
+                        <Route path="allforms" element={<AdmissionFormblank />} />
+                        <Route path="leavingcertificate" element={<LeavingCertificate />} />
+                        <Route path="udise" element={<Udise />} />
+                    </Route>
+                    <Route path="/teacher" element={<TeacherDashboard />}>
+                        <Route index element={<TeacherHome />} />
+                        <Route path="mystudents" element={<MyStudent />} />
+                        <Route
+                            path="/teacher/mystudents/view-profile/:email"
+                            element={<ViewStudentTeacher />} />
+                        <Route
+                            path="/teacher/mystudents/edit-profile/:email"
+                            element={<EditStudentTeacher />}
+                        />
+                        <Route path="assignments" element={<Assignments />} />
+                        <Route path="attendance" element={<Attendance />} />
+                        <Route path="curriculum" element={<Curriculum />} />
+                        <Route path="lectures" element={<Lectures />} />
+                        <Route path="study" element={<Study />} />
+                        <Route path="aboutTeacher" element={<AboutTeacher />} />
+                        <Route path="exams" element={<CreateExam />} />
+                        <Route path="allotmaks" element={<AllotMarks />} />
+                        <Route path="reportscard" element={<ReportCard />} />
+                        <Route path="admitcard" element={<AdmitCardTeacher />} />
+                    </Route>
+                    <Route path="/student" element={<StudentDashboard />}>
+                        <Route index element={<StudentHome />} />
+                        <Route path="subjects" element={<Subjects />} />
+                        <Route path="results" element={<StudentResults />} />
+                        <Route path="StudyMaterial" element={<StudentStudyMaterial />} />
+                        <Route path="timetable" element={<TimeTable />} />
+                        <Route path="assigments" element={<StudentAssigments />} />
+                        <Route path="syllabus" element={<Syllabus />} />
+                        <Route path="exams" element={<StudentExam />} />
+                        <Route path="admitcard" element={<StudentAdmitCard />} />
+                        <Route path="issuedBooks" element={<BookManagement />} />
+                    </Route>
+                    <Route path="/parent" element={<ParentDashboard />}>
+                        <Route index element={<ParentHome />} />
+                        <Route path="mykids" element={<MyKids />} />
+                        <Route path="events" element={<Events />} />
+                        <Route path="results" element={<ParentResults />} />
+                        <Route path="curriculum" element={<ParentCurriculum />} />
+                        <Route path="notification" element={<ParentNotification />} />
+                        <Route path="expenses" element={<Expenses />} />
+                        <Route path="exams" element={<ParentExam />} />
+                        <Route path="fees" element={<ParentFees />} />
+                        <Route path="queries" element={<Queries />} />
+                    </Route>
+                </Routes>
+            </Suspense>
+        </>
+    );
 }
 
 export default App;
+
+// import React, { Suspense, lazy } from "react";
+// import { Route, Routes } from "react-router-dom";
+// import Loading from "./Loading";
+// import ReportCardGenerator from "./TEACHERDASHBOARD/ReportCard";
+// import ExamList from "./TEACHERDASHBOARD/ExamList";
+// import ExamResultsManager from "./TEACHERDASHBOARD/ExamResultsManager";
+// import ExamSystem from "./TEACHERDASHBOARD/ExamSystem";
+// const LandingPage = lazy(() => import("./ShikshMitraWebsite/LandingPage"));
+// const AdminDashboard = lazy(() => import("./ADMINDASHBOARD/AdminDashboard"));
+// const Login = lazy(() =>
+//   import("./ShikshMitraWebsite/component/LoginPage/Login")
+// );
+// const Services = lazy(() =>
+//   import("./ShikshMitraWebsite/component/Pages/Services/Services")
+// );
+// const About = lazy(() =>
+//   import("./ShikshMitraWebsite/component/Pages/About/About")
+// );
+// const Demo = lazy(() => import("./ShikshMitraWebsite/component/Demo/Demo"));
+// const Contact = lazy(() =>
+//   import("./ShikshMitraWebsite/component/Pages/Contact/Contact")
+// );
+// const Home = lazy(() => import("./ShikshMitraWebsite/component/Pages/Home"));
+// const ScreenShorts = lazy(() =>
+//   import("./ShikshMitraWebsite/component/Pages/Screenshots/Screenshot")
+// );
+// const DashboardHome = lazy(() => import("./ADMINDASHBOARD/DashboardHome"));
+// const AllTeachers = lazy(() => import("./ADMINDASHBOARD/Teacher/AllTeachers"));
+// const ViewTeacher = lazy(() => import("./ADMINDASHBOARD/Teacher/ViewTeacher"));
+// const EditTeacher = lazy(() => import("./ADMINDASHBOARD/Teacher/EditTeacher"));
+// const Payment = lazy(() => import("./ADMINDASHBOARD/Payment/Payment"));
+// const AdditionalFee = lazy(() =>
+//   import("./ADMINDASHBOARD/Fees/Additional/AdditionalFee")
+// );
+// const ClasswiseFee = lazy(() =>
+//   import("./ADMINDASHBOARD/Fees/ClassWise/ClasswiseFee")
+// );
+// const EditClasswiseFees = lazy(() =>
+//   import("./ADMINDASHBOARD/Fees/ClassWise/EditClassWise")
+// );
+// const EditAdditional = lazy(() =>
+//   import("./ADMINDASHBOARD/Fees/Additional/EditAdditional")
+// );
+// const Allstudent = lazy(() =>
+//   import("./ADMINDASHBOARD/Student/AllStudent/Allstudent")
+// );
+// const EditStudent = lazy(() =>
+//   import("./ADMINDASHBOARD/Student/AllStudent/EditStudent")
+// );
+// const Promotion = lazy(() =>
+//   import("./ADMINDASHBOARD/Student/Promotion/Promotion")
+// );
+// const CreateParents = lazy(() =>
+//   import("./ADMINDASHBOARD/Parents/AllParent/CreateParents")
+// );
+// const FeeStatus = lazy(() =>
+//   import("./ADMINDASHBOARD/Parents/FeesStatus/FeeStatus")
+// );
+// const Income = lazy(() => import("./ADMINDASHBOARD/Account/Income"));
+// const Expenditure = lazy(() =>
+//   import("./ADMINDASHBOARD/Account/Expenditure/Expenditure")
+// );
+// const Stocks = lazy(() => import("./ADMINDASHBOARD/Inventory/Stocks"));
+// const EditStocks = lazy(() => import("./ADMINDASHBOARD/Inventory/Edit_Stocks"));
+// const Sales = lazy(() => import("./ADMINDASHBOARD/Inventory/Sales/Sales"));
+// const AllBooks = lazy(() => import("./ADMINDASHBOARD/Library/AllBooks"));
+// const EditBook = lazy(() => import("./ADMINDASHBOARD/Library/EditBook"));
+// const ViewBooks = lazy(() => import("./ADMINDASHBOARD/Library/ViewBooks"));
+// const IssuedBook = lazy(() => import("./ADMINDASHBOARD/Library/IssuedBook"));
+// const Registration = lazy(() =>
+//   import("./ADMINDASHBOARD/Admission/Registration")
+// );
+// const AdmissionStatus = lazy(() =>
+//   import("./ADMINDASHBOARD/Admission/AdmissionStatus")
+// );
+// const Primary = lazy(() => import("./ADMINDASHBOARD/Classes/Primary/Primary"));
+// const Staff = lazy(() => import("./ADMINDASHBOARD/Employees/Staff"));
+// const AllExams = lazy(() => import("./ADMINDASHBOARD/Exams/AllExams"));
+// const ViewExams = lazy(() =>
+//   import("./ADMINDASHBOARD/Exams/AllExams/ViewExams")
+// );
+// const EditExams = lazy(() =>
+//   import("./ADMINDASHBOARD/Exams/AllExams/EditExams")
+// );
+// const Wages = lazy(() => import("./ADMINDASHBOARD/Employees/Wages"));
+// const EditAdmission = lazy(() =>
+//   import("./ADMINDASHBOARD/Admission/EditAdmission")
+// );
+// const ViewPrimary = lazy(() =>
+//   import("./ADMINDASHBOARD/Classes/Primary/ViewPrimary")
+// );
+// const EditPrimary = lazy(() =>
+//   import("./ADMINDASHBOARD/Classes/Primary/EditPrimary")
+// );
+// const ViewStaff = lazy(() =>
+//   import("./ADMINDASHBOARD/Employees/Staff/ViewStaff")
+// );
+// const EditStaff = lazy(() =>
+//   import("./ADMINDASHBOARD/Employees/Staff/EditStaff")
+// );
+// const TeacherDashboard = lazy(() =>
+//   import("./TEACHERDASHBOARD/TeacherDashboard")
+// );
+// const TeacherHome = lazy(() => import("./TEACHERDASHBOARD/TeacherHome"));
+// const MyStudent = lazy(() => import("./TEACHERDASHBOARD/MyStudent/MyStudent"));
+// const ViewStudentTeacher = lazy(() =>
+//   import("./TEACHERDASHBOARD/MyStudent/ViewStudent")
+// );
+// const EditStudentTeacher = lazy(() =>
+//   import("./TEACHERDASHBOARD/MyStudent/EditStudent")
+// );
+// const Assignments = lazy(() => import("./TEACHERDASHBOARD/Assignments"));
+// const Attendance = lazy(() => import("./TEACHERDASHBOARD/Attendance"));
+// const Curriculum = lazy(() => import("./TEACHERDASHBOARD/Curriculum"));
+// const Lectures = lazy(() => import("./TEACHERDASHBOARD/Lectures"));
+// const Study = lazy(() => import("./TEACHERDASHBOARD/Study"));
+// // const Results = lazy(() => import("./TEACHERDASHBOARD/Results"));
+// const AboutTeacher = lazy(() => import("./TEACHERDASHBOARD/AboutTeacher"));
+// const StudentDashboard = lazy(() =>
+//   import("./STUDENTDASHBOARD/StudentDashboard")
+// );
+// const ParentDashboard = lazy(() => import("./ParentDashboard"));
+// const Subjects = lazy(() => import("./STUDENTDASHBOARD/Subjects"));
+// const StudentResults = lazy(() => import("./STUDENTDASHBOARD/StudentResults"));
+// const StudentStudyMaterial = lazy(() =>
+//   import("./STUDENTDASHBOARD/StudentStudyMaterial")
+// );
+// const TimeTable = lazy(() => import("./STUDENTDASHBOARD/TimeTable"));
+// const StudentAssigments = lazy(() =>
+//   import("./STUDENTDASHBOARD/StudentAssigments")
+// );
+// const Syllabus = lazy(() => import("./STUDENTDASHBOARD/Syllabus"));
+// const MyKids = lazy(() => import("./PARENTDASHBOARD/MyKids"));
+// const Events = lazy(() => import("./PARENTDASHBOARD/Events"));
+// const ParentResults = lazy(() => import("./PARENTDASHBOARD/ParentResults"));
+// const ParentCurriculum = lazy(() =>
+//   import("./PARENTDASHBOARD/ParentCurriculum")
+// );
+// const ParentNotification = lazy(() =>
+//   import("./PARENTDASHBOARD/ParentNotification")
+// );
+// const Expenses = lazy(() => import("./PARENTDASHBOARD/Expenses"));
+// const Queries = lazy(() => import("./PARENTDASHBOARD/Queries"));
+// const StudentHome = lazy(() => import("./STUDENTDASHBOARD/StudentHome"));
+// const AdmitCard = lazy(() => import("./ADMINDASHBOARD/Exams/AdmitCard"));
+// // const CreateExams = lazy(() => import("./TEACHERDASHBOARD/CreateExams"));
+// const ParentHome = lazy(() => import("./PARENTDASHBOARD/ParentHome"));
+// const StudentFeeStatus = lazy(() =>
+//   import("./ADMINDASHBOARD/Student/AllStudent/StudentFeeStatus")
+// );
+// const Issue = lazy(() => import("./ADMINDASHBOARD/Library/IssueBook/Issue"));
+// const ReturnBook = lazy(() =>
+//   import("./ADMINDASHBOARD/Library/ReturnBook/ReturnBook")
+// );
+// const ParentExam = lazy(() => import("./PARENTDASHBOARD/ParentExam"));
+// const ParentFees = lazy(() => import("./PARENTDASHBOARD/ParentFees"));
+// const StudentExam = lazy(() => import("./STUDENTDASHBOARD/StudentExam"));
+// const StudentAdmitCard = lazy(() =>
+//   import("./STUDENTDASHBOARD/StudentAdmitCard")
+// );
+// const SalaryStatus = lazy(() =>
+//   import("./ADMINDASHBOARD/Teacher/SalaryStatus")
+// );
+// const ViewAdmitCard = lazy(() =>
+//   import("./ADMINDASHBOARD/Exams/ViewAdmitCard")
+// );
+// const StudentsResult = lazy(() =>
+//   import("./ADMINDASHBOARD/Result/StudentsResult")
+// );
+// const ViewResultCard = lazy(() =>
+//   import("./ADMINDASHBOARD/Result/ViewResultCard")
+// );
+// const EmployeeSalaryStatus = lazy(() =>
+//   import("./ADMINDASHBOARD/Employees/SalaryStatus")
+// );
+// const CreateCurriculum = lazy(() =>
+//   import("./ADMINDASHBOARD/CreateCurriculum")
+// );
+// const BookManagement = lazy(() => import("./STUDENTDASHBOARD/BookManagement"));
+// const TermsAndCondition = lazy(() =>
+//   import("./ShikshMitraWebsite/component/PrivacyPolicy/TermsAndCondition")
+// );
+// const StudentIdCardNew = lazy(() =>
+//   import("./ADMINDASHBOARD/Student/AllStudent/StudentIdCardNew")
+// );
+// const FeeReceipt = lazy(() =>
+//   import("./ADMINDASHBOARD/Fees/Additional/FeeReceipt")
+// );
+// const AdmissioReceipt = lazy(() =>
+//   import("./ADMINDASHBOARD/Admission/AdmissioReceipt")
+// );
+// const ViewReg = lazy(() => import("./ADMINDASHBOARD/NewRegistration/ViewReg"));
+// const Newegistrations = lazy(() =>
+//   import("./ADMINDASHBOARD/NewRegistration/Newegistrations")
+// );
+
+// const CheckFee = lazy(() => import("./ADMINDASHBOARD/Fees/CheckFee"));
+// const AdmissionsForms = lazy(() =>
+//   import("./ADMINDASHBOARD/Admission/NewAdmissionForm")
+// );
+// const AdmissionPrint = lazy(() =>
+//   import("./ADMINDASHBOARD/Admission/AdmissionPrint")
+// );
+// const IdCard = lazy(() => import("./ADMINDASHBOARD/IdCard/IdCard"));
+// const AdmitCardUi = lazy(() =>
+//   import("./ADMINDASHBOARD/Exams/AllExams/AdmidCardUi")
+// );
+// const AdmissionFormblank = lazy(() =>
+//   import("./ADMINDASHBOARD/Form/AdmissionForm")
+// );
+// const LeavingCertificate = lazy(() =>
+//   import("./Certificate/LeavingCertificate/LeavingCertificate")
+// );
+// const BulkAdmission = lazy(() =>
+//   import("./ADMINDASHBOARD/Admission/BulkAdmission")
+// );
+// const NewCheckFee = lazy(() => import("./ADMINDASHBOARD/Fees/NewCheckFee"));
+// const NewCheckFee2 = lazy(() => import("./ADMINDASHBOARD/Fees/NewCheckFee2"));
+// const NewCheckFee3 = lazy(() => import("./ADMINDASHBOARD/Fees/NewCheckFee3"));
+// // const StudentReport = lazy(() => import("./TEACHERDASHBOARD/StudentReport"));
+// const Udise = lazy(() => import("./ADMINDASHBOARD/Udise/Udise"));
+// function App() {
+//   return (
+//     <>
+  
+//       <Suspense fallback={<Loading />}>
+//         <Routes>
+//           <Route path="/" element={<LandingPage />}>
+//             <Route index element={<Home />} />
+//             <Route path="/login" element={<Login />} />
+//             <Route path="/services" element={<Services />} />
+//             <Route path="/screenshot" element={<ScreenShorts />} />
+//             <Route path="/contact" element={<Contact />} />
+//             <Route path="/about" element={<About />} />
+//             <Route path="/demo" element={<Demo />} />
+//             <Route path="/privacyPolicy" element={<TermsAndCondition />} />
+//           </Route>
+//           <Route path="/admin" element={<AdminDashboard />}>
+//             <Route index element={<DashboardHome />} />
+//             {/* Teachers Route */}
+//             <Route path="allteachers" element={<AllTeachers />} />
+//             <Route path="payment" element={<Payment />} />
+//             <Route
+//               path="/admin/allteachers/view-profile/:email"
+//               element={<ViewTeacher />}
+//             />
+//             <Route
+//               path="/admin/allteachers/edit-profile/:email"
+//               element={<EditTeacher />}
+//             />
+//             <Route
+//               path="/admin/allteachers/salaryStatus/:email"
+//               element={<SalaryStatus />}
+//             />
+//             <Route path="additional" element={<AdditionalFee />} />
+//             <Route path="classwise" element={<ClasswiseFee />} />
+//             <Route
+//               path="/admin/classwise/edit-fees/:_id"
+//               element={<EditClasswiseFees />}
+//             />
+//             <Route
+//               path="/admin/additional/edit-fees/:_id"
+//               element={<EditAdditional />}
+//             />
+//             <Route path="allstudent" element={<Allstudent />} />
+//             <Route
+//               path="/admin/allstudent/viewstudent/view-profile/:email"
+//               element={<StudentIdCardNew />}
+//             />
+//             <Route
+//               path="/admin/allstudent/editstudent/edit-profile/:email"
+//               element={<EditStudent />}
+//             />
+//             <Route
+//               path="/admin/allstudent/StudentFeeStatus/:email"
+//               element={<StudentFeeStatus />}
+//             />
+//             <Route path="promotion" element={<Promotion />} />
+//             <Route path="allparents" element={<CreateParents />} />
+//             <Route path="feestatus" element={<FeeStatus />} />
+//             <Route path="income" element={<Income />} />
+//             <Route path="expenditure" element={<Expenditure />} />
+//             <Route path="stocks" element={<Stocks />} />
+//             <Route
+//               path="/admin/stocks/editstock/:_id"
+//               element={<EditStocks />}
+//             />
+//             <Route path="sales" element={<Sales />} />
+//             <Route path="books" element={<AllBooks />} />
+//             <Route path="/admin/books/edit-book/:_id" element={<EditBook />} />
+//             <Route path="/admin/books/view-book/:_id" element={<ViewBooks />} />
+//             <Route path="books" element={<AllBooks />} />
+//             <Route path="/admin/books/edit-book/:_id" element={<EditBook />} />
+//             <Route path="/admin/books/view-book/:_id" element={<ViewBooks />} />
+//             <Route path="issued" element={<IssuedBook />} />
+//             <Route path="/admin/books/issue-book/:_id" element={<Issue />} />
+//             <Route
+//               path="/admin/books/return-book/:_id"
+//               element={<ReturnBook />}
+//             />
+//             <Route path="registration" element={<Newegistrations />} />
+//             <Route
+//               path="/admin/newregistration/:registrationNumber"
+//               element={<ViewReg />}
+//             />
+//             <Route path="checkfee" element={<NewCheckFee2 />} />
+//             <Route path="admission" element={<Registration />} />
+//             <Route path="admission/bulkadmission" element={<BulkAdmission />} />
+//             <Route
+//               path="/admin/admission/admissionform"
+//               element={<AdmissionsForms />}
+//             />
+//             <Route
+//               path="/admin/admission/view-admission/:email"
+//               element={<AdmissionPrint />}
+//             />
+//             <Route path="/admin/ad" element={<AdmissioReceipt />} />
+//             <Route path="/admin/idcard" element={<IdCard />} />
+//             <Route path="/admin/admitcards" element={<AdmitCardUi />} />
+//             <Route
+//               path="/admin/admission/edit-admission/:email"
+//               element={<EditAdmission />}
+//             />
+//             <Route path="/admin/fee-receipt" element={<FeeReceipt />} />
+//             <Route path="status" element={<AdmissionStatus />} />
+//             <Route path="classes" element={<Primary />} />
+//             <Route
+//               path="/admin/classes/view-classes/:_id"
+//               element={<ViewPrimary />}
+//             />
+//             <Route
+//               path="/admin/classes/edit-classes/:className"
+//               element={<EditPrimary />}
+//             />
+//             <Route path="staff" element={<Staff />} />
+//             <Route
+//               path="/admin/staff/view-profile/:email"
+//               element={<ViewStaff />}
+//             />
+//             <Route
+//               path="/admin/staff/edit-profile/:email"
+//               element={<EditStaff />}
+//             />
+//             <Route
+//               path="/admin/staff/salaryStatus/:email"
+//               element={<EmployeeSalaryStatus />}
+//             />
+//             <Route path="wages" element={<Wages />} />
+
+//             <Route
+//               path="/admin/exams/view-profile/:email"
+//               element={<ViewExams />}
+//             />
+//             <Route
+//               path="/admin/exams/edit-profile/:email"
+//               element={<EditExams />}
+//             />
+//             <Route path="results" element={<StudentsResult />} />
+
+//             <Route path="admitcard" element={<AdmitCard />} />
+//             <Route
+//               path="/admin/viewadmitcard/:email"
+//               element={<ViewAdmitCard />}
+//             />
+//             <Route path="studentsresult" element={<StudentsResult />} />
+//             <Route
+//               path="/admin/viewresultcard/:email"
+//               element={<ViewResultCard />}
+//             />
+//             <Route path="/admin/curriculum" element={<CreateCurriculum />} />
+//             <Route path="/admin/allexam" element={<AllExams />} />
+//             <Route path="allforms" element={<AdmissionFormblank />} />
+//             <Route path="leavingcertificate" element={<LeavingCertificate />} />
+//             <Route path="udise" element={<Udise />} />
+//           </Route>
+//           <Route path="/teacher" element={<TeacherDashboard />}>
+//             <Route index element={<TeacherHome />} />
+//             <Route path="mystudents" element={<MyStudent />} />
+//             <Route
+//               path="/teacher/mystudents/view-profile/:email"
+//               element={<ViewStudentTeacher />}/>
+//             <Route
+//               path="/teacher/mystudents/edit-profile/:email"
+//               element={<EditStudentTeacher />}
+//             />
+//             <Route path="assignments" element={<Assignments />} />
+//             <Route path="attendance" element={<Attendance />} />
+//             <Route path="curriculum" element={<Curriculum />} />
+//             <Route path="lectures" element={<Lectures />} />
+//             <Route path="study" element={<Study />} />
+//             {/* <Route path="results" element={<Results />} /> */}
+//             {/* <Route path="createExam" element={<CreateExams />} /> */}
+//             <Route path="ReportCardGenerator" element={<ReportCardGenerator />} />
+//             <Route path="ExamList" element={<ExamList />} />
+//             <Route path="ExamResultsManager" element={<ExamResultsManager />} />
+//             <Route path="aboutTeacher" element={<AboutTeacher />} />
+//             {/* <Route path="studentReport" element={<StudentReport />} /> */}
+//             <Route path="examsystem" element={<ExamSystem />} />
+//           </Route>
+//           <Route path="/student" element={<StudentDashboard />}>
+//             <Route index element={<StudentHome />} />
+//             <Route path="subjects" element={<Subjects />} />
+//             <Route path="results" element={<StudentResults />} />
+//             <Route path="StudyMaterial" element={<StudentStudyMaterial />} />
+//             <Route path="timetable" element={<TimeTable />} />
+//             <Route path="assigments" element={<StudentAssigments />} />
+//             <Route path="syllabus" element={<Syllabus />} />
+//             <Route path="exams" element={<StudentExam />} />
+//             <Route path="admitcard" element={<StudentAdmitCard />} />
+//             <Route path="issuedBooks" element={<BookManagement />} />
+//           </Route>
+//           <Route path="/parent" element={<ParentDashboard />}>
+//             <Route index element={<ParentHome />} />
+//             <Route path="mykids" element={<MyKids />} />
+//             <Route path="events" element={<Events />} />
+//             <Route path="results" element={<ParentResults />} />
+//             <Route path="curriculum" element={<ParentCurriculum />} />
+//             <Route path="notification" element={<ParentNotification />} />
+//             <Route path="expenses" element={<Expenses />} />
+//             <Route path="exams" element={<ParentExam />} />
+//             <Route path="fees" element={<ParentFees />} />
+//             <Route path="queries" element={<Queries />} />
+//           </Route>
+//         </Routes>
+//       </Suspense>
+      
+//     </>
+//   );
+// }
+
+// export default App;
 
 
 

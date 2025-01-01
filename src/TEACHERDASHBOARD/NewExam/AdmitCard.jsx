@@ -148,7 +148,7 @@ const AdmitCard = () => {
     return (
         <div>
             <div
-                className="rounded-tl-lg rounded-tr-lg border flex justify-between text-white px-2 py-2 px-2"
+                className="rounded-tl-lg rounded-tr-lg border flex justify-between text-white  py-2 px-2"
                 style={{
                     background: `linear-gradient(to bottom, ${currentColor}, #8d8b8b)`,
                 }}
@@ -157,7 +157,7 @@ const AdmitCard = () => {
                 <MdDownload onClick={generatePDF} className="text-2xl cursor-pointer" />
             </div>
            <div className="flex w-full">
-           <div className="mb-4">
+           <div className="">
                 {/* <h3 className="text-lg font-semibold mb-2">Select Student</h3> */}
                 <select
                     className="p-2 border rounded"
@@ -177,7 +177,7 @@ const AdmitCard = () => {
                     ))}
                 </select>
             </div>
-            <div className="mb-4">
+            <div className="">
                 {/* <h3 className="text-lg font-semibold mb-2">Select Term</h3> */}
                 <select
                     className="p-2 border rounded"

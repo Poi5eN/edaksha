@@ -1,53 +1,31 @@
 import React, { useEffect, useState } from "react";
-import { DropDownListComponent } from "@syncfusion/ej2-react-dropdowns";
-import { dropdownData } from "../../../data/dummy";
-// import logo from '../../../ShikshMitraWebsite/assets/logo/download-removebg-preview.png'
 
 import {
   FcConferenceCall,
   FcBusinesswoman,
   FcCurrencyExchange,
 } from "react-icons/fc";
-import { BiMaleFemale, BiSolidStoreAlt } from "react-icons/bi";
-import { useLocation, useNavigate } from "react-router-dom";
+import { BiMaleFemale } from "react-icons/bi";
 
 import axios from "axios";
-import EarningChart from "../../../CHART/EarningChart";
 
-import IncomeChart from "../IncomeChart";
-import FeeChart from "../FeeChart";
 import InventoryStock from "./InventoryStock";
 import EmployeeChart from "./EmployeeChart";
 import ExpensesChart from "./ExpensesChart";
 import Cookies from "js-cookie";
 const authToken = Cookies.get("token");
 
-const DropDown = ({ currentMode }) => (
-  <div className="w-28 border-1 border-color px-2 py-1 rounded-md">
-    <DropDownListComponent
-      id="time"
-      fields={{ text: "Time", value: "Id" }}
-      style={{ border: "none", color: currentMode === "Dark" && "white" }}
-      value="1"
-      dataSource={dropdownData}
-      popupHeight="220px"
-      popupWidth="120px"
-    />
-  </div>
-);
+
 const Create_Expenditure = () => {
-  const location = useLocation();
-  const navigate = useNavigate();
+ 
   const [teacherCount, setTeacherCount] = useState([]);
   const [studentCount, setStudentCount] = useState([]);
   const [parentCount, setParentCount] = useState([]);
-  const [earningData, setEarningData] = useState([]);
   const [schoolInfo, setSchoolInfo] = useState({
     schoolImage: "",
     schoolName: "",
   });
 
-  // Fetch Admin Info
   useEffect(() => {
     axios
       .get(
@@ -56,7 +34,7 @@ const Create_Expenditure = () => {
           withCredentials: true,
           headers: {
             Authorization: `Bearer ${authToken}`,
-          }, // Set withCredentials to true
+          }, 
         }
       )
       .then((response) => {
@@ -69,12 +47,10 @@ const Create_Expenditure = () => {
         });
       })
       .catch((error) => {
-        // Handle any errors that occur during the logout process
         console.error(" Here Response error", error);
       });
   }, []);
 
-  // Fetch teacher count
   useEffect(() => {
     axios
       .get(
@@ -99,7 +75,6 @@ const Create_Expenditure = () => {
       });
   }, []);
 
-  // Fetch student count
   useEffect(() => {
     axios
       .get(
@@ -124,7 +99,6 @@ const Create_Expenditure = () => {
   }, []);
 
   useEffect(() => {
-    // Fetch data from the server when the component mounts
     axios
       .get(
         "https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAllParents",
@@ -132,7 +106,7 @@ const Create_Expenditure = () => {
           withCredentials: true,
           headers: {
             Authorization: `Bearer ${authToken}`,
-          }, // Set withCredentials to true
+          }, 
         }
       )
       .then((response) => {
@@ -145,60 +119,10 @@ const Create_Expenditure = () => {
   }, []);
 
   useEffect(() => {
-    const newEarningData = [
-      {
-        icon: <FcConferenceCall />,
-        amount: `${studentCount}`,
-        percentage: "-4%",
-        title: "Students",
-        iconColor: "#03C9D7",
-        iconBg: "#E5FAFB",
-        pcColor: "red-600",
-      },
-      {
-        icon: <FcBusinesswoman />,
-        amount: `${teacherCount}`,
-        percentage: "+23%",
-        title: "Teachers",
-        iconColor: "rgb(255, 244, 229)",
-        iconBg: "rgb(254, 201, 15)",
-        pcColor: "green-600",
-      },
-      {
-        icon: <FcCurrencyExchange />,
-        amount: "423,39",
-        percentage: "+38%",
-        title: "Earning",
-        iconColor: "rgb(228, 106, 118)",
-        iconBg: "rgb(255, 244, 229)",
-        pcColor: "green-600",
-      },
-      {
-        icon: <BiMaleFemale />,
-        amount: `${parentCount}`,
-        percentage: "-12%",
-        title: "Parents",
-        iconColor: "rgb(0, 194, 146)",
-        iconBg: "rgb(235, 250, 242)",
-        pcColor: "red-600",
-      },
-    ];
-    setEarningData(newEarningData);
+  
   }, [teacherCount, studentCount, parentCount]);
 
-  // Prevent navigation using arrow keys and back button
-  // useEffect(() => {
-  //   window.addEventListener("keydown", function (event) {
-  //     if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
-  //       event.preventDefault();
-  //     }
-  //   });
 
-  //   navigate.pushState(null, null, location.href);
-  //   window.addEventListener("popstate", function (event) {
-  //     navigate.pushState(null, null, location.href);
-  //   });
-  // }, []);
 
   return (
     <div className="mt-12">
@@ -235,13 +159,9 @@ const Create_Expenditure = () => {
         </div>
         <div className="bg-white  dark:text-gray-200 dark:bg-secondary-dark-bg   rounded-2xl p-3">
           <EmployeeChart />
-          {/* <TeacherNotice/> */}
-          {/* <FeeChart/> */}
+        
         </div>
-        {/* <Calendar /> */}
-
-        {/* <div className="bg-white  dark:text-gray-200 dark:bg-secondary-dark-bg   rounded-2xl p-3">
-        </div> */}
+       
       </div>
     </div>
   );

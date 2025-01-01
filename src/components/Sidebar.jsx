@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, {  useRef, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { GiExplosiveMaterials } from "react-icons/gi";
 import { MdOutlineCancel } from "react-icons/md";
@@ -12,19 +12,8 @@ import { BiSolidSchool } from "react-icons/bi";
 import logo from "../../src/ShikshMitraWebsite/assets/SHIKSHAMITRA_logo.png";
 const Sidebar = () => {
   const [selectedIndex, setSelectedIndex] = useState(null);
-  // const handleMenuClickbg = (index) => {
-  //   setSelectedIndex(index); // Update the active link index
-  // };
-  
-  const [heights, setHeights] = useState([]);
   const refs = useRef([]);
-
-  useEffect(() => {
-    setHeights(refs.current.map((ref) => ref?.scrollHeight));
-  }, [links]);
-
   const [openIndex, setOpenIndex] = useState(null);
-
   const handleMenuClick = (index) => {
     setOpenIndex(openIndex === index ? null : index);
     setSelectedIndex(index);
@@ -55,20 +44,13 @@ const Sidebar = () => {
 
   const activeLink =
     "flex items-center gap-5 pl-4 pt-3 pb-2.5 rounded-lg  text-white  text-md m-2 duration-1000 cursor-pointer";
-  // const activeLink ="flex items-center gap-5 pl-3 py-2 rounded-lg  text-white  text-sm m-1 duration-1500";
   const normalLink =
     "flex flex items-center gap-5 pl-4 pt-3 pb-2.5 rounded-lg text-md text-gray-700 dark:text-gray-200 dark:hover:text-black hover:bg-light-gray m-2 duration-700 cursor-pointer";
-  // "flex items-center gap-5 pl-4 pt-3 pb-2.5 rounded-lg text-md text-gray-700 dark:text-gray-200 dark:hover:text-black hover:bg-light-gray m-2 duration-700 cursor-pointer";
-  // const normalLink ="flex items-center gap-5 pl-3 p-2  rounded-lg text-sm text-gray-700 dark:text-gray-200 dark:hover:text-black hover:bg-light-gray m-2 duration-700";
-
-  const navbarLink =
-    "flex items-center pl-3  py-2 rounded-lg  text-white  text-sm m-1 cursor-pointer duration-700";
 
   {
     if (isLoggedIn === "student") {
       return (
         <div className="ml-3 h-screen md:overflow-hidden overflow-auto md:hover:overflow-auto pb-10 bg-blend-overlay  ">
-          {/* <div className="ml-3 h-screen md:overflow-hidden overflow-auto md:hover:overflow-auto pb-10 bg-blend-overlay"> */}
           {activeMenu && (
             <>
               <div className="flex justify-between items-center ">
@@ -79,7 +61,6 @@ const Sidebar = () => {
                   className="items-center gap-3 ml-3 mt-4 flex text-xl font-extrabold tracking-tight dark:text-white text-slate-900"
                 >
                   <div className="flex items-center space-x-2">
-                    {/* <GiExplosiveMaterials className="text-red-500 text-2xl" /> */}
                     <div className="w-full  flex justify-center items-center">
                       <img
                         src={logo}
@@ -147,13 +128,12 @@ const Sidebar = () => {
                   className="items-center gap-3 ml-4 mt-4 flex text-xl font-extrabold tracking-tight dark:text-white text-slate-900"
                 >
                   <div className="flex items-center space-x-2">
-                  <div className="w-full  flex justify-center items-center">
+                    <div className="w-full  flex justify-center items-center">
                       <img
                         src={logo}
                         className="h-[60px]  object-contain scale-125 "
                       />
-                  </div>
-                    {/* <GiExplosiveMaterials className="text-red-500 text-2xl" /> */}
+                    </div>
                     <span style={{ color: currentColor }}>Teacher</span>
                   </div>
                 </Link>
@@ -270,9 +250,7 @@ const Sidebar = () => {
       );
     } else {
       return (
-        // <div className="ml-4 h-screen md:overflow-hidden overflow-auto md:hover:overflow-auto pb-10 bg-blend-overlay ">
         <div className="overflow-auto h-screen w-full bg-[#f3f4f6] ">
-          {/* <div className="ml-4 h-screen md:overflow-hidden overflow-auto md:hover:overflow-auto   "> */}
           {activeMenu && (
             <>
               <div className=" w-full flex justify-between items-center dark:bg-main-dark-bg">
@@ -280,10 +258,8 @@ const Sidebar = () => {
                   to="/admin"
                   onClick={handleCloseSideBar}
                   className="w-full"
-                  // className="items-center gap-3 ml-4 mt-4 flex text-xl font-extrabold tracking-tight dark:text-white text-slate-900"
                 >
                   <div className="w-[full]  ">
-                    {/* <GiExplosiveMaterials className="text-red-500 text-3xl" /> */}
                     <div className="w-full  flex justify-center items-center">
                       <img
                         src={logo}
@@ -293,22 +269,10 @@ const Sidebar = () => {
                     <div className="flex items-center justify-center hover:bg-slate-100">
                       <BiSolidSchool
                         style={{
-                          // border: `1px solid ${currentColor} `,
-                          // fontSize:"16px",
                           color: "#616161",
                         }}
                       />
-                      <span
-                        className=" flex text-[#616161] font-serif text-[12px]  text-center flex-col   py-1 rounded-sm  text-md mb-1 mx-[2px] cursor-pointer"
-                        // className="flex  flex-col   px-2 pt-3 pb-2.5 rounded-lg text-white text-md m-2 cursor-pointer"
-                        style={
-                          {
-                            // border: `1px solid ${currentColor} `,
-                            // fontSize:"16px",
-                          }
-                        }
-                      >
-                        {" "}
+                      <span className=" flex text-[#616161] font-serif text-[12px]  text-center flex-col   py-1 rounded-sm  text-md mb-1 mx-[2px] cursor-pointer">
                         ADMIN DASHBOARD
                       </span>
                     </div>
@@ -331,30 +295,22 @@ const Sidebar = () => {
                   <div
                     key={index}
                     className={`text-[14px] flex font-serif flex-col hover:bg-slate-200 dark:bg-secondary-dark-bg py-1 pl-4 rounded-sm text-md mb-[2px] mx-[2px] cursor-pointer ${
-                      selectedIndex === index ? 'bg-gray-300' : '' // Conditional background color
+                      selectedIndex === index ? "bg-gray-300" : ""
                     }`}
-                    
-                    // className="flex font-serif flex-col dark:bg-secondary-dark-bg py-1 pl-4 rounded-sm  text-md mb-[2px] mx-[2px] cursor-pointer"
-                    // className="flex  flex-col   px-2 pt-3 pb-2.5 rounded-lg text-white text-md m-2 cursor-pointer"
                     style={{
-                      // border: `1px solid ${currentColor} `,
-                    
                       color: currentColor,
                     }}
                     onClick={(e) => {
                       e.preventDefault();
                       handleMenuClick(index);
-                      // handleMenuClickbg(index)
                     }}
                   >
                     {item.children ? (
                       <>
-                        <div 
-                        // className="flex items-center gap-x-3 font-serif "
-                        className={`text-[14px] w-full flex items-center gap-3 font-serif ${
-                          selectedIndex === index ? 'bg-gray-200' : '' // Conditional background color
-                        }`}
-                        
+                        <div
+                          className={`text-[14px] w-full flex items-center gap-3 font-serif ${
+                            selectedIndex === index ? "bg-gray-200" : ""
+                          }`}
                         >
                           {item.icon}
                           {item.name}
@@ -375,7 +331,7 @@ const Sidebar = () => {
                               <Link
                                 key={childIndex}
                                 to={child.link}
-                                style={{backgroundColor:currentColor}}
+                                style={{ backgroundColor: currentColor }}
                                 className={`flex items-center gap-2 ml-1 font-serif my-2 py-1 pl-2 mx-2 text-white text-md  cursor-pointer bg-[${currentColor}]`}
                               >
                                 {child.icon}

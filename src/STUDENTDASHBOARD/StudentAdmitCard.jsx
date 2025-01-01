@@ -1,8 +1,8 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { usePDF } from "react-to-pdf";
 import { useStateContext } from "../contexts/ContextProvider";
-import { Page, Text, View, doc } from "@react-pdf/renderer";
+import { Page,View } from "@react-pdf/renderer";
 import Cookies from "js-cookie";
 const authToken = Cookies.get("token");
 
@@ -22,8 +22,6 @@ const StudentAdmitCard = () => {
   const [selectedExam, setSelectedExam] = useState("");
   const [newexamName, setExamName] = useState("");
   const studentData = JSON.parse(sessionStorage.getItem("response"));
-  // console.log("sessionStorage-->", studentData);
-
   const [schoolData, setSchoolData] = useState([]);
 
   useEffect(() => {
@@ -41,14 +39,12 @@ const StudentAdmitCard = () => {
       .then((response) => {
         const data = response.data.admin;
 
-        // console.log("AdminInfo---ResultData--->", response.data.admin);
         setSchoolData(data);
       })
       .catch((error) => {
         console.log(error.message);
       });
   }, []);
-  // console.log(schoolData);
 
   useEffect(() => {
     axios
@@ -60,17 +56,14 @@ const StudentAdmitCard = () => {
       })
       .then((response) => {
         const classTeacher = JSON.parse(sessionStorage.response).class;
-        // console.log("Data ExamData response---->", response.data.examData);
         const filteredData = response.data.examData.filter(
           (exam) => exam.className === classTeacher
         );
         const name = filteredData[0].examName;
-        // console.log("filter", name);
         setExamName(name);
         setExamData(filteredData);
-        const examName = filteredData[0].examName;
+       
 
-        // console.log("filter", examName);
       })
       .catch((error) => {
         console.log(error.message);

@@ -1,29 +1,42 @@
-import React, { useState } from 'react';
-import { useStateContext } from '../../contexts/ContextProvider';
-import axios from 'axios';
-import Cookies from 'js-cookie';
-import { toast } from 'react-toastify';
-import { FaPlus, FaCalendar, FaClock, FaCheckCircle, FaTimesCircle, FaBook } from 'react-icons/fa';
-
+import React, { useEffect, useState } from "react";
+import { useStateContext } from "../../contexts/ContextProvider";
+import axios from "axios";
+import Cookies from "js-cookie";
+import { toast } from "react-toastify";
+import {
+  FaPlus,
+  FaCalendar,
+  FaClock,
+  FaTimesCircle,
+} from "react-icons/fa";
+import ViewExam from "./ViewExam";
+import Modal from "../../Dynamic/Modal";
+import Heading2 from "../../Dynamic/Heading2";
 
 export default function CreateExam() {
   const { currentColor, teacherRoleData } = useStateContext();
-  const authToken = Cookies.get('token');
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const handleOpenModal = () => {
+    setModalOpen(true);
+  };
+  const authToken = Cookies.get("token");
   const [examCreated, setExamCreated] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [allClass, setAllclass] = useState([]);
   const [examData, setExamData] = useState({
-    examName: '',
-    examType: '',
-    className: '',
-    section: '',
-    startDate: '',
-    endDate: '',
+    examName: "",
+    examType: "",
+    className: "",
+    section: "",
+    startDate: "",
+    endDate: "",
     Grade: "",
-    resultPublishDate: '',
+    resultPublishDate: "",
     subjects: [],
   });
-
-  const [savedExams, setSavedExams] = useState([]);
+  const [filteredSubjects, setFilteredSubjects] = useState([]);
+  const teacherDetails = JSON.parse(sessionStorage.response);
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setExamData((prevData) => ({ ...prevData, [name]: value }));
@@ -40,90 +53,157 @@ export default function CreateExam() {
       ...prevData,
       subjects: [
         ...prevData.subjects,
-        { name: '', examDate: '', startTime: '', endTime: '', totalMarks: '', passingMarks: '' },
+        {
+          name: "",
+          examDate: "",
+          startTime: "",
+          endTime: "",
+          totalMarks: "",
+          passingMarks: "",
+        },
       ],
     }));
+  };
+
+  const getAllClasses = async () => {
+    try {
+      let response = await axios.get(
+        "https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAllClasses",
+        {
+          withCredentials: true,
+          headers: {
+            Authorization: `Bearer ${authToken}`,
+          },
+        }
+      );
+      setAllclass(response.data.classList);
+    } catch (error) {
+      console.error("Error fetching exams:", error);
+
+    }
+  };
+
+  useEffect(() => {
+    getAllClasses();
+  }, []);
+
+  useEffect(() => {
+    if (teacherDetails && allClass?.length > 0) {
+      const filteredClass = allClass.find(
+        (cls) =>
+          cls.className === teacherDetails.classTeacher &&
+          cls.sections.includes(teacherDetails.section)
+      );
+
+      if (filteredClass) {
+        const subjectsArray = filteredClass.subjects
+          .split(",")
+          .map((subject) => subject.trim());
+        setFilteredSubjects(subjectsArray);
+      } else {
+        setFilteredSubjects([]);
+      }
+    }
+  }, [allClass, teacherDetails]);
+
+  const handleSubjectNameChange = (index, value) => {
+    handleSubjectChange(index, "name", value);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     if (
-        !examData?.examName ||
-        !examData?.examType ||
-        !teacherRoleData?.classTeacher ||
-        !teacherRoleData?.section ||
-        !examData?.Grade ||
-        !examData?.startDate ||
-        !examData?.endDate ||
-        !examData?.resultPublishDate ||
-        examData?.subjects.length === 0
-      ) {
-        toast.error("Please fill in all the required fields!");
-        setLoading(false);
-        return;
-      }
+      !examData?.examName ||
+      !examData?.examType ||
+      !teacherDetails?.classTeacher ||
+      !teacherDetails?.section ||
+      !examData?.Grade ||
+      !examData?.startDate ||
+      !examData?.endDate ||
+      !examData?.resultPublishDate ||
+      examData?.subjects?.length === 0
+    ) {
+      toast.error("Please fill in all the required fields!");
+      setLoading(false);
+      return;
+    }
     let payload = {
-      "name": examData?.examName,
-      "examType": examData?.examType,
-      "className": teacherRoleData?.classTeacher,
-      "section": teacherRoleData?.section,
-      "gradeSystem": examData?.Grade,
-      "startDate": examData?.startDate,
-      "endDate": examData?.endDate,
-      "resultPublishDate": examData?.resultPublishDate,
+      name: examData?.examName,
+      examType: examData?.examType,
+      className: teacherDetails?.classTeacher,
+      section: teacherDetails?.section,
+      gradeSystem: examData?.Grade,
+      startDate: examData?.startDate,
+      endDate: examData?.endDate,
+      resultPublishDate: examData?.resultPublishDate,
       subjects: examData?.subjects,
     };
 
     try {
-      await axios.post("https://eserver-i5sm.onrender.com/api/v1/exam/createExams", payload, {
-        withCredentials: true,
-        headers: {
-          Authorization: `Bearer ${authToken}`,
-          'Content-Type': 'application/json',
+      await axios.post(
+        "https://eserver-i5sm.onrender.com/api/v1/exam/createExams",
+        payload,
+        {
+          withCredentials: true,
+          headers: {
+            Authorization: `Bearer ${authToken}`,
+            "Content-Type": "application/json",
+          },
         }
-      });
+      );
       setExamData({
-        examName: '',
-        examType: '',
-        startDate: '',
-        endDate: '',
-        resultPublishDate: '',
+        examName: "",
+        examType: "",
+        startDate: "",
+        endDate: "",
+        resultPublishDate: "",
         subjects: [],
-        Grade: ""
+        Grade: "",
       });
       toast.success("Exam Created Successfully!");
       setExamCreated(!examCreated);
       setLoading(false);
+      setModalOpen(false);
     } catch (error) {
       setLoading(false);
-        console.log("error", error)
-        toast.error(`Error: ${error?.response?.data?.message || "Something went wrong!"}`);
+      console.log("error", error);
+      toast.error(
+        `Error: ${error?.response?.data?.message || "Something went wrong!"}`
+      );
     }
   };
-    const removeSubject = (index) => {
-        const updatedSubjects = examData.subjects.filter((_, i) => i !== index);
-        setExamData((prevData) => ({ ...prevData, subjects: updatedSubjects }));
-      };
+  const removeSubject = (index) => {
+    const updatedSubjects = examData.subjects.filter((_, i) => i !== index);
+    setExamData((prevData) => ({ ...prevData, subjects: updatedSubjects }));
+  };
   return (
-    <div className="max-w-4xl mx-auto bg-gray-50 p-6 rounded-lg shadow-xl">
-      
-      <div
+    <>
+    <Heading2 title={ "All EXAMS"}>
+    <button onClick={handleOpenModal}
+       className="py-1 p-3 rounded-tl-lg rounded-tr-lg  flex items-center space-x-1 text-white"
+       style={{ background: currentColor }}
+       >  <FaPlus /><span>Create Exam</span>
+       </button>
+    </Heading2>
+      <Modal isOpen={modalOpen} setIsOpen={setModalOpen} title="Exam">
+      <div className="max-w-4xl mx-auto bg-gray-50 p-6 rounded-lg shadow-xl">
+      {/* <div
         className="rounded-tl-lg rounded-tr-lg text-white text-lg py-2 mb-4 flex justify-between items-center px-4"
         style={{ background: currentColor }}
       >
         <p>Create Exam</p>
-       {/*  <FaCheckCircle className="text-white"  /> */}
-      </div>
+      </div> */}
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 border p-4 rounded-md">
-        
           <div>
-            <label className="block text-sm font-medium text-gray-700">Exam Name</label>
+            <label className="block text-sm font-medium text-gray-700">
+              Exam Name
+            </label>
             <input
               type="text"
               name="examName"
-              value={examData.examName}
+              value={examData?.examName}
               onChange={handleInputChange}
               required
               className="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-indigo-200 focus:outline-none"
@@ -131,10 +211,12 @@ export default function CreateExam() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700">Exam Type</label>
+            <label className="block text-sm font-medium text-gray-700">
+              Exam Type
+            </label>
             <select
               name="examType"
-              value={examData.examType}
+              value={examData?.examType}
               onChange={handleInputChange}
               required
               className="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-indigo-200 focus:outline-none"
@@ -148,11 +230,13 @@ export default function CreateExam() {
             </select>
           </div>
 
-            <div>
-            <label className="block text-sm font-medium text-gray-700">Grade System</label>
+          <div>
+            <label className="block text-sm font-medium text-gray-700">
+              Grade System
+            </label>
             <select
               name="Grade"
-              value={examData.Grade}
+              value={examData?.Grade}
               onChange={handleInputChange}
               required
               className="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-indigo-200 focus:outline-none"
@@ -161,56 +245,61 @@ export default function CreateExam() {
               <option value="Percentage">Percentage</option>
               <option value="Grade">Grade</option>
               <option value="CGPA">CGPA</option>
-
             </select>
           </div>
-            <div>
-            <label className="block text-sm font-medium text-gray-700">Start Date</label>
+          <div>
+            <label className="block text-sm font-medium text-gray-700">
+              Start Date
+            </label>
             <div className="relative">
-                <input
-                  type="date"
-                  name="startDate"
-                  value={examData.startDate}
-                  onChange={handleInputChange}
-                  required
-                  className="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-indigo-200 focus:outline-none pr-10" // Added padding for the icon
-                />
-                <div className="absolute inset-y-0 right-3 flex items-center pointer-events-none">
+              <input
+                type="date"
+                name="startDate"
+                value={examData?.startDate}
+                onChange={handleInputChange}
+                required
+                className="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-indigo-200 focus:outline-none pr-10" // Added padding for the icon
+              />
+              <div className="absolute inset-y-0 right-3 flex items-center pointer-events-none">
                 <FaCalendar className="text-gray-500" />
-                </div>
               </div>
             </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700">End Date</label>
-            <div className="relative">
-                <input
-                  type="date"
-                  name="endDate"
-                  value={examData.endDate}
-                  onChange={handleInputChange}
-                  required
-                  className="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-indigo-200 focus:outline-none pr-10" // Added padding for the icon
-                />
-                <div className="absolute inset-y-0 right-3 flex items-center pointer-events-none">
-                <FaCalendar className="text-gray-500" />
-                </div>
-              </div>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700">Result Publish Date</label>
-             <div className="relative">
-                <input
-                  type="date"
-                  name="resultPublishDate"
-                  value={examData.resultPublishDate}
-                  onChange={handleInputChange}
-                  required
-                 className="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-indigo-200 focus:outline-none pr-10"
-                />
-                   <div className="absolute inset-y-0 right-3 flex items-center pointer-events-none">
+            <label className="block text-sm font-medium text-gray-700">
+              End Date
+            </label>
+            <div className="relative">
+              <input
+                type="date"
+                name="endDate"
+                value={examData?.endDate}
+                onChange={handleInputChange}
+                required
+                className="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-indigo-200 focus:outline-none pr-10" // Added padding for the icon
+              />
+              <div className="absolute inset-y-0 right-3 flex items-center pointer-events-none">
                 <FaCalendar className="text-gray-500" />
-                </div>
               </div>
+            </div>
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700">
+              Result Publish Date
+            </label>
+            <div className="relative">
+              <input
+                type="date"
+                name="resultPublishDate"
+                value={examData?.resultPublishDate}
+                onChange={handleInputChange}
+                required
+                className="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-indigo-200 focus:outline-none pr-10"
+              />
+              <div className="absolute inset-y-0 right-3 flex items-center pointer-events-none">
+                <FaCalendar className="text-gray-500" />
+              </div>
+            </div>
           </div>
         </div>
 
@@ -222,110 +311,131 @@ export default function CreateExam() {
               onClick={addSubject}
               className="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded flex items-center space-x-1"
             >
-                <FaPlus/>
+              <FaPlus />
               <span>Add Subject</span>
             </button>
           </div>
-          {examData.subjects.map((subject, index) => (
-            <div key={index} className="border p-4 mb-2 rounded-md  grid grid-cols-1 md:grid-cols-6 gap-3">
-                <div>
-                <label className="block text-sm font-medium text-gray-700">Subject Name</label>
-                <input
-                  type="text"
-                  value={subject.name}
+          {examData?.subjects?.map((subject, index) => (
+            <div
+              key={index}
+              className="border p-4 mb-2 rounded-md  grid grid-cols-1 md:grid-cols-6 gap-3"
+            >
+              <div>
+                <label className="block text-sm font-medium text-gray-700">
+                  Subject Name
+                </label>
+                <select
+                  value={subject?.name}
                   onChange={(e) =>
-                    handleSubjectChange(index, 'name', e.target.value)
+                    handleSubjectNameChange(index, e.target.value)
                   }
                   className="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-indigo-200 focus:outline-none"
                   required
-                />
+                >
+                  <option value="">Select Subject</option>
+                  {filteredSubjects.map((subjectName) => (
+                    <option key={subjectName} value={subjectName}>
+                      {subjectName}
+                    </option>
+                  ))}
+                </select>
               </div>
-              
-                <div>
-                <label className="block text-sm font-medium text-gray-700">Exam Date</label>
-               <div className="relative">
-                <input
-                  type="date"
-                  value={subject.examDate}
-                  onChange={(e) =>
-                    handleSubjectChange(index, 'examDate', e.target.value)
-                  }
-                  className="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-indigo-200 focus:outline-none pr-10"
-                  required
-                />
-                   <div className="absolute inset-y-0 right-3 flex items-center pointer-events-none">
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700">
+                  Exam Date
+                </label>
+                <div className="relative">
+                  <input
+                    type="date"
+                    value={subject?.examDate}
+                    onChange={(e) =>
+                      handleSubjectChange(index, "examDate", e.target.value)
+                    }
+                    className="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-indigo-200 focus:outline-none pr-10"
+                    required
+                  />
+                  <div className="absolute inset-y-0 right-3 flex items-center pointer-events-none">
                     <FaCalendar className="text-gray-500" />
-                </div>
                   </div>
+                </div>
               </div>
-              <div className='col-span-2 flex space-x-2'>
-              <div>
-              <label className="block text-sm font-medium text-gray-700">Start Time</label>
+              <div className="col-span-2 flex space-x-2">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">
+                    Start Time
+                  </label>
                   <div className="relative">
-                <input
-                  type="time"
-                  value={subject.startTime}
-                  onChange={(e) =>
-                    handleSubjectChange(index, 'startTime', e.target.value)
-                  }
-                  className="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-indigo-200 focus:outline-none pr-10"
-                  required
-                />
-                 <div className="absolute inset-y-0 right-3 flex items-center pointer-events-none">
-                    <FaClock className="text-gray-500" />
-                  </div>
+                    <input
+                      type="time"
+                      value={subject?.startTime}
+                      onChange={(e) =>
+                        handleSubjectChange(index, "startTime", e.target.value)
+                      }
+                      className="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-indigo-200 focus:outline-none pr-10"
+                      required
+                    />
+                    <div className="absolute inset-y-0 right-3 flex items-center pointer-events-none">
+                      <FaClock className="text-gray-500" />
+                    </div>
                   </div>
                 </div>
-                
-              <div>
-                <label className="block text-sm font-medium text-gray-700">End Time</label>
-                   <div className="relative">
-                <input
-                  type="time"
-                  value={subject.endTime}
-                  onChange={(e) =>
-                    handleSubjectChange(index, 'endTime', e.target.value)
-                  }
-                  className="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-indigo-200 focus:outline-none pr-10"
-                  required
-                />
-                 <div className="absolute inset-y-0 right-3 flex items-center pointer-events-none">
-                    <FaClock className="text-gray-500" />
-                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">
+                    End Time
+                  </label>
+                  <div className="relative">
+                    <input
+                      type="time"
+                      value={subject?.endTime}
+                      onChange={(e) =>
+                        handleSubjectChange(index, "endTime", e.target.value)
+                      }
+                      className="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-indigo-200 focus:outline-none pr-10"
+                      required
+                    />
+                    <div className="absolute inset-y-0 right-3 flex items-center pointer-events-none">
+                      <FaClock className="text-gray-500" />
+                    </div>
                   </div>
+                </div>
               </div>
-             </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700">Total Marks</label>
+                <label className="block text-sm font-medium text-gray-700">
+                  Total Marks
+                </label>
                 <input
                   type="number"
                   value={subject.totalMarks}
                   onChange={(e) =>
-                    handleSubjectChange(index, 'totalMarks', e.target.value)
+                    handleSubjectChange(index, "totalMarks", e.target.value)
                   }
                   className="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-indigo-200 focus:outline-none"
                   required
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700">Passing Marks</label>
+                <label className="block text-sm font-medium text-gray-700">
+                  Passing Marks
+                </label>
                 <input
                   type="number"
-                  value={subject.passingMarks}
+                  value={subject?.passingMarks}
                   onChange={(e) =>
-                    handleSubjectChange(index, 'passingMarks', e.target.value)
+                    handleSubjectChange(index, "passingMarks", e.target.value)
                   }
                   className="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-indigo-200 focus:outline-none"
                   required
                 />
               </div>
               <div className="flex items-center justify-center">
-              <button
+                <button
                   type="button"
                   onClick={() => removeSubject(index)}
                   className="text-red-500 hover:text-red-700 focus:outline-none"
                 >
-                     <FaTimesCircle size={20} />
+                  <FaTimesCircle size={20} />
                 </button>
               </div>
             </div>
@@ -337,16 +447,388 @@ export default function CreateExam() {
           className="w-full bg-indigo-500 hover:bg-indigo-600 text-white py-2 rounded-md focus:outline-none disabled:bg-indigo-300 disabled:cursor-not-allowed"
           disabled={loading}
         >
-           {loading ?  'Saving Exam...' : 'Save Exam'}
+          {loading ? "Saving Exam..." : "Save Exam"}
         </button>
       </form>
-
-
     </div>
+      </Modal>
+    <ViewExam/>
+    </>
   );
 }
 
+// import React, { useEffect, useState } from 'react';
+// import { useStateContext } from '../../contexts/ContextProvider';
+// import axios from 'axios';
+// import Cookies from 'js-cookie';
+// import { toast } from 'react-toastify';
+// import { FaPlus, FaCalendar, FaClock, FaCheckCircle, FaTimesCircle, FaBook } from 'react-icons/fa';
 
+// export default function CreateExam() {
+//   const { currentColor, teacherRoleData } = useStateContext();
+//   const authToken = Cookies.get('token');
+//   const [examCreated, setExamCreated] = useState(false);
+//   const [loading, setLoading] = useState(false);
+//   const [allClass,setAllclass]=useState([])
+//   const [examData, setExamData] = useState({
+//     examName: '',
+//     examType: '',
+//     className: '',
+//     section: '',
+//     startDate: '',
+//     endDate: '',
+//     Grade: "",
+//     resultPublishDate: '',
+//     subjects: [],
+//   });
+
+//   const [savedExams, setSavedExams] = useState([]);
+//   const handleInputChange = (e) => {
+//     const { name, value } = e.target;
+//     setExamData((prevData) => ({ ...prevData, [name]: value }));
+//   };
+
+//   const handleSubjectChange = (index, field, value) => {
+//     const updatedSubjects = [...examData.subjects];
+//     updatedSubjects[index] = { ...updatedSubjects[index], [field]: value };
+//     setExamData((prevData) => ({ ...prevData, subjects: updatedSubjects }));
+//   };
+
+//   const addSubject = () => {
+//     setExamData((prevData) => ({
+//       ...prevData,
+//       subjects: [
+//         ...prevData.subjects,
+//         { name: '', examDate: '', startTime: '', endTime: '', totalMarks: '', passingMarks: '' },
+//       ],
+//     }));
+//   };
+
+//   const teacherDetails = JSON.parse(sessionStorage.response);
+//   console.log("teacherDetailsteacherDetailsteacherDetailsteacherDetails",teacherDetails)
+//   const getAllClasses = async () => {
+//     setLoading(true);
+//     try {
+//         let response = await axios.get(
+//             "https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAllClasses",
+//             {
+//                 withCredentials: true,
+//                 headers: {
+//                     Authorization: `Bearer ${authToken}`,
+//                 },
+//             }
+//         );
+//         setAllclass(response.data.exams);
+//     } catch (error) {
+//         console.error("Error fetching exams:", error);
+//         toast.error(`Error: ${error?.response?.data?.message || "Something went wrong!"}`);
+//     } finally {
+//         setLoading(false);
+//     }
+// };
+// useEffect(()=>{
+//   getAllClasses()
+// },[])
+
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+//     setLoading(true);
+//     if (
+//         !examData?.examName ||
+//         !examData?.examType ||
+//         !teacherRoleData?.classTeacher ||
+//         !teacherRoleData?.section ||
+//         !examData?.Grade ||
+//         !examData?.startDate ||
+//         !examData?.endDate ||
+//         !examData?.resultPublishDate ||
+//         examData?.subjects.length === 0
+//       ) {
+//         toast.error("Please fill in all the required fields!");
+//         setLoading(false);
+//         return;
+//       }
+//     let payload = {
+//       "name": examData?.examName,
+//       "examType": examData?.examType,
+//       "className": teacherRoleData?.classTeacher,
+//       "section": teacherRoleData?.section,
+//       "gradeSystem": examData?.Grade,
+//       "startDate": examData?.startDate,
+//       "endDate": examData?.endDate,
+//       "resultPublishDate": examData?.resultPublishDate,
+//       subjects: examData?.subjects,
+//     };
+
+//     try {
+//       await axios.post("https://eserver-i5sm.onrender.com/api/v1/exam/createExams", payload, {
+//         withCredentials: true,
+//         headers: {
+//           Authorization: `Bearer ${authToken}`,
+//           'Content-Type': 'application/json',
+//         }
+//       });
+//       setExamData({
+//         examName: '',
+//         examType: '',
+//         startDate: '',
+//         endDate: '',
+//         resultPublishDate: '',
+//         subjects: [],
+//         Grade: ""
+//       });
+//       toast.success("Exam Created Successfully!");
+//       setExamCreated(!examCreated);
+//       setLoading(false);
+//     } catch (error) {
+//       setLoading(false);
+//         console.log("error", error)
+//         toast.error(`Error: ${error?.response?.data?.message || "Something went wrong!"}`);
+//     }
+//   };
+//     const removeSubject = (index) => {
+//         const updatedSubjects = examData.subjects.filter((_, i) => i !== index);
+//         setExamData((prevData) => ({ ...prevData, subjects: updatedSubjects }));
+//       };
+//   return (
+//     <div className="max-w-4xl mx-auto bg-gray-50 p-6 rounded-lg shadow-xl">
+
+//       <div
+//         className="rounded-tl-lg rounded-tr-lg text-white text-lg py-2 mb-4 flex justify-between items-center px-4"
+//         style={{ background: currentColor }}
+//       >
+//         <p>Create Exam</p>
+//        {/*  <FaCheckCircle className="text-white"  /> */}
+//       </div>
+//       <form onSubmit={handleSubmit} className="space-y-4">
+//         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 border p-4 rounded-md">
+
+//           <div>
+//             <label className="block text-sm font-medium text-gray-700">Exam Name</label>
+//             <input
+//               type="text"
+//               name="examName"
+//               value={examData?.examName}
+//               onChange={handleInputChange}
+//               required
+//               className="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-indigo-200 focus:outline-none"
+//             />
+//           </div>
+
+//           <div>
+//             <label className="block text-sm font-medium text-gray-700">Exam Type</label>
+//             <select
+//               name="examType"
+//               value={examData?.examType}
+//               onChange={handleInputChange}
+//               required
+//               className="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-indigo-200 focus:outline-none"
+//             >
+//               <option value="">Select Exam Type</option>
+//               <option value="TERM">Term</option>
+//               <option value="UNIT_TEST">Unit Test</option>
+//               <option value="FINAL">Final</option>
+//               <option value="ENTRANCE">Entrance</option>
+//               <option value="COMPETITIVE">Competitive</option>
+//             </select>
+//           </div>
+
+//             <div>
+//             <label className="block text-sm font-medium text-gray-700">Grade System</label>
+//             <select
+//               name="Grade"
+//               value={examData?.Grade}
+//               onChange={handleInputChange}
+//               required
+//               className="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-indigo-200 focus:outline-none"
+//             >
+//               <option value="">Grade System</option>
+//               <option value="Percentage">Percentage</option>
+//               <option value="Grade">Grade</option>
+//               <option value="CGPA">CGPA</option>
+
+//             </select>
+//           </div>
+//             <div>
+//             <label className="block text-sm font-medium text-gray-700">Start Date</label>
+//             <div className="relative">
+//                 <input
+//                   type="date"
+//                   name="startDate"
+//                   value={examData?.startDate}
+//                   onChange={handleInputChange}
+//                   required
+//                   className="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-indigo-200 focus:outline-none pr-10" // Added padding for the icon
+//                 />
+//                 <div className="absolute inset-y-0 right-3 flex items-center pointer-events-none">
+//                 <FaCalendar className="text-gray-500" />
+//                 </div>
+//               </div>
+//             </div>
+//           <div>
+//             <label className="block text-sm font-medium text-gray-700">End Date</label>
+//             <div className="relative">
+//                 <input
+//                   type="date"
+//                   name="endDate"
+//                   value={examData?.endDate}
+//                   onChange={handleInputChange}
+//                   required
+//                   className="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-indigo-200 focus:outline-none pr-10" // Added padding for the icon
+//                 />
+//                 <div className="absolute inset-y-0 right-3 flex items-center pointer-events-none">
+//                 <FaCalendar className="text-gray-500" />
+//                 </div>
+//               </div>
+//           </div>
+//           <div>
+//             <label className="block text-sm font-medium text-gray-700">Result Publish Date</label>
+//              <div className="relative">
+//                 <input
+//                   type="date"
+//                   name="resultPublishDate"
+//                   value={examData?.resultPublishDate}
+//                   onChange={handleInputChange}
+//                   required
+//                  className="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-indigo-200 focus:outline-none pr-10"
+//                 />
+//                    <div className="absolute inset-y-0 right-3 flex items-center pointer-events-none">
+//                 <FaCalendar className="text-gray-500" />
+//                 </div>
+//               </div>
+//           </div>
+//         </div>
+
+//         <div>
+//           <div className="flex justify-between items-center mb-2">
+//             <h3 className="text-lg font-bold text-gray-800">Subjects</h3>
+//             <button
+//               type="button"
+//               onClick={addSubject}
+//               className="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded flex items-center space-x-1"
+//             >
+//                 <FaPlus/>
+//               <span>Add Subject</span>
+//             </button>
+//           </div>
+//           {examData?.subjects?.map((subject, index) => (
+//             <div key={index} className="border p-4 mb-2 rounded-md  grid grid-cols-1 md:grid-cols-6 gap-3">
+//                 <div>
+//                 <label className="block text-sm font-medium text-gray-700">Subject Name</label>
+//                 <input
+//                   type="text"
+//                   value={subject?.name}
+//                   onChange={(e) =>
+//                     handleSubjectChange(index, 'name', e.target.value)
+//                   }
+//                   className="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-indigo-200 focus:outline-none"
+//                   required
+//                 />
+//               </div>
+
+//                 <div>
+//                 <label className="block text-sm font-medium text-gray-700">Exam Date</label>
+//                <div className="relative">
+//                 <input
+//                   type="date"
+//                   value={subject?.examDate}
+//                   onChange={(e) =>
+//                     handleSubjectChange(index, 'examDate', e.target.value)
+//                   }
+//                   className="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-indigo-200 focus:outline-none pr-10"
+//                   required
+//                 />
+//                    <div className="absolute inset-y-0 right-3 flex items-center pointer-events-none">
+//                     <FaCalendar className="text-gray-500" />
+//                 </div>
+//                   </div>
+//               </div>
+//               <div className='col-span-2 flex space-x-2'>
+//               <div>
+//               <label className="block text-sm font-medium text-gray-700">Start Time</label>
+//                   <div className="relative">
+//                 <input
+//                   type="time"
+//                   value={subject?.startTime}
+//                   onChange={(e) =>
+//                     handleSubjectChange(index, 'startTime', e.target.value)
+//                   }
+//                   className="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-indigo-200 focus:outline-none pr-10"
+//                   required
+//                 />
+//                  <div className="absolute inset-y-0 right-3 flex items-center pointer-events-none">
+//                     <FaClock className="text-gray-500" />
+//                   </div>
+//                   </div>
+//                 </div>
+
+//               <div>
+//                 <label className="block text-sm font-medium text-gray-700">End Time</label>
+//                    <div className="relative">
+//                 <input
+//                   type="time"
+//                   value={subject?.endTime}
+//                   onChange={(e) =>
+//                     handleSubjectChange(index, 'endTime', e.target.value)
+//                   }
+//                   className="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-indigo-200 focus:outline-none pr-10"
+//                   required
+//                 />
+//                  <div className="absolute inset-y-0 right-3 flex items-center pointer-events-none">
+//                     <FaClock className="text-gray-500" />
+//                 </div>
+//                   </div>
+//               </div>
+//              </div>
+//               <div>
+//                 <label className="block text-sm font-medium text-gray-700">Total Marks</label>
+//                 <input
+//                   type="number"
+//                   value={subject.totalMarks}
+//                   onChange={(e) =>
+//                     handleSubjectChange(index, 'totalMarks', e.target.value)
+//                   }
+//                   className="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-indigo-200 focus:outline-none"
+//                   required
+//                 />
+//               </div>
+//               <div>
+//                 <label className="block text-sm font-medium text-gray-700">Passing Marks</label>
+//                 <input
+//                   type="number"
+//                   value={subject?.passingMarks}
+//                   onChange={(e) =>
+//                     handleSubjectChange(index, 'passingMarks', e.target.value)
+//                   }
+//                   className="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-indigo-200 focus:outline-none"
+//                   required
+//                 />
+//               </div>
+//               <div className="flex items-center justify-center">
+//               <button
+//                   type="button"
+//                   onClick={() => removeSubject(index)}
+//                   className="text-red-500 hover:text-red-700 focus:outline-none"
+//                 >
+//                      <FaTimesCircle size={20} />
+//                 </button>
+//               </div>
+//             </div>
+//           ))}
+//         </div>
+
+//         <button
+//           type="submit"
+//           className="w-full bg-indigo-500 hover:bg-indigo-600 text-white py-2 rounded-md focus:outline-none disabled:bg-indigo-300 disabled:cursor-not-allowed"
+//           disabled={loading}
+//         >
+//            {loading ?  'Saving Exam...' : 'Save Exam'}
+//         </button>
+//       </form>
+
+//     </div>
+//   );
+// }
 
 // import React, { useState } from 'react';
 // import { useStateContext } from '../../contexts/ContextProvider';
@@ -356,7 +838,7 @@ export default function CreateExam() {
 // export default function CreateExam() {
 //   const { currentColor,teacherRoleData} = useStateContext();
 //   const authToken = Cookies.get('token');
-//   const [examCreated, setExamCreated] = useState(false); 
+//   const [examCreated, setExamCreated] = useState(false);
 //   const [loading, setLoading] = useState(false);
 //   const [examData, setExamData] = useState({
 //     examName: '',
@@ -368,7 +850,7 @@ export default function CreateExam() {
 //     Grade:"",
 //     resultPublishDate: '',
 //     subjects: [],
-    
+
 //   });
 
 //   // console.log("teacherRoleData",teacherRoleData)
@@ -434,7 +916,7 @@ export default function CreateExam() {
 //       })
 //       setExamData({
 //         examName: '',
-//         examType: '',    
+//         examType: '',
 //         startDate: '',
 //         endDate: '',
 //         resultPublishDate: '',
@@ -448,7 +930,7 @@ export default function CreateExam() {
 //       alert('Exam saved successfully!');
 //     }
 //     catch (error) {
-   
+
 //        setLoading(false);
 //       //  toast.error("error",error)
 //       console.log("error", error)
@@ -461,9 +943,9 @@ export default function CreateExam() {
 //       //  style={{ background: `linear-gradient(to bottom, ${currentColor}, ${"#8d8b8b"})` }}
 //       style={{background:currentColor}}
 //       >
-//       <p 
+//       <p
 //       className='px-5'
-      
+
 //       >Create Exam</p>
 //       </div>
 //       <form
@@ -483,7 +965,7 @@ export default function CreateExam() {
 //               className="w-full border outline-none text-[12px] lg:text-lg  px-2"
 //             />
 //           </div>
-       
+
 //           <div>
 //             <label className="block text-[12px] lg:text-lg">Exam Type</label>
 //             <select
@@ -515,7 +997,7 @@ export default function CreateExam() {
 //               <option value="Percentage">Percentage</option>
 //               <option value="Grade">Grade</option>
 //               <option value="CGPA">CGPA</option>
-              
+
 //             </select>
 //           </div>
 
@@ -694,8 +1176,6 @@ export default function CreateExam() {
 //     </div>
 //   );
 // }
-
-
 
 // import React, { useState } from 'react';
 
@@ -979,8 +1459,6 @@ export default function CreateExam() {
 // );
 // }
 
-
-
 // import React, { useState } from 'react';
 
 // export default function CreateExam() {
@@ -1206,9 +1684,6 @@ export default function CreateExam() {
 //   );
 // }
 
-
-
-
 // import React, { useState } from 'react';
 // import { api } from '../api/api';
 // import { Button, Input, Select, DatePicker } from '@/components/ui';
@@ -1378,4 +1853,3 @@ export default function CreateExam() {
 //     </form>
 //   );
 // }
-

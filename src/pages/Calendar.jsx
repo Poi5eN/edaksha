@@ -3,13 +3,8 @@ import { ScheduleComponent, ViewsDirective, ViewDirective, Day, Week, WorkWeek, 
 import { DatePickerComponent } from '@syncfusion/ej2-react-calendars';
 import { toast } from "react-toastify";
 
-// import { scheduleData } from '../data/dummy';
-import { Header } from '../components';
 import axios from 'axios';
 import Cookies from 'js-cookie';
-
-// import { BsNutFill } from 'react-icons/bs';
-
 
 const PropertyPane = (props) => <div className="mt-5">{props.children}</div>;
 
@@ -182,14 +177,12 @@ const Scheduler = () => {
     }
     else if(args.type == 'DeleteAlert'){
       console.log("kyahuare")
-      // deleteButton.addEventListener('click', () => handleDelete(args));
       handleDelete(args)
     }
   };
 
   const handleNavigating = (args) => {
     if (args.action === 'date') {
-      // Filter events for the new selected date
       const startOfWeek = new Date(args.currentDate);
       startOfWeek.setHours(0, 0, 0, 0);
       startOfWeek.setDate(args.currentDate.getDate() - args.currentDate.getDay());
@@ -222,7 +215,6 @@ return (
       popupOpen={onPopupOpen}
       popupClose={onPopupClose}
       startHour="07:00" // Set the starting hour to 7:00 AM
-      // className='dark:text-white dark:bg-secondary-dark-bg'
     >
       <ViewsDirective className="dark:bg-secondary-dark-bg">
         {['Day', 'Week', 'WorkWeek', 'Month', 'Agenda'].map((item) => <ViewDirective key={item} option={item} />)}
@@ -232,7 +224,6 @@ return (
 
     <PropertyPane>
       <table 
-      // style={{ width: '100%', background: 'white' }}
       className='dark:text-white dark:bg-secondary-dark-bg w-full'
       >
         <tbody className='dark:bg-secondary-dark-bg'>

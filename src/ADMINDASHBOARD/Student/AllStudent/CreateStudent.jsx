@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-// import InputForm from "../../../Dynamic/Form/InputForm";
 import { toast } from "react-toastify";
 import axios from "axios";
 import "../../../Dynamic/Form/FormStyle.css";
@@ -7,7 +6,6 @@ import DynamicDataTable from "./DataTable";
 import { useStateContext } from "../../../contexts/ContextProvider.js";
 import Cookies from "js-cookie";
 import Loading from "../../../Loading";
-
 import useCustomQuery from '../../../useCustomQuery'
 import SomthingwentWrong from "../../../SomthingwentWrong";
 import NoDataFound from "../../../NoDataFound.jsx";
@@ -17,12 +15,8 @@ import Heading from "../../../Dynamic/Heading.jsx";
 function CreateStudent() {
   const authToken = Cookies.get("token");
   const { currentColor } = useStateContext();
- 
-
   const [submittedData, setSubmittedData] = useState([]);
-
   const { queryData: studentData, error: studentError, loading: studentLoading } = useCustomQuery("https://eserver-i5sm.onrender.com/api/v1/adminRoute/getAllStudents");
-  
   useEffect(()=>{
     if(studentData){
       setSubmittedData(studentData.allStudent);
